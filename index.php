@@ -7,6 +7,11 @@
   <meta name="keywords" content="Web Game, HTML, Javascript" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
+	<link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
+  <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/styles-e9671010d8.css" />
+	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
   <script>
 	  function goTo(site)
 	  {
@@ -56,6 +61,7 @@
       </div>
     </div>
     <div id="site_content">
+			<div id="players"/>
       <div id="content">
 		<?php
 			session_start();
@@ -89,5 +95,6 @@
       <p>Copyright &copy; cormorant</p>
 	</div>
 	</div>
+	<script type="text/babel" src="players.jsx"></script>
 </body>
 </html>
