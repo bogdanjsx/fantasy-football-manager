@@ -1,0 +1,369 @@
+html
+{
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	min-height: 100%;
+	width: 100%;
+	padding: 0px;
+	font-size: 0.9em;
+	background: white;
+	color: rgb(4, 4, 4);
+}
+
+p
+{ 
+	margin: 0px;
+	padding: 0px 0px 16px 0px;
+	line-height: 1.7em;
+}
+
+h1, h2, h3, h4
+{ 
+	font-size: 150%;
+	padding: 7px 0px 5px 0px; 
+	margin: 0px 0px 12px 0px; 
+	font-weight: normal;
+	color: #342F28;
+	font-family: serif;
+}
+
+h1, h3
+{ 
+	text-transform: uppercase;
+	margin: 10px 0px 20px 0px;
+	padding: 5px 20px 5px 0px;
+	border-bottom: 1px solid #CCC6B4;
+}
+
+tab
+{
+	padding-left: 2em;
+}
+ 
+a, a:hover
+{ 
+	border-bottom: 1px dotted;
+	color: #635B53;
+	text-decoration: none;
+}
+
+a:hover
+{ 
+	border-bottom: 1px solid;
+	color: #0017b9;
+}
+
+img
+{ 
+	border: 0px; 
+	margin: 0px; 
+	padding: 0px 0px 0px 0px;
+}
+
+a
+{ 
+	outline: none;
+}
+
+form
+{ 
+	padding: 0; 
+	margin: 0;
+}
+
+.left
+{ 
+	float: left;
+	margin-right: 10px;
+}
+
+.right
+{ 
+	float: right; 
+	margin-left: 10px;
+}
+
+.center
+{ 
+	float:center;
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+ul
+{ 
+	margin: 2px 0px 18px 16px;
+	padding: 0px;
+}
+
+ul li
+{ 
+	list-style-type: square;
+	margin: 0px 0px 6px 0px; 
+	padding: 0px;
+}
+
+ol
+{ 
+	margin: 8px 0px 0px 24px;
+	padding: 0px;
+}
+
+ol li
+{ 
+	margin: 0px 0px 11px 0px; 
+	padding: 0px;
+}
+
+#main, #logo, #menubar, #site_content, #footer
+{ 
+	margin-left: auto; 
+	margin-right: auto;
+	margin-bottom: auto;
+}
+
+#main
+{
+	min-height: 100%;
+}
+
+#header
+{ 
+	background: url(header_background.png) repeat-x;
+}
+
+#logo
+{ 
+	width: 70%;
+	height: 127px;
+	position: relative;
+	background: url(cormorant_logo.jpg) no-repeat right;
+	background-size: 300px;
+}
+
+#logo #logo_text 
+{ 
+	position: absolute; 
+	top: 0;
+	left: 0;
+}
+
+#logo h1, #logo h2
+{ 
+	font: normal 500% 'century gothic', arial, sans-serif;
+	border-bottom: 0;
+	text-transform: none;
+	margin: 0 0 0 1%px;
+}
+
+#logo_text h2
+{ 
+	font-size: 120%;
+	padding: 4px 0 0 0;
+	color: #BBB;
+}
+
+#logo h1, #logo h2
+{ 
+	margin: 0;
+	font-family: "century gothic", arial, sans-serif;
+}
+
+#logo h1
+{ 
+	font-size: 300%;
+	padding: 2% 0px 0px 0px;
+	color: #777;
+}
+
+#logo h2
+{ 
+	font-size: 120%;
+	padding: 0.5% 0px 0px 0px;
+	color: #BBB;
+}
+
+#menubar
+{ 
+	width: 1000px;
+	height: 50px;
+	padding-top: 4px;
+	padding-left: 4px;
+} 
+
+ul#menu
+{ 
+	float: left;
+	margin: 0px;
+}
+
+ul#menu li
+{ 
+	float: left;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 6px;
+	list-style: none;
+}
+
+ul#menu li a
+{ 
+	letter-spacing: 0.1em;
+	font-family: serif;
+	font-size: 100%;
+	display: block; 
+	float: left; 
+	height: 20px;
+	text-decoration: none; 
+	padding: 9px 22px 5px 16px;
+	text-align: center;
+	color: #FFF;
+	text-transform: uppercase;
+	border: none;
+} 
+
+ul#menu li.selected a
+{ 
+	height: 20px;
+	padding: 7px 22px 4px 16px;
+}
+
+ul#menu li.selected
+{ 
+	margin: 7px 0 0 0;
+	background: #635B53 url(menu_background.png) no-repeat 0 0px;
+}
+
+ul#menu li.selected a, ul#menu li.selected a:hover
+{ 
+	background: #635B53 url(menu_background.png) no-repeat 100% 0px;
+	color: #FFF;
+}
+
+ul#menu li a:hover
+{ 
+	color: rgb(0, 23, 185);
+}
+
+#site_content
+{ 
+	width: 75%;
+	margin-top: 10px;
+	overflow: hidden;
+} 
+
+#content
+{ 
+	text-align: left;
+	float: left;
+	padding: 20px 10px 15px 0px;
+}
+
+#footer
+{ 
+	width: 100%;
+	position: fixed;
+	font-family: sans-serif;
+	font-size: 90%;
+	height: 60px;
+	bottom: 0px;
+	padding: 10px 0px 4px 0px;
+	margin-bottom: 0px;
+	text-align: center; 
+	background: #000000;
+	color: #A8AA94;
+	border-top: 4px solid #0017b9;
+	border-bottom: 4px solid #0017b9;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+#footer a
+{ 
+	color: #A8AA94;
+	text-decoration: none;
+}
+
+#footer a:hover
+{ 
+	color: #FFF;
+	text-decoration: none;
+}
+
+.form_settings
+{ 
+	margin: 15px 0 0 0;
+}
+
+.form_settings p
+{ 
+	padding: 0 0 4px 0;
+}
+
+.form_settings span
+{ 
+	float: left; 
+	width: 200px; 
+	text-align: left;
+}
+  
+.form_settings input, .form_settings textarea
+{ 
+	padding: 5px; 
+	width: 299px; 
+	font: 100% arial; 
+	border: 1px solid #E5E5DB; 
+	background: #FFF; 
+	color: #47433F;
+}
+  
+.form_settings .submit
+{ 
+	font: 100% arial; 
+	border: 1px solid; 
+	width: 99px; 
+	margin: 0 0 0 212px; 
+	height: 33px;
+	padding: 2px 0 3px 0;
+	cursor: pointer; 
+	background: #3B3B3B; 
+	color: #FFF;
+}
+
+.form_settings textarea, .form_settings select
+{ 
+	font: 100% arial; 
+	width: 299px;
+}
+
+.form_settings select
+{ 
+	width: 310px;
+}
+
+.form_settings .checkbox
+{ 
+	margin: 4px 0; 
+	padding: 0; 
+	width: 14px;
+	border: 0;
+	background: none;
+}
+
+canvas 
+{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+	width: 450px;
+	height: 450px;
+}
