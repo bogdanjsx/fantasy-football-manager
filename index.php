@@ -59,6 +59,25 @@
       <div id="content">
 		<?php
 			session_start();
+			
+			require 'vendor/autoload.php'; // include Composer's autoloader
+
+			$username = "alex";
+			$password = "proiectsac";
+			$database = "fantasy-football-manager";
+			$client = new MongoDB\Client("mongodb://ds249025.mlab.com:49025/fantasy-football-manager", array("username" => $username, "password" => $password));
+
+			try 
+			{
+			    $db = $client->getManager();
+			}
+			catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
+			{
+			    echo $e->getMessage();
+			}
+
+			print_r($db);
+
 			if(isset($_SESSION['logID']))
 			{
 				echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
