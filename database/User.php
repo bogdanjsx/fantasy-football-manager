@@ -39,37 +39,6 @@ class User
 		return null;
 	}
 	
-	//Increase rank of feedbacking users to 2
-	public static function increaseRankByEmail($email)
-	{
-		$user = ORM::for_table('users')->where('email', $email)->find_one();
-		
-		if($user != null)
-		{
-			$user->rank = 2;
-			$user->save();
-		}
-	}
-	
-	//Increase rank of game rating users to 2
-	public static function increaseRankByUsername($username)
-	{
-		$user = ORM::for_table('users')->where('username', $username)->find_one();
-		
-		if($user != null)
-		{
-			$user->rank = 2;
-			$user->save();
-		}
-	}
-	
-	//Returns all users that have rank 2
-	public static function getAllRank2Users()
-	{
-		$users = ORM::for_table('users')->where('rank',2)->find_many();
-		
-		return $users;
-	}
 	//Check is user exists by the email given
 	public static function userExistsByEmail($email)
 	{

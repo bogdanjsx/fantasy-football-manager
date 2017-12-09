@@ -2,16 +2,18 @@
 <html>
 
 <head>
-  <title>Cormorant Games</title>
-  <meta name="description" content="Web HTML Games" />
-  <meta name="keywords" content="Web Game, HTML, Javascript" />
+  <title>Fantasy football manager</title>
+  <meta name="description" content="Fantasy football simulator" />
+  <meta name="keywords" content="Web Game, HTML, Javascript, PHP, football, manager, simulator" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <!--
 	<link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
   <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/styles-e9671010d8.css" />
 	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+	-->
   <script>
 	  function goTo(site)
 	  {
@@ -32,7 +34,7 @@
 	  {
 		  document.getElementById(id).classList.add('selected');
 		  
-		  for(count = 1; count < 5; count ++)
+		  for(count = 1; count < 6; count ++)
 		  {
 			  if(count != id)
 			  {
@@ -47,21 +49,23 @@
   <div id="main">
     <div id="header">
       <div id="logo">
-         <h1><span class="logo_colour">cormorant</span></h1>
-          <h2>&nbsp; &nbsp; &nbsp; Web HTML Games</h2>
+         <h1><span class="logo_colour">Fantasy football manager</span></h1>
+          <h2>&nbsp; &nbsp; &nbsp; Football simulation web game</h2>
       </div>
       <div id="menubar">
         <ul id="menu" style="cursor:pointer">
-          <li id=1 class="selected"><a href='index.php' onclick="setSelected(1)">Home</a></li>
-          <li id=2><a onclick="goTo('games.html');setSelected(2)">Games</a></li>
-          <li id=3><a onclick="goTo('news_links.php');setSelected(3)">News & Links</a></li>
-          <li id=4><a onclick="goTo('login.php');setSelected(4)">Login</a></li>
-          <li id=5><a onclick="goTo('contact.php');setSelected(5)">Contact Us</a></li>
+          <li id=1 class="selected"><a href='index.php' onclick="setSelected(1)">Play</a></li>
+          <li id=2><a onclick="goTo('my_team.php');setSelected(2)">My team</a></li>
+          <li id=3><a onclick="goTo('transfer_market.php');setSelected(3)">Transfer market</a></li>
+          <li id=4><a onclick="goTo('weekly_challenge.php');setSelected(4)">Weekly challenge</a></li>
+          <li id=5><a onclick="goTo('stats.php');setSelected(5)">Stats</a></li>
+          <li id=6><a onclick="goTo('my_account.php');setSelected(6)">My account</a></li>
+          
         </ul>
       </div>
     </div>
     <div id="site_content">
-			<div id="players"/>
+			<!-- <div id="players"/> -->
       <div id="content">
 		<?php
 			session_start();
@@ -82,7 +86,7 @@
 			    echo $e->getMessage();
 			}
 
-			print_r($db);
+			//print_r($db);
 
 			if(isset($_SESSION['logID']))
 			{
@@ -94,26 +98,15 @@
 				echo "<p>You are not logged in! To register or log into your account access the Login page</p>";
 			}
 		?>
-        <h1>Welcome to Cormorant Games!</h1>
-        <p>Play the best free Classic and Retro games online with Pacman, Tetris, Pinball, Snake, Golf and many more classic games.</p>
-		<p>The games are playable on desktop, tablet and mobile (Android, iOS, Windows Mobile). Like us on Facebook or follow us on Twitter to stay up to date of our new classic games.</p>
-        <p>You can play either as a guest, or as a logged user and rate our games and give us feedback!<p>
-		<p>We have 3 games planned to release, but stay tuned for other updates. If you want you can contact us and sugest what games you like and we'll code them.<p>
-		<h2>Current games list</h2>
-        <p>Choose from any of these exciting games and play them from the Games tab:</p>
-        <ul>
-          <li>Pong</li>
-          <li>Snake</li>
-          <li>Flappy Birds</li>
-        </ul>
 		<p></p><p></p><p></p><p></p><p></p><p></p>
       </div>
     </div>
     <div id="footer" style="cursor:pointer">
-      <p><a href="index.php">Home</a> | <a onclick="goTo('games.html')">Games</a> | <a onclick="goTo('news_links.php')">News & Links</a> | <a onclick="goTo('login.php')">Login</a> | <a onclick="goTo('contact.php')">Contact Us</a></p>
-      <p>Copyright &copy; cormorant</p>
+      <p><a href="index.php">Play</a> | <a onclick="goTo('my_team.php')">My team</a> | <a onclick="goTo('transfer_market.php')">Transfer market</a> | <a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | <a onclick="goTo('stats.php')">Stats</a> | <a onclick="goTo('my_account.php')">My account</a></p>
+      <p>Copyright &copy; Fantasy football manager</p>
 	</div>
 	</div>
-	<script type="text/babel" src="players.jsx"></script>
+
+	<!--- <script type="text/babel" src="players.jsx"></script> -->
 </body>
 </html>

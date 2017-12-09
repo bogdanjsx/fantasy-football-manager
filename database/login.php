@@ -11,7 +11,7 @@ if(isset($_POST['login_button']))
 	$user = User::findUser($username, $password);
 	if($user == null)
 	{
-		redirect("../login.php", "Username and password combination do not exist!");
+		redirect("../my_account.php", "Username and password combination do not exist!");
 	}
 	
 	ob_start();
