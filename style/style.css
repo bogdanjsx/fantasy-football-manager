@@ -143,10 +143,10 @@ ol li
 #logo
 { 
 	width: 70%;
-	height: 127px;
+	height: 130px;
 	position: relative;
-	background: url(cormorant_logo.jpg) no-repeat right;
-	background-size: 300px;
+	background: url(logo.png) no-repeat right;
+	background-size: 250px;
 }
 
 #logo #logo_text 
