@@ -7,13 +7,13 @@
   <meta name="keywords" content="Web Game, HTML, Javascript, PHP, football, manager, simulator" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
-  <!--
-	<link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
+  
+  <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
   <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/styles-e9671010d8.css" />
-	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
-	-->
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+	
   <script>
 	  function goTo(site)
 	  {
@@ -65,28 +65,76 @@
       </div>
     </div>
     <div id="site_content">
-			<!-- <div id="players"/> -->
+      
       <div id="content">
+      	<div id="players"/>
+	       	<?php
+		       	session_start();
+		       	require 'vendor/autoload.php'; // include Composer's autoloader
+		       	
+		       	//Nu merge lul
+		       	//getRandomPlayer();
+		     ?>
+		</div>
 		<?php
-			session_start();
 			
-			require 'vendor/autoload.php'; // include Composer's autoloader
+			require 'vendor/autoload.php';
 
-			$username = "alex";
-			$password = "proiectsac";
-			$database = "fantasy-football-manager";
-			$client = new MongoDB\Client("mongodb://ds249025.mlab.com:49025/fantasy-football-manager", array("username" => $username, "password" => $password));
+			function bsonUnserialize($map)
+			{
+				$array = [];
 
-			try 
-			{
-			    $db = $client->getManager();
-			}
-			catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
-			{
-			    echo $e->getMessage();
+			    foreach ( $map as $k => $value )
+			    {
+			        $array[$k] = $value;
+			    }
+
+			    return $array;
 			}
 
-			//print_r($db);
+			function getRandomPlayer()
+			{
+				$username = "alex";
+				$password = "proiectsac";
+				$database = "fantasy-football-manager";
+				$client = new MongoDB\Client("mongodb://ds249025.mlab.com:49025/fantasy-football-manager", array("username" => $username, "password" => $password));
+
+				try 
+				{
+				    $db = $client->getManager();
+				}
+				catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
+				{
+				    echo $e->getMessage();
+				}
+
+				try
+				{
+					$database = $client->selectDatabase('fantasy-football-manager');
+					$playerCollection = $database->selectCollection('player_classes');
+				}
+				catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
+				{
+				    echo $e->getMessage();
+				}
+
+				$playersCount = $playerCollection->count();
+
+				$randomID = rand(0, $playersCount);
+
+				$cursor = $playerCollection->find([
+					'_id' => $randomID
+				]);
+
+				foreach ($cursor as $randomPlayer) 
+				{
+				   $playerArray = bsonUnserialize($randomPlayer);
+				   var_dump($playerArray);
+				};
+				return $playerArray;
+			}
+			
+			getRandomPlayer();
 
 			if(isset($_SESSION['logID']))
 			{
@@ -107,6 +155,6 @@
 	</div>
 	</div>
 
-	<!--- <script type="text/babel" src="players.jsx"></script> -->
+	<script type="text/babel" src="players.jsx"></script>
 </body>
 </html>
