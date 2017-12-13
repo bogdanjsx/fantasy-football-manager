@@ -34,7 +34,7 @@
 	  {
 		  document.getElementById(id).classList.add('selected');
 		  
-		  for(count = 1; count < 6; count ++)
+		  for(count = 1; count < 7; count ++)
 		  {
 			  if(count != id)
 			  {
