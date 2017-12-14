@@ -1,6 +1,6 @@
-function RepoListItem({playerData}) {
+function PlayerCard({playerData}) {
   return (
-    <div id="player" className="card-generator playercard centered card-large bronze fut18">
+    <div id="player" className="card-generator playercard centered card-large gold fut18">
     <div id="art" className="playercard-art not-draggable"></div>
     <div id="name" className="playercard-name">{playerData.name}</div>
     <div id="rating" className="playercard-rating">{playerData.overall}</div>
@@ -24,33 +24,13 @@ function RepoListItem({playerData}) {
     </div>
     </div>
   );
-}
+}  
 
-var player ={
-    "_id": 8,
-    "dribbling": 81,
-    "shooting": 81,
-    "physical": 70,
-    "name": "T. Kroos",
-    "club": "Real Madrid CF",
-    "positions": [
-        "CDM",
-        "CM"
-    ],
-    "gk handling": 11,
-    "club_logo": "https://cdn.sofifa.org/18/teams/243.png",
-    "overall": 90,
-    "pace": 56,
-    "flag": "https://cdn.sofifa.org/flags/21.png",
-    "gk positioning": 7,
-    "gk diving": 10,
-    "passing": 89,
-    "photo": "https://cdn.sofifa.org/18/players/182521.png",
-    "nationality": "Germany",
-    "gk speed": 60,
-    "gk reflexes": 10,
-    "gk kicking": 13,
-    "defending": 73
-}
+var count = 11;
+var randomPlayerList = generateRandomPlayer(count);
 
-ReactDOM.render(<RepoListItem playerData={player}/>, document.getElementById("players"));
+for(let i = 0; i < count; i++)
+{
+    var reactVar = React.createElement(PlayerCard, {"playerData" : randomPlayerList[i]});
+    ReactDOM.render(reactVar, document.getElementById("players" + i));
+}

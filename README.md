@@ -18,4 +18,7 @@ Pune extension=php_mongodb.dll in php.ini din
 	wamp64\bin\apache\apache2.4.27\bin\php.ini
 	wamp64\bin\php\php5.6.31\php.ini
 
+Put in wamp64\bin\php\php5.6.31\ext the contents from php_mongodb-1.3.4-5.6-ts-vc11-x64.zip
+Download it from http://pecl.php.net/package/mongodb
+
 API reference: https://docs.mongodb.com/php-library/current/reference/

@@ -8,14 +8,15 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
   
-  
+ 
   <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
   <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/styles-e9671010d8.css" />
-
+ 	
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
-	
+  <script type="text/babel" src="players.jsx"></script>
+
   <script>
 	  function goTo(site)
 	  {
@@ -67,19 +68,21 @@
       </div>
     </div>
     <div id="site_content">
+      <div id="players0"/></div>
+      <div id="players1"/></div>
+      <div id="players2"/></div>
+      <div id="players3"/></div>
+      <div id="players4"/></div>
+      <div id="players5"/></div>
+      <div id="players6"/></div>
+      <div id="players7"/></div>
+      <div id="players8"/></div>
+      <div id="players9"/></div>
+      <div id="players10"/></div>
       
       <div id="content">
-      	<div id="players"/>
-	       	<?php
-		       	session_start();
-		       	require 'vendor/autoload.php'; // include Composer's autoloader
-		       	
-		       	//Nu merge lul
-		       	//getRandomPlayer();
-		     ?>
-		</div>
 		<?php
-			
+			session_start();
 			require 'vendor/autoload.php';
 
 			function bsonUnserialize($map)
@@ -94,7 +97,7 @@
 			    return $array;
 			}
 
-			function getRandomPlayer()
+			function getRandomPlayer($randomID)
 			{
 				$username = "alex";
 				$password = "proiectsac";
@@ -122,8 +125,7 @@
 
 				$playersCount = $playerCollection->count();
 
-				$randomID = rand(0, $playersCount);
-
+				
 				$cursor = $playerCollection->find([
 					'_id' => $randomID
 				]);
@@ -131,12 +133,11 @@
 				foreach ($cursor as $randomPlayer) 
 				{
 				   $playerArray = bsonUnserialize($randomPlayer);
-				   var_dump($playerArray);
 				};
-				return $playerArray;
+
+				return json_encode($playerArray);
 			}
 			
-			getRandomPlayer();
 
 			if(isset($_SESSION['logID']))
 			{
@@ -148,6 +149,40 @@
 				echo "<p>You are not logged in! To register or log into your account access the Login page</p>";
 			}
 		?>
+		
+		<script type="text/Javascript"  async=false>
+
+			function generateRandomPlayer(count)
+			{
+				var randomPlayerList = [];
+
+				for(var i = 0; i < count; i ++)
+				{
+					var randomPlayer = <?php
+						$randomID = mt_rand(0, 100);
+						$randomPlayer = getRandomPlayer($randomID);
+
+						echo $randomPlayer;
+						?>
+
+					randomPlayerList.push(randomPlayer);
+				}
+
+				console.log(randomPlayerList);
+				return randomPlayerList;
+
+				/*
+				var reactVar = React.createElement(PlayerCard, {"playerData" : randomPlayer});
+				ReactDOM.render(reactVar, document.getElementById("players"));
+				*/
+			}
+			/*
+			document.addEventListener("DOMContentLoaded", function(event) {
+				generateRandomPlayer();
+			  });
+			*/
+
+ 		 </script>
 		<p></p><p></p><p></p><p></p><p></p><p></p>
       </div>
     </div>
@@ -156,7 +191,5 @@
       <p>Copyright &copy; Fantasy football manager</p>
 	</div>
 	</div>
-
-	<script type="text/babel" src="players.jsx"></script>
 </body>
 </html>
