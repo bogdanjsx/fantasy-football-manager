@@ -68,6 +68,7 @@
       </div>
     </div>
     <div id="site_content">
+	<div id="team" style="width:1670px; height:1440px; background: url('http://www.conceptdraw.com/How-To-Guide/picture/soccer-football-field-templates/End-Zone-View-Soccer-Football-Field.png'); background-size: cover; ">
       <div id="players0"/></div>
       <div id="players1"/></div>
       <div id="players2"/></div>
@@ -79,6 +80,7 @@
       <div id="players8"/></div>
       <div id="players9"/></div>
       <div id="players10"/></div>
+	<div />
       
       <div id="content">
 		<?php
