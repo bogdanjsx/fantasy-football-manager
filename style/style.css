@@ -136,7 +136,8 @@ ol li
 }
 
 #header
-{ 
+{
+	max-height: 100px;
 	background: url(header_background.png) repeat-x;
 }
 
@@ -372,4 +373,21 @@ canvas
 {
 width: 800px;
 height: 400px;
+}
+
+.playercard
+{
+	display: inline-block;
+}
+
+#player0
+{
+    left:200px;
+    top:100px;
+}
+
+#player1
+{
+    left:300px;
+    top:100px;
 }

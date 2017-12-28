@@ -65,7 +65,21 @@
       </div>
     </div>
     <div id="site_content">
-      <div id="players0"/></div>
+
+	<div id="team">
+      <div id="player0" class="playercard"/></div>
+	  <div id="player1" class="playercard"/></div>
+	  <div id="player2" class="playercard"/></div>
+	  <div id="player3" class="playercard"/></div>
+	  <div id="player4" class="playercard"/></div>
+	  <div id="player5" class="playercard"/></div>
+	  <div id="player6" class="playercard"/></div>
+	  <div id="player7" class="playercard"/></div>
+	  <div id="player8" class="playercard"/></div>
+	  <div id="player9" class="playercard"/></div>
+	  <div id="player10" class="playercard"/></div>
+	</div>
+
       <div id="content">
 		<?php
 			session_start();

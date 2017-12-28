@@ -50,11 +50,11 @@ function Card({player}) {
     )
 }
 
-var count = 1;
+var count = 11;
 var randomPlayerList = generateRandomPlayer(count);
 
 for(let i = 0; i < count; i++)
 {
     var reactVar = React.createElement(Card, {"player" : randomPlayerList[i]});
-    ReactDOM.render(reactVar, document.getElementById("players" + i));
+    ReactDOM.render(reactVar, document.getElementById("player" + i));
 }
