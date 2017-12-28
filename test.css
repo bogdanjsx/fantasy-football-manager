@@ -1,0 +1,6 @@
+#someselector {
+  all: initial;
+  * {
+    all: unset;
+  }
+}

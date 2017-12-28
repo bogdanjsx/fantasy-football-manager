@@ -6,11 +6,8 @@
   <meta name="description" content="Fantasy football simulator" />
   <meta name="keywords" content="Web Game, HTML, Javascript, PHP, football, manager, simulator" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="style/style.css" />
-  
- 
-  <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/vendor-484356dfc9.css" />
-  <link rel="stylesheet" href="http://futhead.cursecdn.com/static/build/css/styles-e9671010d8.css" />
+  <link rel="stylesheet" type="text/css" href="./style/style.css" />
+  <link rel="stylesheet" type="text/css" href="./style/fut-cards.css" />
  	
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -68,20 +65,7 @@
       </div>
     </div>
     <div id="site_content">
-	<div id="team" style="width:1670px; height:1440px; background: url('http://www.conceptdraw.com/How-To-Guide/picture/soccer-football-field-templates/End-Zone-View-Soccer-Football-Field.png'); background-size: cover; ">
       <div id="players0"/></div>
-      <div id="players1"/></div>
-      <div id="players2"/></div>
-      <div id="players3"/></div>
-      <div id="players4"/></div>
-      <div id="players5"/></div>
-      <div id="players6"/></div>
-      <div id="players7"/></div>
-      <div id="players8"/></div>
-      <div id="players9"/></div>
-      <div id="players10"/></div>
-	<div />
-      
       <div id="content">
 		<?php
 			session_start();

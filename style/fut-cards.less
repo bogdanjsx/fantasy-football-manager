@@ -1,0 +1,1429 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,700,600&subset=latin,latin-ext);
+
+/* 15 Player Cards */
+.fut15 {
+	&.playercard {
+		background-repeat: no-repeat;
+		position: relative;
+		font-family: 'Titillium Web', sans-serif;
+		font-weight: 400;
+		text-transform: uppercase;
+		color: #fff;
+	}
+	
+	&.playercard.card-small {
+		width: 135px;
+		height: 200px;
+		cursor: pointer;
+		background-position: 0px -1px;
+	}
+	&.playercard.card-large {
+		width: 200px;
+		height: 300px;
+	}
+	&.playercard div {
+		position: absolute; text-shadow: 1px 1px 1px #333; line-height: 18px;
+	}
+	&.card-large.playercard.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-rare-gold.png');
+	}
+	&.card-large.playercard.gold.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-gold.png');
+	}
+	&.card-large.playercard.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-rare-bronze.png');
+	}
+	&.card-large.playercard.bronze.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-bronze.png');
+	}
+	&.card-large.playercard.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-rare-silver.png');
+	}
+	&.card-large.playercard.silver.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-silver.png');
+	}
+	&.card-large.playercard.if.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-if-gold.png'); color: #dcb20a;
+	}
+	&.card-large.playercard.if.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-if-silver.png'); color: #d6dee0;
+	}
+	&.card-large.playercard.if.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-if-bronze.png'); color: #a48266;
+	}
+	&.card-large.playercard.motm {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-motm.png'); color: #fff;
+	}
+	&.card-large.playercard.pink,
+	&.card-large.playercard.charity {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-charity.png'); color: #fff;
+	}
+	&.card-large.playercard.legend {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-legend.png');
+		color: #B39428;
+		text-shadow: 1px 1px 1px rgba(193, 166, 69, 0.4) !important;
+	}
+	&.card-large.playercard.green,
+	&.card-large.playercard.wcmotm,
+	&.card-large.playercard.intl-motm {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-intl-motm.png');
+	}
+	&.card-large.playercard.turquoise,
+	&.card-large.playercard.pro-player {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-pro-player.png');
+	}
+	&.card-large.playercard.purple,
+	&.card-large.playercard.hero {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-hero.png');
+	}
+	&.card-large.playercard.bluered,
+	&.card-large.playercard.blue-red {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-blue-red.png');
+	}
+	&.card-large.playercard.blue,
+	&.card-large.playercard.toty {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-toty.png');
+	}
+	&.card-large.playercard.blue-green {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-blue-green.png');
+	}
+	&.card-large.playercard.tots.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-tots-gold.png');
+	}
+	&.card-large.playercard.tots.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-tots-silver.png');
+	}
+	&.card-large.playercard.tots.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-tots-bronze.png');
+	}
+	&.card-large.playercard.concept {
+		background-image: url('../assets/cards/fifa15/card-fut-15-large-concept.png');
+	}
+	
+	&.card-large.playercard.legend div,
+	&.card-small.playercard.legend div {
+		color: #B39428;
+		text-shadow: 1px 1px 1px rgba(193, 166, 69, 0.4);
+	}
+	&.card-large.playercard.legend .playercard-picture {
+		height: 115px;
+		width: 113px;
+		top: 45px;
+		left: 78px;
+	}
+	&.card-large.playercard .playercard-picture img {
+		max-width:100%;
+	}
+	&.card-large.playercard.legend .playercard-rating { top: 35px; }
+	&.card-large.playercard.legend .playercard-position { top: 50px; }
+	
+	&.card-large .playercard-mid-bar {
+		top: 158px;
+		left: 8px;
+		width: ~"calc(100% - 18px)";
+		height: 25px;
+	}
+	&.card-large .playercard-mid-bar > div {
+		position: relative;
+		display: inline-block;
+		width: 31%;
+		text-align: center;
+	}
+	&.card-large .playercard-mid-bar > div > .label {
+		font-size: 8px;
+		clear: both;
+		display: block;
+		line-height: 8px;
+		margin: 1px 0 0;
+	}
+	&.card-small, &.card-mini {
+		.playercard-mid-bar > div > .label {
+			display: none;
+		}
+	}
+	
+	&.card-small.legend .playercard-picture { top: 33px; left: 53px; }
+	
+	&.card-small.playercard.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-rare-gold.png');
+	}
+	&.card-small.playercard.gold.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-gold.png');
+	}
+	&.card-small.playercard.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-rare-bronze.png');
+	}
+	&.card-small.playercard.bronze.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-bronze.png');
+	}
+	&.card-small.playercard.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-rare-silver.png');
+	}
+	&.card-small.playercard.silver.normal {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-silver.png');
+	}
+	&.card-small.playercard.bsg {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-bsg.png');}
+	&.card-small.playercard.if.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-if-gold.png');
+		color: #dcb20a;
+	}
+	&.card-small.playercard.if.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-if-silver.png');
+		color: #d6dee0;
+	}
+	&.card-small.playercard.if.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-if-bronze.png');
+		color: #a48266;
+	}
+	&.card-small.playercard.legend {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-legend.png');
+		color: #B39428;
+		text-shadow: 1px 1px 1px rgba(193, 166, 69, 0.4) !important;
+	}
+	&.card-small.playercard.gold:hover .hover,
+	&.card-small.playercard.silver:hover .hover,
+	&.card-small.playercard.bronze:hover .hover {
+		position: absolute;
+		width: 127px;
+		height: 100%;
+		background: url('../assets/cards/fifa15/card-fut-15-small-hover-rare.png') no-repeat;
+	}
+	&.card-small.playercard.blue,
+	&.card-small.playercard.toty {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-toty.png');
+	}
+	&.card-small.playercard.tots.gold {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-tots-gold.png');
+	}
+	&.card-small.playercard.tots.silver {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-tots-silver.png');
+	}
+	&.card-small.playercard.tots.bronze {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-tots-bronze.png');
+	}
+	&.card-small.playercard.green,
+	&.card-small.playercard.wcmotm,
+	&.card-small.playercard.intl-motm {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-intl-motm.png');
+	}
+	&.card-small.playercard.purple,
+	&.card-small.playercard.hero {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-hero.png');
+	}
+	&.card-small.playercard.motm {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-motm.png');
+	}
+	&.card-small.playercard.pro-player {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-pro-player.png');
+	}
+	&.card-small.playercard.bluered {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-bluered.png');
+	}
+	&.card-small.playercard.concept {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-concept.png');
+	}
+	&.card-small.playercard.blue-green {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-blue-green.png');
+	}
+	&.card-small.playercard.charity {
+		background-image: url('../assets/cards/fifa15/card-fut-15-small-charity.png');
+	}
+	
+	&.card-large .playercard-rating { text-shadow: -1px 2px -1px #4f4f4f; top: 31px; left: 20px; font-size: 30px; line-height: 44px; }
+	&.card-large .playercard-name { top: 20px; left: 0; font-size: 20px; width: 200px; text-align: center;
+	}
+	&.card-large .playercard-position { top: 47px; left: 68px; font-size: 18px; font-weight: bold; }
+	&.card-large .playercard-nation { top: 114px; left: 23px; }
+	&.card-large .playercard-nation img { width: 48px; }
+	&.card-large .playercard-picture { height: 115px; width: 115px; top: 42px; left: 75px; }
+	&.card-large .playercard-club { position: absolute; top: 82px; left: 26px; }
+	&.card-large .playercard-club img { width: 40px; height: 40px; }
+	&.card-large .playercard-attr1 { top: 190px; left: 26px; font-size: 18px; }
+	&.card-large .playercard-attr2 { top: 217px; left: 26px; font-size: 18px; }
+	&.card-large .playercard-attr3 { top: 243px; left: 26px; font-size: 18px; }
+	&.card-large .playercard-attr4 { top: 190px; left: 111px; font-size: 18px; }
+	&.card-large .playercard-attr5 { top: 217px; left: 111px; font-size: 18px; }
+	&.card-large .playercard-attr6 { top: 243px; left: 111px; font-size: 18px; }
+	
+	&.card-small .playercard-rating { top: 25px; left: 14px; font-size: 19px; line-height: 24px; }
+	&.card-small .playercard-name { top: 12px; left: 0; font-size: 13px; line-height: 14px; width: 100%; text-align: center;    overflow: hidden;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  padding: 0 10px;
+	}
+	&.card-small .playercard-position { top: 29px; left: 45px; font-size: 11px; text-align: left;
+	}
+	&.card-small .playercard-chem { top: 108px; left: 58px; font-size: 12px; width: 65px; color: #fff; }
+	&.card-small .playercard-workrates { top: 108px; left: 26px; font-size: 12px; color: #fff; }
+	&.card-small .playercard-nation { top: 76px; left: 15px; padding-top: 7px; }
+	&.card-small .playercard-nation img { width: 32px; }
+	&.card-small .playercard-picture { top: 31px; left: 54px; }
+	&.card-small .playercard-picture img { width: 74px; height: 74px; }
+	&.card-small .playercard-club { top: 52px; left: 16px; }
+	&.card-small .playercard-club img { height: 29px; width: 29px; }
+	&.card-small .playercard-attr1 { top: 124px; left: 16px; font-size: 12px; }
+	&.card-small .playercard-attr2 { top: 142px; left: 16px; font-size: 12px; }
+	&.card-small .playercard-attr3 { top: 159px; left: 16px; font-size: 12px; }
+	&.card-small .playercard-attr4 { top: 124px; left: 71px; font-size: 12px; }
+	&.card-small .playercard-attr5 { top: 142px; left: 71px; font-size: 12px; }
+	&.card-small .playercard-attr6 { top: 159px; left: 71px; font-size: 12px; }
+	
+	
+	&.card-mini {
+		width:80px;
+		height:97px;
+		.playercard-mid-bar, .playercard-attr {
+			display: none;
+		}
+	}
+	&.card-mini .playercard-picture {
+		position:absolute;
+		right:5px;
+		top:24px;
+	}
+	&.card-mini .playercard-picture img {
+		height:48px;
+	}
+	&.card-mini .playercard-club {
+		position:absolute;
+		top:29px;
+		left:8px;
+	}
+	&.card-mini .playercard-club img {
+		height:22px;
+	}
+	&.card-mini .playercard-nation {
+		position:absolute;
+		top:49px;
+		left:8px;
+	}
+	&.card-mini .playercard-nation img {
+		height:13px;
+	}
+	&.card-mini .playercard-name {
+		font-size:10px;
+		position:absolute;
+		bottom:8px;
+		left:13px;
+		width:55px;
+		text-align:center;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	&.card-mini .playercard-rating {
+		/*font-family:'knulbold';*/
+		font-size:16px;
+		position:absolute;
+		top:7px;
+		left:8px;
+		text-align:center;
+	}
+	&.card-mini .playercard-position {
+		font-size:10px;
+		position:absolute;
+		top:7px;
+		left:33px;
+		text-align:center;
+	}
+	&.card-mini.gold {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-gold.png');
+		color:#000000;
+		text-shadow:-1px 1px 1px #CCCCCC;
+		background-size: 80px 97px;
+	}
+	&.card-mini.gold.rare {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-rare-gold.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.gold.if {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-if-gold.png');
+		color:#f0d075;
+		text-shadow:-1px 1px 1px #888888;
+		background-size: 80px 97px;
+	}
+	&.card-mini.silver {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-silver.png');
+		color:#000000;
+		text-shadow:-1px 1px 1px #CCCCCC;
+		background-size: 80px 97px;
+	}
+	&.card-mini.silver.rare {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-rare-silver.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.silver.if {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-if-silver.png');
+		color:#c2bdc3;
+		text-shadow:-1px 1px 1px #888888;
+		background-size: 80px 97px;
+	}
+	&.card-mini.bronze {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-bronze.png');
+		color:#000000;
+		text-shadow:-1px 1px 1px #CCCCCC;
+		background-size: 80px 97px;
+	}
+	&.card-mini.bronze.rare {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-rare-bronze.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.bronze.if {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-if-bronze.png');
+		color:#cca48a;
+		text-shadow:-1px 1px 1px #888888;
+		background-size: 80px 97px;
+	}
+	&.card-mini.toty {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-toty.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.bluered {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-blue-red.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.motm {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-motm.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.pro-player {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-pro-player.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.tots.bronze {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-tots-bronze.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.tots.silver {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-tots-silver.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.tots.gold {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-tots-gold.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.intl-motm {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-intl-motm.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.charity {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-charity.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.hero {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-hero.png');
+		color:#FFFFFF;
+		text-shadow:-1px 1px 1px #666666;
+		background-size: 80px 97px;
+	}
+	&.card-mini.legend {
+		background:url('../assets/cards/fifa15/card-fut-15-mini-legend.png');
+		color: #877418;
+		text-shadow: -1px 1px 1px #CCCCCC;
+		background-size: 80px 97px;
+	}
+	&.card-mini.playercard.concept {
+		background-image: url('../assets/cards/fifa15/card-fut-15-mini-concept.png');
+	}
+	&.card-mini.playercard.blue-green {
+		background-image: url('../assets/cards/fifa15/card-fut-15-mini-blue-green.png');
+	}
+	
+	/* Personal Additions */
+	&.card-small .playercard-mid-bar {
+		top: 106px;
+		left: 6px;
+		font-size: 12px;
+		width: ~"calc(100% - 12px)";
+		height: 18px;
+		text-transform: capitalize;
+	}
+	&.card-small .playercard-mid-bar > div {
+		position: relative;
+		display: inline-block;
+		width: 31%;
+		text-align: center;
+	}
+}
+
+.fut16 {
+	&.playercard {
+		background-repeat: no-repeat;
+		position: relative;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		text-transform: uppercase;
+		color: #000;
+		text-shadow: 0 1px rgba(255,255,255,0.3);
+		& .playercard-container {
+			height: 100%;
+			width: 100%;
+		}
+		&.if.gold {
+			color: #dcb20a;
+			text-shadow: 0 1px rgba(0,0,0,0.3);
+		}
+		&.if.silver {
+			color: #d6dee0;
+			text-shadow: 0 1px rgba(0,0,0,0.3);
+		}
+		&.if.bronze {
+			color: #a48266;
+			text-shadow: 0 1px rgba(0,0,0,0.3);
+		}
+		&.purple,
+		&.hero {
+			color: #26042f;
+		}
+		&.blue,
+		&.toty {
+			color: #d2ebfa;
+			text-shadow: 0 1px rgba(0,0,0,0.3);
+		}
+		&.tots.gold {
+			color: #ebd56d;
+		}
+		&.tots.silver {
+			color: #dce5eb;
+		}
+		&.tots.bronze {
+			color: #eac0a1;
+		}
+		&.if {
+			& .playercard-rating,
+			& .playercard-position {
+				color: #000;
+			}
+		}
+		&.tots {
+			text-shadow: 0 1px #000;
+			& .playercard-name {
+				color: #000;
+				text-shadow: none;
+			}
+		}
+		&.rb,
+		&.record-breaker,
+		&.bluered,
+		&.blue-red {
+			color: #ebebeb;
+			text-shadow: 0px 1px #000;
+		}
+		&.legend {
+			color: #6b4a15;
+		}
+		& div {
+			position: absolute;
+			line-height: 18px;
+			font-size: 18px;
+		}
+		&.card-small {
+			width: 138px;
+			height: 207px;
+			cursor: pointer;
+			background-image: url('../assets/cards/fifa16/sprite-fut-16-regular-cards-small.png');
+			background-position: 0 0;
+			
+			&.gold,
+			&.gold.rare {
+				background-image: url('../assets/cards/fifa16/small-rare-gold.png');
+			}
+			&.gold.nonrare {
+				background-image: url('../assets/cards/fifa16/small-nonrare-gold.png');
+			}
+			&.bronze,
+			&.bronze.rare {
+				background-image: url('../assets/cards/fifa16/small-rare-bronze.png');
+			}
+			&.bronze.nonrare {
+				background-image: url('../assets/cards/fifa16/small-nonrare-bronze.png');
+			}
+			&.silver,
+			&.silver.rare {
+				background-image: url('../assets/cards/fifa16/small-rare-silver.png');
+			}
+			&.silver.nonrare {
+				background-image: url('../assets/cards/fifa16/small-nonrare-silver.png');
+			}
+			&.bsg {
+				background-image: url('../assets/cards/fifa16/small-bsg.png');
+			}
+			&.if.gold {
+				background-image: url('../assets/cards/fifa16/small-if-gold.png');
+				color: #dcb20a;
+			}
+			&.if.silver {
+				background-image: url('../assets/cards/fifa16/small-if-silver.png');
+				color: #d6dee0;
+			}
+			&.if.bronze {
+				background-image: url('../assets/cards/fifa16/small-if-bronze.png');
+				color: #a48266;
+			}
+			&.legend {
+				background-image: url('../assets/cards/fifa16/small-legend.png');
+			}
+			&.gold:hover .hover,
+			&.silver:hover .hover,
+			&.bronze:hover .hover {
+				position: absolute;
+				width: 127px;
+				height: 100%;
+				background: url('../assets/cards/fifa16/small-hover-rare.png') no-repeat;
+			}
+			&.blue,
+			&.toty {
+				background-image: url('../assets/cards/fifa16/small-toty.png');
+			}
+			&.tots.gold {
+				background-image: url('../assets/cards/fifa16/small-tots-gold.png');
+			}
+			&.tots.silver {
+				background-image: url('../assets/cards/fifa16/small-tots-silver.png');
+			}
+			&.tots.bronze {
+				background-image: url('../assets/cards/fifa16/small-tots-bronze.png');
+			}
+			&.green,
+			&.wcmotm,
+			&.intl-motm {
+				background-image: url('../assets/cards/fifa16/small-intl-motm.png');
+			}
+			&.purple,
+			&.hero {
+				background-image: url('../assets/cards/fifa16/small-hero.png');
+			}
+			&.orange,
+			&.motm {
+				background-image: url('../assets/cards/fifa16/small-motm.png');
+			}
+			&.teal,
+			&.pro-player {
+				background-image: url('../assets/cards/fifa16/small-pro-player.png');
+			}
+			&.rb,
+			&.record-breaker,
+			&.bluered,
+			&.blue-red {
+				background-image: url('../assets/cards/fifa16/small-bluered.png');
+			}
+			&.concept {
+				background-image: url('../assets/cards/fifa16/small-concept.png');
+			}
+			&.blue-green {
+				background-image: url('../assets/cards/fifa16/small-blue-green.png');
+			}
+			&.pink,
+			&.charity {
+				background-image: url('../assets/cards/fifa16/small-charity.png');
+			}
+			
+			& .playercard-rating {
+				top: 17px;
+				left: 6px;
+				font-size: 20px;
+				width: 65px;
+				text-align: center;
+				font-weight: 700;
+			}
+			& .playercard-name {
+				top: 106px;
+				left: 6px;
+				font-size: 12px;
+				line-height: 12px;
+				width: 121px;
+				text-align: center;
+				font-weight: 700;
+			}
+			& .playercard-position {
+				top: 34px;
+				left: 6px;
+				font-size: 14px;
+				width: 65px;
+				text-align: center;
+			}
+			& .playercard-chem { top: 108px; left: 58px; font-size: 12px; width: 65px; color: #fff; }
+			& .playercard-workrates { top: 108px; left: 26px; font-size: 12px; color: #fff; }
+			& .playercard-nation { top: 79px; left: 23px; }
+			& .playercard-nation img { width: 29px; }
+			& .playercard-picture { top: 29px; left: 54px; }
+			& .playercard-picture img { height: 76px; }
+			& .playercard-club { top: 52px; left: 25px; }
+			& .playercard-club img { width: 26px; }
+			& .playercard-attr1 { top: 122px; left: 20px; }
+			& .playercard-attr2 { top: 136px; left: 20px; }
+			& .playercard-attr3 { top: 151px; left: 20px; }
+			& .playercard-attr4 { top: 122px; left: 74px; }
+			& .playercard-attr5 { top: 136px; left: 74px; }
+			& .playercard-attr6 { top: 151px; left: 74px; }
+			& .playercard-attr {
+				width: 50px;
+				font-size: 12px;
+				.fut-rating {
+					font-weight: 700;
+				}
+			}
+			
+			& .playercard-mid-bar {
+				top: 168px;
+				left: 20px;
+				font-size: 12px;
+				width: 100px;
+				height: 18px;
+				text-transform: capitalize;
+				& > div {
+					width: 31%;
+					display: inline-block;
+					position: relative;
+				}
+				.playercard-workrate,
+				.playercard-skillmoves,
+				.playercard-weakfoot {
+					font-size: 12px;
+				}
+			}
+			
+			&.legend .playercard-picture,
+			&.toty .playercard-picture {
+				top: 26px;
+			}
+		}
+		&.card-large {
+			width: 202px;
+			height: 316px;
+			background-image: url('../assets/cards/fifa16/sprite-fut-16-regular-cards.png');
+			background-position: 0 0;
+			&.gold,
+			&.gold.rare {
+				background-position: 0 -1265px;
+			}
+			&.gold.nonrare {
+				background-position: 0 -316px;
+			}
+			&.bronze,
+			&.bronze.rare {
+				background-position: 0 -948px;
+			}
+			&.bronze.nonrare {
+				background-position: 0 0;
+			}
+			&.silver,
+			&.silver.rare {
+				background-position: 0 -1581px;
+			}
+			&.silver.nonrare {
+				background-position: 0 -2261px;
+			}
+			&.motm,
+			&.pink,
+			&.charity,
+			&.green,
+			&.wcmotm,
+			&.intl-motm,
+			&.turquoise,
+			&.pro-player,
+			&.purple,
+			&.hero,
+			&.rb,
+			&.record-breaker,
+			&.bluered,
+			&.blue-red,
+			&.blue,
+			&.toty,
+			&.blue-green,
+			&.tots.gold,
+			&.tots.silver,
+			&.tots.bronze,
+			&.if.gold,
+			&.if.silver,
+			&.if.bronze {
+				background-image: url('../assets/cards/fifa16/sprite-fut-16-specialty-cards.png');
+			}
+			&.if.gold {
+				background-position: 0 -3518px;
+			}
+			&.if.silver {
+				background-position: 0 -3835px;
+			}
+			&.if.bronze {
+				background-position: 0 -3202px;
+			}
+			&.legend {
+				background-position: 0 -632px;
+			}
+			&.concept {
+				background-image: url('../assets/cards/fifa16/large-concept.png');
+				background-position: 0 9px;
+			}
+			&.motm,
+			&.orange {
+				background-position: 0 -990px;
+			}
+			&.pink,
+			&.charity {
+				background-position: 0 -1306px;
+			}
+			&.green,
+			&.wcmotm,
+			&.intl-motm {
+				background-position: 0 -673px;
+			}
+			&.turquoise,
+			&.pro-player {
+				background-position: 0 -1937px;
+			}
+			&.purple,
+			&.hero {
+				background-position: 0 -1622px;
+			}
+			&.rb,
+			&.record-breaker,
+			&.bluered,
+			&.blue-red {
+				background-position: 0 -359px;
+			}
+			&.blue,
+			&.toty {
+				background-position: 0 -4150px;
+			}
+			&.blue-green {
+				background-image: url('../assets/cards/fifa16/card-fut-15-large-blue-green.png');
+			}
+			&.tots.gold {
+				background-position: 0 -2570px;
+			}
+			&.tots.silver {
+				background-position: 0 -2886px;
+			}
+			&.tots.bronze {
+				background-position: 0 -2254px;
+			}
+			&.legend {
+				background-position: 0 -632px;
+			}
+			
+			& .playercard-picture img {
+				max-width:100%;
+			}
+			
+			& .playercard-rating { top: 31px; left: 20px; font-size: 30px; line-height: 44px; }
+			& .playercard-name { top: 163px; left: 0; font-size: 20px; width: 200px; text-align: center; }
+			& .playercard-position { top: 68px; left: 16px; font-size: 18px; }
+			& .playercard-nation { top: 114px; left: 23px; }
+			& .playercard-nation img { width: 48px; }
+			& .playercard-picture { height: 115px; width: 115px; top: 42px; left: 75px; }
+			& .playercard-club { position: absolute; top: 82px; left: 26px; }
+			& .playercard-club img { width: 40px; height: 40px; }
+			& .playercard-attr1 { top: 190px; left: 26px; font-size: 18px; }
+			& .playercard-attr2 { top: 217px; left: 26px; font-size: 18px; }
+			& .playercard-attr3 { top: 243px; left: 26px; font-size: 18px; }
+			& .playercard-attr4 { top: 190px; left: 111px; font-size: 18px; }
+			& .playercard-attr5 { top: 217px; left: 111px; font-size: 18px; }
+			& .playercard-attr6 { top: 243px; left: 111px; font-size: 18px; }
+			& .playercard-mid-bar {
+				top: 263px;
+				left: 8px;
+				width: ~"calc(100% - 18px)";
+				height: 25px;
+				& > div {
+					position: relative;
+					display: inline-block;
+					width: 31%;
+					text-align: center;
+					& > .label {
+						font-size: 8px;
+						clear: both;
+						display: block;
+						line-height: 8px;
+						margin: 1px 0 0;
+					}
+				}
+			}
+			
+			& .playercard-name {
+				text-align: center;
+				font-size: 20px;
+				width: 184px;
+				top: 163px;
+				left: 7px;
+				font-weight: 700;
+			}
+			& .playercard-rating {
+				text-align: center;
+				font-size: 28px;
+				width: 50px;
+				top: 16px;
+				left: 36px;
+				font-weight: 700;
+			}
+			& .playercard-rating#rating {
+				text-align: center;
+			}
+			& .playercard-position {
+				text-align: center;
+				width: 50px;
+				top: 53px;
+				left: 36px;
+			}
+			& .playercard-position#position {
+				text-align: center;
+				width: 50px;
+			}
+			& .playercard-workrates {
+				top: 250px;
+				width: 180px;
+				left: 10px;
+				font-size: 16px;
+				text-align: center;
+			}
+			& .playercard-nation {
+				top: 124px;
+				left: 40px;
+			}
+			& .playercard-nation img {
+				width: 40px;
+			}
+			& .playercard-picture {
+				top: 38px;
+				left: 84px;
+			}
+			& .playercard-picture img {
+				height: 120px;
+				border-bottom-right-radius: 90px 4px;
+			}
+			& .playercard-club {
+				top: 77px;
+				left: 41px;
+			}
+			& .playercard-club img {
+				width: 40px;
+			}
+			& .playercard-attr {
+				text-align: left;
+				font-size: 20px;
+			}
+			& .playercard-attr1 {
+				width: 95px;
+				top: 188px;
+				left: 28px;
+			}
+			& .playercard-attr4 {
+				width: 95px;
+				top: 188px;
+				left: 114px;
+			}
+			& .playercard-attr2 {
+				width: 95px;
+				top: 214px;
+				left: 28px;
+			}
+			& .playercard-attr5 {
+				width: 95px;
+				top: 214px;
+				left: 114px;
+			}
+			& .playercard-attr3 {
+				width: 95px;
+				top: 240px;
+				left: 28px;
+			}
+			& .playercard-attr6 {
+				width: 95px;
+				top: 240px;
+				left: 114px;
+			}
+			& .playercard-chem {
+				text-align: center;
+				width: 200px;
+				top: 251px;
+				font-size: 16px;
+			}
+			& .playercard-chem .chem-name {
+				//font-family: 'Futhead-Sans-ExtraBold';
+			}
+			& .playercard-chem .chem-icon {
+				width: 26px;
+			}
+			& .fut-rating {
+				font-weight: 700;
+			}
+			
+			&.if {
+				& .playercard-rating,
+				& .playercard-position {
+					color: #000;
+				}
+			}
+			&.tots {
+				text-shadow: none;
+				& .playercard-name {
+					color: #000;
+				}
+			}
+		}
+		&.card-responsive {
+			width: 202px;
+			height: 316px;
+			background-image: url('../assets/cards/fifa16/sprite-fut-16-regular-cards.png');
+			background-position: 0 0;
+			&.gold,
+			&.gold.rare {
+				background-position: 0 -1265px;
+			}
+			&.gold.nonrare {
+				background-position: 0 -316px;
+			}
+			&.bronze,
+			&.bronze.rare {
+				background-position: 0 -948px;
+			}
+			&.bronze.nonrare {
+				background-position: 0 0;
+			}
+			&.silver,
+			&.silver.rare {
+				background-position: 0 -1581px;
+			}
+			&.silver.nonrare {
+				background-position: 0 -2261px;
+			}
+			&.motm,
+			&.pink,
+			&.charity,
+			&.green,
+			&.wcmotm,
+			&.intl-motm,
+			&.turquoise,
+			&.pro-player,
+			&.purple,
+			&.hero,
+			&.bluered,
+			&.blue-red,
+			&.blue,
+			&.toty,
+			&.blue-green,
+			&.tots.gold,
+			&.tots.silver,
+			&.tots.bronze,
+			&.if.gold,
+			&.if.silver,
+			&.if.bronze {
+				background-image: url('../assets/cards/fifa16/sprite-fut-16-specialty-cards.png');
+			}
+			&.if.gold {
+				background-position: 0 -3518px;
+				color: #dcb20a;
+				text-shadow: 0 1px rgba(0,0,0,0.3);
+			}
+			&.if.silver {
+				background-position: 0 -3835px;
+				color: #d6dee0;
+				text-shadow: 0 1px rgba(0,0,0,0.3);
+			}
+			&.if.bronze {
+				background-position: 0 -3202px;
+				color: #a48266;
+				text-shadow: 0 1px rgba(0,0,0,0.3);
+			}
+			&.legend {
+				background-position: 0 -632px;
+			}
+			&.concept {
+				background-image: url('../assets/cards/fifa16/card-fut-15-large-concept.png');
+			}
+			&.motm,
+			&.orange {
+				background-position: 0 -990px;
+			}
+			&.pink,
+			&.charity {
+				background-position: 0 -1306px;
+			}
+			&.green,
+			&.wcmotm,
+			&.intl-motm {
+				background-position: 0 -673px;
+			}
+			&.turquoise,
+			&.pro-player {
+				background-position: 0 -1937px;
+			}
+			&.purple,
+			&.hero {
+				//background-image: url('../Screen%20Shot%202015-11-29%20at%207.01.06%20PM.png');
+				background-position: 0 -1622px;
+				color: #26042f;
+			}
+			&.bluered,
+			&.blue-red {
+				background-position: 0 -359px;
+			}
+			&.blue,
+			&.toty {
+				background-position: 0 -4150px;
+				color: #d2ebfa;
+				text-shadow: 0 1px rgba(0,0,0,0.3);
+			}
+			&.blue-green {
+				background-image: url('../assets/cards/fifa16/card-fut-15-large-blue-green.png');
+			}
+			&.tots.gold {
+				background-position: 0 -2570px;
+				color: #ebd56d;
+			}
+			&.tots.silver {
+				background-position: 0 -2886px;
+				color: #dce5eb;
+			}
+			&.tots.bronze {
+				background-position: 0 -2254px;
+				color: #eac0a1;
+			}
+			&.legend {
+				background-position: 0 -632px;
+			}
+			&.rb,
+			&.record-breaker,
+			&.bluered,
+			&.blue-red {
+				
+			}
+			& .playercard-container {
+				height: 100%;
+				width: 100%;
+			}
+			
+			& .playercard-picture img {
+				max-width: 100%;
+			}
+			& .playercard-mid-bar {
+				top: 263px;
+				left: 8px;
+				width: ~"calc(100% - 18px)";
+				height: 25px;
+				& > div {
+					position: relative;
+					display: inline-block;
+					width: 31%;
+					text-align: center;
+					& > .label {
+						font-size: 8px;
+						clear: both;
+						display: block;
+						line-height: 8px;
+						margin: 1px 0 0;
+					}
+				}
+			}
+			
+			& .playercard-name {
+				text-align: center;
+				font-size: 118%;
+				width: 100%;
+				top: 51.4%;
+				left: 0;
+				font-weight: 700;
+			}
+			& .playercard-rating {
+				font-size: 169%;
+				width: 25%;
+				top: 5%;
+				left: 17.5%;
+				font-weight: 700;
+			}
+			& .playercard-rating#rating {
+				text-align: center;
+			}
+			& .playercard-position {
+				text-align: center;
+				width: 25%;
+				top: 16.5%;
+				left: 17.5%;
+			}
+			& .playercard-position#position {
+				text-align: center;
+				width: 50px;
+			}
+			& .playercard-workrates {
+				top: 250px;
+				width: 180px;
+				left: 10px;
+				font-size: 16px;
+				text-align: center;
+			}
+			& .playercard-nation {
+				top: 124px;
+				left: 40px;
+			}
+			& .playercard-nation img {
+				width: 40px;
+			}
+			& .playercard-picture {
+				top: 38px;
+				left: 84px;
+			}
+			& .playercard-picture img {
+				height: 120px;
+				border-bottom-right-radius: 90px 4px;
+			}
+			& .playercard-club {
+				top: 77px;
+				left: 41px;
+			}
+			& .playercard-club img {
+				width: 40px;
+			}
+			& .playercard-attr {
+				text-align: left;
+				font-size: 20px;
+			}
+			& .playercard-attr1 {
+				width: 95px;
+				top: 188px;
+				left: 28px;
+			}
+			& .playercard-attr4 {
+				width: 95px;
+				top: 188px;
+				left: 114px;
+			}
+			& .playercard-attr2 {
+				width: 95px;
+				top: 214px;
+				left: 28px;
+			}
+			& .playercard-attr5 {
+				width: 95px;
+				top: 214px;
+				left: 114px;
+			}
+			& .playercard-attr3 {
+				width: 95px;
+				top: 240px;
+				left: 28px;
+			}
+			& .playercard-attr6 {
+				width: 95px;
+				top: 240px;
+				left: 114px;
+			}
+			& .playercard-chem {
+				text-align: center;
+				width: 200px;
+				top: 251px;
+				font-size: 16px;
+			}
+			& .playercard-chem .chem-name {
+				//font-family: 'Futhead-Sans-ExtraBold';
+			}
+			& .playercard-chem .chem-icon {
+				width: 26px;
+			}
+			& .fut-rating {
+				font-weight: 700;
+			}
+			&.legend .playercard-picture,
+			&.if .playercard-picture {
+				top: 30px;
+			}
+			
+			&.legend {
+				.playercard-picture {
+					height: 115px;
+					width: 113px;
+					top: 45px;
+					left: 78px;
+				}
+				.playercard-rating { top: 35px; }
+				.playercard-position { top: 50px; }
+			}
+			
+			&.if {
+				& .playercard-rating,
+				& .playercard-position {
+					color: #000;
+				}
+			}
+			&.tots {
+				text-shadow: none;
+				& .playercard-name {
+					color: #000;
+				}
+			}
+		}
+		
+		&.card-small, &.card-mini {
+			.playercard-mid-bar > div > .label {
+				display: none;
+			}
+		}
+		
+		&.card-mini {
+			width:80px;
+			height:102px;
+			background-size: 80px 102px;
+			.playercard-mid-bar, .playercard-attr {
+				display: none;
+			}
+			.playercard-container {
+				height: 100%;
+				width: 100%;
+			}
+			& .playercard-picture {
+				position: absolute;
+				right: 0;
+				top: 25px;
+				overflow: hidden;
+				width: 50px;
+				height: 50px;
+				border-bottom-left-radius: 100px 1px;
+				border-bottom-right-radius: 100px 5px;
+			}
+			& .playercard-picture img {
+				height: 45px;
+			}
+			& .playercard-club {
+				position: absolute;
+				top: 37px;
+				left: 12px;
+			}
+			& .playercard-club img {
+				height: 18px;
+			}
+			& .playercard-nation {
+				position: absolute;
+				top: 57px;
+				left: 12px;
+			}
+			& .playercard-nation img {
+				height: 12px;
+			}
+			& .playercard-name {
+				//font-family: 'knulextrabold';
+				font-size: 10px;
+				position: absolute;
+				top: 71px;
+				left: 2px;
+				width: 77px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-align: center;
+				font-weight: 700;
+			}
+			& .playercard-rating {
+				//font-family: 'knulextrabold';
+				font-size: 15px;
+				position: absolute;
+				top: 9px;
+				left: 12px;
+				text-align: center;
+				font-weight: 700;
+			}
+			& .playercard-position {
+				//font-family: 'knulextrabold';
+				font-size: 10px;
+				position: absolute;
+				top: 22px;
+				left: 0px;
+				width: 41px;
+				text-align: center;
+			}
+			&.gold {
+				background-image: url('../assets/cards/fifa16/mini-nonrare-gold.png');
+			}
+			&.gold.rare {
+				background-image: url('../assets/cards/fifa16/mini-rare-gold.png');
+			}
+			&.gold.if {
+				background-image: url('../assets/cards/fifa16/mini-if-gold.png');
+			}
+			&.silver {
+				background-image: url('../assets/cards/fifa16/mini-nonrare-silver.png');
+			}
+			&.silver.rare {
+				background-image: url('../assets/cards/fifa16/mini-rare-silver.png');
+			}
+			&.silver.if {
+				background-image: url('../assets/cards/fifa16/mini-if-silver.png');
+			}
+			&.bronze {
+				background-image: url('../assets/cards/fifa16/mini-nonrare-bronze.png');
+			}
+			&.bronze.rare {
+				background-image: url('../assets/cards/fifa16/mini-rare-bronze.png');
+			}
+			&.bronze.if {
+				background-image: url('../assets/cards/fifa16/mini-if-bronze.png');
+			}
+			&.toty {
+				background-image: url('../assets/cards/fifa16/mini-toty.png');
+			}
+			&.bluered {
+				background-image: url('../assets/cards/fifa16/mini-bluered.png');
+			}
+			&.motm {
+				background-image: url('../assets/cards/fifa16/mini-motm.png');
+			}
+			&.pro-player {
+				background-image: url('../assets/cards/fifa16/mini-pro-player.png');
+			}
+			&.tots.bronze {
+				background-image: url('../assets/cards/fifa16/mini-tots-bronze.png');
+			}
+			&.tots.silver {
+				background-image: url('../assets/cards/fifa16/mini-tots-silver.png');
+			}
+			&.tots.gold {
+				background-image: url('../assets/cards/fifa16/mini-tots-gold.png');
+			}
+			&.intl-motm {
+				background-image: url('../assets/cards/fifa16/mini-intl-motm.png');
+			}
+			&.charity {
+				background-image: url('../assets/cards/fifa16/mini-charity.png');
+			}
+			&.hero {
+				background-image: url('../assets/cards/fifa16/mini-hero.png');
+			}
+			&.legend {
+				background-image: url('../assets/cards/fifa16/mini-legend.png');
+			}
+			&.concept {
+				background-image: url('../assets/cards/fifa16/mini-concept.png');
+			}
+			&.blue-green {
+				background-image: url('../assets/cards/fifa16/mini-blue-green.png');
+			}
+			&.rb,
+			&.record-breaker,
+			&.bluered,
+			&.blue-red {
+				background-image: url('../assets/cards/fifa16/mini-bluered.png');
+			}
+		}
+	}
+}
