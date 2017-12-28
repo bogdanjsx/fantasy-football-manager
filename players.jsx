@@ -7,20 +7,20 @@ function Card({player}) {
     if (player.positions[0] === 'GK') {
         statsArray = [
             [player['gk diving'], 'DIV'],
-            [player['gk diving'], 'DIV'],
-            [player['gk diving'], 'DIV'],
-            [player['gk diving'], 'DIV'],
-            [player['gk diving'], 'DIV'],
-            [player['gk diving'], 'DIV']
+            [player['gk handling'], 'HAN'],
+            [player['gk kicking'], 'KIC'],
+            [player['gk reflexes'], 'REF'],
+            [player['gk speed'], 'SPD'],
+            [player['gk positioning'], 'POS']
         ];
     } else {
         statsArray = [
-            [player.pace, 'PAC'],
-            [player.pace, 'PAC'],
-            [player.pace, 'PAC'],
-            [player.pace, 'PAC'],
-            [player.pace, 'PAC'],
-            [player.pace, 'PAC']
+            [player['pace'], 'PAC'],
+            [player['shooting'], 'SHO'],
+            [player['passing'], 'PAS'],
+            [player['dribbling'], 'DRI'],
+            [player['defending'], 'DEF'],
+            [player['physical'], 'PHY']
         ];
     }
 
