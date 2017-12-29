@@ -15,7 +15,7 @@
   <script type="text/babel" src="players.jsx"></script>
 
   <script>
-	  function goTo(site)
+	  function goTo(site, callback)
 	  {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function()
@@ -23,6 +23,7 @@
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("site_content").innerHTML = this.responseText;
+				callback();
 			}
 		};
 		
@@ -55,7 +56,7 @@
       <div id="menubar">
         <ul id="menu" style="cursor:pointer">
           <li id=1 class="selected"><a href='index.php' onclick="setSelected(1)">Play</a></li>
-          <li id=2><a onclick="goTo('my_team.php');setSelected(2)">My team</a></li>
+          <li id=2><a onclick="goTo('my_team.php', renderTeam);setSelected(2);">My team</a></li>
           <li id=3><a onclick="goTo('transfer_market.php');setSelected(3)">Transfer market</a></li>
           <li id=4><a onclick="goTo('weekly_challenge.php');setSelected(4)">Weekly challenge</a></li>
           <li id=5><a onclick="goTo('stats.php');setSelected(5)">Stats</a></li>
@@ -65,21 +66,6 @@
       </div>
     </div>
     <div id="site_content">
-
-	<div id="team">
-      <div id="player0" class="playercard"/></div>
-	  <div id="player1" class="playercard"/></div>
-	  <div id="player2" class="playercard"/></div>
-	  <div id="player3" class="playercard"/></div>
-	  <div id="player4" class="playercard"/></div>
-	  <div id="player5" class="playercard"/></div>
-	  <div id="player6" class="playercard"/></div>
-	  <div id="player7" class="playercard"/></div>
-	  <div id="player8" class="playercard"/></div>
-	  <div id="player9" class="playercard"/></div>
-	  <div id="player10" class="playercard"/></div>
-	</div>
-
       <div id="content">
 		<?php
 			session_start();
@@ -142,7 +128,7 @@
     <div id="footer" style="cursor:pointer">
       <p><a href="index.php">Play</a> | <a onclick="goTo('my_team.php')">My team</a> | <a onclick="goTo('transfer_market.php')">Transfer market</a> | <a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | <a onclick="goTo('stats.php')">Stats</a> | <a onclick="goTo('my_account.php')">My account</a></p>
       <p>Copyright &copy; Fantasy football manager</p>
-	</div>
+		</div>
 	</div>
 </body>
 </html>

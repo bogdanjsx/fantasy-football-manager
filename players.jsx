@@ -61,10 +61,12 @@ for(let i = 0; i < count; i++)
 }
 */
 
-var activeTeam = getStartingEleven();
-var count = 11;
-for(let i = 0; i < count; i++)
-{
-    var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[i])});
-    ReactDOM.render(reactVar, document.getElementById("player" + i));
+function renderTeam() {
+    var activeTeam = getStartingEleven();
+    var count = 11;
+    for(let i = 0; i < count; i++)
+    {
+        var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[i])});
+        ReactDOM.render(reactVar, document.getElementById("player" + i));
+    }
 }
