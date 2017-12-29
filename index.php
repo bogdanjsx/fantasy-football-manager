@@ -97,7 +97,10 @@
 
 			$mongoDB = Database::instance();
 			$mongoDB->setCredentials();
-			$playersCollection = $mongoDB->connectToTable('player_classes'); 
+			$playersCollection = $mongoDB->connectToTable('player_classes');
+			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
+
+			$managerID = 42; //42 sau 420
 		?>
 		
 		<script type="text/Javascript"  async=false>
@@ -109,7 +112,7 @@
 				for(var i = 0; i < count; i ++)
 				{
 					var randomPlayer = <?php
-						$randomPlayer = $mongoDB->getRandomPlayer($playersCollection);
+						$randomPlayer = $mongoDB->getPlayer($playersCollection);
 						echo $randomPlayer;
 						?>
 
@@ -118,6 +121,18 @@
 
 				return randomPlayerList;
 			}
+			
+			
+			function getStartingEleven()
+			{
+				var startingEleven = <?php
+					$team = $mongoDB->getStartingEleven($activeTeamsCollection, $playersCollection, $managerID);
+					echo json_encode($team);
+					?>
+
+				return startingEleven;
+			}
+			
 
  		 </script>
 		<p></p><p></p><p></p><p></p><p></p><p></p>

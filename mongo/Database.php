@@ -10,8 +10,8 @@ class Database extends Singleton
 
 	public function setCredentials($username = 'alex', $password = 'proiectsac')
 	{
-		$this->username = "alex";
-		$this->password = "proiectsac";
+		$this->username = $username;
+		$this->password = $password;
 		$this->databaseName = "fantasy-football-manager";
 		$this->client = new MongoDB\Client("mongodb://ds249025.mlab.com:49025/fantasy-football-manager", 
 						array(
@@ -44,16 +44,19 @@ class Database extends Singleton
 	}
 
 	/**
-		Returns any player, including silver and bronze ones
+		Returns the specified player or a random one
 	*/
-	public function getRandomPlayer($playerCollection)
+	public function getPlayer($collection, $random = True, $playerID = null)
 	{
-		$playersCount = $playerCollection->count();
+		$playersCount = $collection->count();
 
-		$randomID = mt_rand(0, $playersCount);
+		if($random)
+		{
+			$playerID = mt_rand(0, $playersCount);
+		}
 
-		$cursor = $playerCollection->find([
-			'_id' => $randomID
+		$cursor = $collection->find([
+			'_id' => $playerID
 		]);
 
 		foreach ($cursor as $randomPlayer) 
@@ -64,7 +67,29 @@ class Database extends Singleton
 		return json_encode($playerArray);
 	}
 
-	
+	public function getStartingEleven($teamCollection, $playerCollection, $managerID)
+	{
+		$cursor = $teamCollection->find([
+			'manager_id' => $managerID
+		]);
+
+		foreach ($cursor as $activeTeam) 
+		{
+		   $startingEleven = bsonUnserialize($activeTeam);
+		};
+
+		$startingTeam = $startingEleven["players"];
+
+		$startingPlayers = [];
+
+		foreach($startingTeam as $playerID) 
+		{
+		   $player = $this->getPlayer($playerCollection, False, $playerID);
+		   $startingPlayers[] = $player;
+		};
+
+		return $startingPlayers;
+	}
 
 	public function getDatabase()
 	{
