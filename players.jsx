@@ -50,16 +50,25 @@ function Card({player}) {
     )
 }
 
-/*
-var count = 11;
-var randomPlayerList = generateRandomPlayer(count);
-
-for(let i = 0; i < count; i++)
-{
-    var reactVar = React.createElement(Card, {"player" : randomPlayerList[i]});
-    ReactDOM.render(reactVar, document.getElementById("player" + i));
+function GenericList({items}) {
+    return (
+        <ul>
+          {items.map(function(listValue){
+            return <li key={listValue.name}><PlayerListItem player={listValue}/></li>;
+          })}
+        </ul>
+    )
 }
-*/
+
+function PlayerListItem({player}){
+    return (
+        <div>
+            <div>{player.name}</div>
+            <div>{player.overall}</div>
+            <button className="replace">Replace</button>
+        </div>
+    )
+}
 
 function renderTeam() {
     var activeTeam = getStartingEleven();
@@ -69,4 +78,24 @@ function renderTeam() {
         var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[i])});
         ReactDOM.render(reactVar, document.getElementById("player" + i));
     }
+}
+
+function openDialog() {
+    $("#dialog").dialog({
+    autoOpen: false
+    });
+
+    //Open it when #opener is clicked
+    $("#opener").click(function () {
+        $("#dialog").dialog("open");
+    });
+
+    //When the button in the form is clicked, take the input value and set that as the value of `.myTarget`
+    $('.formSaver').on('click', function () {
+        $('.myTarget').text($('.myInput').val());
+        $("#dialog").dialog('close');
+    });
+
+    var reactVar = React.createElement(GenericList, {"items" : [{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]});
+    ReactDOM.render(reactVar, document.getElementById("content"));
 }

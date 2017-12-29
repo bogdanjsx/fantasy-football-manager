@@ -12,36 +12,41 @@
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/babel" src="players.jsx"></script>
 
   <script>
 	  function goTo(site, callback)
 	  {
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("site_content").innerHTML = this.responseText;
-				callback();
+			if (!callback) {
+				 callback = () => {};
 			}
-		};
-		
-		xmlhttp.open("GET", site, true);
-		xmlhttp.send();
-	  }
-	  
-	  function setSelected(id)
-	  {
-		  document.getElementById(id).classList.add('selected');
-		  
-		  for(count = 1; count < 7; count ++)
-		  {
-			  if(count != id)
-			  {
-				  document.getElementById(count).classList.remove('selected');
-			  }
-		  }
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					document.getElementById("site_content").innerHTML = this.responseText;
+					callback();
+				}
+			};
+			
+			xmlhttp.open("GET", site, true);
+			xmlhttp.send();
+			}
+			
+			function setSelected(id)
+			{
+				document.getElementById(id).classList.add('selected');
+				
+				for(count = 1; count < 7; count ++)
+				{
+					if(count != id)
+					{
+						document.getElementById(count).classList.remove('selected');
+					}
+				}
 	  }
   </script>
 </head>
@@ -57,7 +62,7 @@
         <ul id="menu" style="cursor:pointer">
           <li id=1 class="selected"><a href='index.php' onclick="setSelected(1)">Play</a></li>
           <li id=2><a onclick="goTo('my_team.php', renderTeam);setSelected(2);">My team</a></li>
-          <li id=3><a onclick="goTo('transfer_market.php');setSelected(3)">Transfer market</a></li>
+          <li id=3><a onclick="goTo('transfer_market.php', openDialog);setSelected(3)">Transfer market</a></li>
           <li id=4><a onclick="goTo('weekly_challenge.php');setSelected(4)">Weekly challenge</a></li>
           <li id=5><a onclick="goTo('stats.php');setSelected(5)">Stats</a></li>
           <li id=6><a onclick="goTo('my_account.php');setSelected(6)">My account</a></li>
@@ -86,7 +91,7 @@
 			$playersCollection = $mongoDB->connectToTable('player_classes');
 			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 
-			$managerID = 42; //42 sau 420
+			$managerID = 420; //42 sau 420
 		?>
 		
 		<script type="text/Javascript"  async=false>
