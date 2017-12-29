@@ -104,10 +104,16 @@
 			*/
 
 
-			/*	Get all managers
-				
-			*/
+			/*	Get all managers except current manager
 			$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
+			echo var_dump($managers);
+			*/
+			
+			/*
+				Get current manager's team
+
+			*/
+			$managers = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
 			echo var_dump($managers);
 		?>
 		

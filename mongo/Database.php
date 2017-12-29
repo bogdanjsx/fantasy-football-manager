@@ -158,6 +158,45 @@ class Database extends Singleton
 		return $managers;
 	}
 
+	//Same function as above, but in reverse
+	public function getMyTeamInfo($managerCollection, $playerCollection, $activeTeamsCollection, $managerID)
+	{
+		$cursorManagers = $managerCollection->find();
+
+		$managers = [];
+
+		foreach ($cursorManagers as $manager) 
+		{
+		   $objManager = bsonUnserialize($manager);
+
+		   if($objManager["_id"] != $managerID)
+		   {
+		   		continue;
+		   }
+
+		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
+		  
+		   $overall = 0;
+		   foreach($startingEleven as $player)
+		   {
+		   		$decodedPlayer = json_decode($player);
+		   		$vars = get_object_vars($decodedPlayer);
+
+		   		$overall += $vars["overall"];
+		   }
+
+		   $overall /= 11;		  
+		   $managers[$objManager['_id']] = array(
+		   								"team_name" => $objManager['team_name'],
+		   								"starting_eleven" => $startingEleven,
+		   								"overall" => $overall,
+		   								"record" => null
+		   							);
+		};
+
+		return $managers;
+	}
+
 	/*
 		If $includeStartingEleven = True it returns all players of the specified manager
 	*/
