@@ -1,13 +1,14 @@
 <?php
 require 'vendor/autoload.php';
 require 'HelperFunctions.php';
+require 'Singleton.php';
 
 //MongoDB class
-class Database
+class Database extends Singleton
 {
 	private $username, $password, $databaseName, $client, $database;
 
-	public function __construct($username = 'alex', $password = 'proiectsac')
+	public function setCredentials($username = 'alex', $password = 'proiectsac')
 	{
 		$this->username = "alex";
 		$this->password = "proiectsac";

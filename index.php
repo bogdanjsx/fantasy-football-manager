@@ -95,7 +95,8 @@
 				echo "<p>You are not logged in! To register or log into your account access the Login page</p>";
 			}
 
-			$mongoDB = new Database();
+			$mongoDB = Database::instance();
+			$mongoDB->setCredentials();
 			$playersCollection = $mongoDB->connectToTable('player_classes'); 
 		?>
 		
