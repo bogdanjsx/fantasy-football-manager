@@ -70,7 +70,7 @@ class Database extends Singleton
 	public function getStartingEleven($teamCollection, $playerCollection, $managerID)
 	{
 		$cursor = $teamCollection->find([
-			'manager_id' => $managerID
+			'_id' => $managerID
 		]);
 
 		foreach ($cursor as $activeTeam) 
