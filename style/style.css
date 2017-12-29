@@ -254,16 +254,14 @@ ul#menu li a:hover
 
 #site_content
 { 
-	width: 75%;
+	width: 80%;
 	margin-top: 10px;
-	overflow: hidden;
 } 
 
 #content
 { 
 	text-align: left;
 	float: left;
-	padding: 20px 10px 15px 0px;
 }
 
 #footer
@@ -370,23 +368,35 @@ canvas
 
 #team
 {
-width: 800px;
-height: 400px;
+	width: 1100px;
+	height: 950px;
+	background: url(football_field.png);
+	background-size: contain;
+}
+
+#attack
+{
+	text-align: center;
+}
+
+#midfield
+{
+	text-align: center;
+}
+
+#defense
+{
+	text-align: center;
+}
+
+#goalkeeper
+{
+	text-align: center;
 }
 
 .playercard
 {
 	display: inline-block;
-}
-
-#player0
-{
-    left:200px;
-    top:100px;
-}
-
-#player1
-{
-    left:300px;
-    top:100px;
+	margin: 2px 20px;
+	float: none;
 }

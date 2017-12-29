@@ -40,12 +40,12 @@ function Card({player}) {
         <div className="playercard-mid-bar">
         </div>
 
-        <div className="playercard-attr playercard-attr1">{statsArray[0][0]}{statsArray[0][1]}</div>
-        <div className="playercard-attr playercard-attr2">{statsArray[1][0]}{statsArray[1][1]}</div>
-        <div className="playercard-attr playercard-attr3">{statsArray[2][0]}{statsArray[2][1]}</div>
-        <div className="playercard-attr playercard-attr4">{statsArray[3][0]}{statsArray[3][1]}</div>
-        <div className="playercard-attr playercard-attr5">{statsArray[4][0]}{statsArray[4][1]}</div>
-        <div className="playercard-attr playercard-attr6">{statsArray[5][0]}{statsArray[5][1]}</div>
+        <div className="playercard-attr playercard-attr1">{statsArray[0][0]} {statsArray[0][1]}</div>
+        <div className="playercard-attr playercard-attr2">{statsArray[1][0]} {statsArray[1][1]}</div>
+        <div className="playercard-attr playercard-attr3">{statsArray[2][0]} {statsArray[2][1]}</div>
+        <div className="playercard-attr playercard-attr4">{statsArray[3][0]} {statsArray[3][1]}</div>
+        <div className="playercard-attr playercard-attr5">{statsArray[4][0]} {statsArray[4][1]}</div>
+        <div className="playercard-attr playercard-attr6">{statsArray[5][0]} {statsArray[5][1]}</div>
     </div>
     )
 }
