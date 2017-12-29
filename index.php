@@ -85,6 +85,10 @@
 			$mongoDB->setCredentials();
 			$playersCollection = $mongoDB->connectToTable('player_classes');
 			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
+			$managersCollection = $mongoDB->connectToTable('managers');
+
+			$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection);
+			echo var_dump($managers);
 
 			$managerID = 42; //42 sau 420
 		?>

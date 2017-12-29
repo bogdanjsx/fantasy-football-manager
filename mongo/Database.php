@@ -91,6 +91,39 @@ class Database extends Singleton
 		return $startingPlayers;
 	}
 
+	public function getAllManagers($managerCollection, $playerCollection, $activeTeamsCollection)
+	{
+		$cursorManagers = $managerCollection->find();
+
+		$managers = [];
+
+		foreach ($cursorManagers as $manager) 
+		{
+		   $objManager = bsonUnserialize($manager);
+
+		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
+		  
+		   $overall = 0;
+		   foreach($startingEleven as $player)
+		   {
+		   		$decodedPlayer = json_decode($player);
+		   		$vars = get_object_vars($decodedPlayer);
+
+		   		$overall += $vars["overall"];
+		   }
+
+		   $overall /= 11;		  
+		   $managers[$objManager['_id']] = array(
+		   								"team_name" => $objManager['team_name'],
+		   								"starting_eleven" => $startingEleven,
+		   								"overall" => $overall,
+		   								"record" => null
+		   							);
+		};
+
+		return $managers;
+	}
+
 	public function getDatabase()
 	{
 		return $this->database;
