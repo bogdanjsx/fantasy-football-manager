@@ -67,9 +67,9 @@ class Database extends Singleton
 		return json_encode($playerArray);
 	}
 
-	public function getStartingEleven($teamCollection, $playerCollection, $managerID)
+	public function getStartingEleven($activeTeamsCollection, $playerCollection, $managerID)
 	{
-		$cursor = $teamCollection->find([
+		$cursor = $activeTeamsCollection->find([
 			'_id' => $managerID
 		]);
 
@@ -89,6 +89,31 @@ class Database extends Singleton
 		};
 
 		return $startingPlayers;
+	}
+
+	//Returns all available players, including benched ones
+	public function getAvailablePlayers($managerCollection, $playerCollection, $managerID)
+	{
+		$cursor = $managerCollection->find([
+			'_id' => $managerID
+		]);
+
+		foreach ($cursor as $availablePlayers) 
+		{
+		   $allPlayers = bsonUnserialize($availablePlayers);
+		};
+
+		$availablePlayers = $allPlayers["players"];
+
+		$playersArray = [];
+
+		foreach($availablePlayers as $playerID) 
+		{
+		   $player = $this->getPlayer($playerCollection, False, $playerID);
+		   $playersArray[] = $player;
+		};
+
+		return $playersArray;
 	}
 
 	public function getAllManagers($managerCollection, $playerCollection, $activeTeamsCollection)
@@ -123,6 +148,25 @@ class Database extends Singleton
 
 		return $managers;
 	}
+
+	/*
+		If $includeStartingEleven = True it returns all players of the specified manager
+	*/
+	public function getAllPlayers($managerID, $managerCollection, $playerCollection, $activeTeamsCollection, $includeStartingEleven = True)
+	{
+		$allAvailablePlayers = $this->getAvailablePlayers($managerCollection, $playerCollection, $managerID);
+		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);
+
+		if($includeStartingEleven)
+		{
+			return $allAvailablePlayers;
+		}
+		else
+		{
+			return getBenchedPlayers($allAvailablePlayers, $startingEleven);
+		}
+	}
+
 
 	public function getDatabase()
 	{

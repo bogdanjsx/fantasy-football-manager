@@ -92,10 +92,15 @@
 			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 			$managersCollection = $mongoDB->connectToTable('managers');
 
-			$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection);
-			echo var_dump($managers);
 
-			$managerID = 420; //42 sau 420
+			$managerID = 41; //41 sau 42 sau 420
+			//$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection);
+			
+			$includeStartingEleven = False;
+			$team = $mongoDB->getAllPlayers($managerID, $managersCollection, $playersCollection, $activeTeamsCollection, $includeStartingEleven);
+			echo var_dump($team);
+
+			
 		?>
 		
 		<script type="text/Javascript"  async=false>

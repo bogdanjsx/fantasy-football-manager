@@ -10,4 +10,19 @@ function bsonUnserialize($map)
 
     return $array;
 }
+
+function getBenchedPlayers($allPlayers, $startingEleven)
+{
+	$benchedPlayers = [];
+	
+	foreach($allPlayers as $player)
+	{
+		if(!in_array($player, $startingEleven))
+		{
+			$benchedPlayers[] = $player;
+		}
+	}
+
+	return $benchedPlayers;
+}
 ?>
