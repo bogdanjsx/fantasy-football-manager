@@ -70,16 +70,18 @@ class Match
 			$this->awayGoals += mt_rand(0, 2);
 		}
 
-		$randomNumber2 = mt_rand(0, 95);
+		$randomNumber2 = mt_rand(5, 100);
 		$randomNumber2 += $this->getOverallBias();
 
 		//Second half, cica; avantaj gazdele, doar pune presiune publicul, no?
 		if($randomNumber2 > 50)
 		{
 			$this->homeGoals += mt_rand(0, 3);
+			$this->awayGoals += mt_rand(0, 1);
 		}
 		else
 		{
+			$this->homeGoals += mt_rand(0, 1);
 			$this->awayGoals += mt_rand(0, 3);
 		}
 
