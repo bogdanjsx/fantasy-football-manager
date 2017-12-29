@@ -83,62 +83,8 @@
       <div id="content">
 		<?php
 			session_start();
-			require 'vendor/autoload.php';
-
-			function bsonUnserialize($map)
-			{
-				$array = [];
-
-			    foreach ( $map as $k => $value )
-			    {
-			        $array[$k] = $value;
-			    }
-
-			    return $array;
-			}
-
-			function getRandomPlayer($randomID)
-			{
-				$username = "alex";
-				$password = "proiectsac";
-				$database = "fantasy-football-manager";
-				$client = new MongoDB\Client("mongodb://ds249025.mlab.com:49025/fantasy-football-manager", array("username" => $username, "password" => $password));
-
-				try 
-				{
-				    $db = $client->getManager();
-				}
-				catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
-				{
-				    echo $e->getMessage();
-				}
-
-				try
-				{
-					$database = $client->selectDatabase('fantasy-football-manager');
-					$playerCollection = $database->selectCollection('player_classes');
-				}
-				catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e)
-				{
-				    echo $e->getMessage();
-				}
-
-				$playersCount = $playerCollection->count();
-
-				
-				$cursor = $playerCollection->find([
-					'_id' => $randomID
-				]);
-
-				foreach ($cursor as $randomPlayer) 
-				{
-				   $playerArray = bsonUnserialize($randomPlayer);
-				};
-
-				return json_encode($playerArray);
-			}
+			require 'mongo/Database.php';
 			
-
 			if(isset($_SESSION['logID']))
 			{
 				echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
@@ -148,6 +94,9 @@
 			{
 				echo "<p>You are not logged in! To register or log into your account access the Login page</p>";
 			}
+
+			$mongoDB = new Database();
+			$playersCollection = $mongoDB->connectToTable('player_classes'); 
 		?>
 		
 		<script type="text/Javascript"  async=false>
@@ -159,28 +108,15 @@
 				for(var i = 0; i < count; i ++)
 				{
 					var randomPlayer = <?php
-						$randomID = mt_rand(0, 100);
-						$randomPlayer = getRandomPlayer($randomID);
-
+						$randomPlayer = $mongoDB->getRandomPlayer($playersCollection);
 						echo $randomPlayer;
 						?>
 
 					randomPlayerList.push(randomPlayer);
 				}
 
-				console.log(randomPlayerList);
 				return randomPlayerList;
-
-				/*
-				var reactVar = React.createElement(PlayerCard, {"playerData" : randomPlayer});
-				ReactDOM.render(reactVar, document.getElementById("players"));
-				*/
 			}
-			/*
-			document.addEventListener("DOMContentLoaded", function(event) {
-				generateRandomPlayer();
-			  });
-			*/
 
  		 </script>
 		<p></p><p></p><p></p><p></p><p></p><p></p>
