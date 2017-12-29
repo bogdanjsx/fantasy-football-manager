@@ -190,7 +190,7 @@ class Database extends Singleton
 		   								"team_name" => $objManager['team_name'],
 		   								"starting_eleven" => $startingEleven,
 		   								"overall" => $overall,
-		   								"record" => null
+		   								"record" => "0-0-0"
 		   							);
 		};
 

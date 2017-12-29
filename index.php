@@ -75,15 +75,16 @@
 		<?php
 			session_start();
 			require 'mongo/Database.php';
+			require 'mongo/Match.php';
 			
 			if(isset($_SESSION['logID']))
 			{
 				echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
-				echo "<p>To logout from your account acces this <a href=\"database/logout.php\">link</a></p>";
+				echo "<p>To logout from your account acces this <a href=\"database/logout.php\">link</a>.</p>";
 			}
 			else
 			{
-				echo "<p>You are not logged in! To register or log into your account access the Login page</p>";
+				echo "<p>You are not logged in! To register or log into your account access the Login page.</p>";
 			}
 
 			$mongoDB = Database::instance();
@@ -92,10 +93,12 @@
 			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 			$managersCollection = $mongoDB->connectToTable('managers');
 
-			//The curreunt manager that is playing, later it will be returned from $_SESSION['managerID']
+			//The current manager that is playing, later it will be returned from $_SESSION['managerID']
 			$managerID = 41; //41 sau 42 sau 420
 
-			//$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection);
+			//The challenger for the match (as chosen from the match list)
+			$awayManagerID = 42;
+
 
 			/* Get all players or benched ones for a manager
 			$includeStartingEleven = False;
@@ -104,17 +107,21 @@
 			*/
 
 
-			/*	Get all managers except current manager
-			$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
-			echo var_dump($managers);
-			*/
+			//	Get all managers except current manager
+			$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
+			//echo var_dump($awayManagers);
+			
 			
 			/*
 				Get current manager's team
 
 			*/
-			$managers = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
-			echo var_dump($managers);
+			$homeManager = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
+			//echo var_dump($homeManager);
+
+			//Simulate match between two teams
+			$match = new Match($homeManager[$managerID], $awayManagers[$awayManagerID]);
+			echo $match->simulateMatch();
 		?>
 		
 		<script type="text/Javascript"  async=false>
