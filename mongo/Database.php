@@ -116,7 +116,11 @@ class Database extends Singleton
 		return $playersArray;
 	}
 
-	public function getAllManagers($managerCollection, $playerCollection, $activeTeamsCollection)
+	/**
+		Returns an array of all manager's team with team name, starting 11, overall team rating and record
+		except for the manager $managerID who is considered the manager that is currently playing
+	*/
+	public function getAllManagers($managerCollection, $playerCollection, $activeTeamsCollection, $managerID)
 	{
 		$cursorManagers = $managerCollection->find();
 
@@ -125,6 +129,11 @@ class Database extends Singleton
 		foreach ($cursorManagers as $manager) 
 		{
 		   $objManager = bsonUnserialize($manager);
+
+		   if($objManager["_id"] == $managerID)
+		   {
+		   		continue;
+		   }
 
 		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
 		  
@@ -166,7 +175,6 @@ class Database extends Singleton
 			return getBenchedPlayers($allAvailablePlayers, $startingEleven);
 		}
 	}
-
 
 	public function getDatabase()
 	{

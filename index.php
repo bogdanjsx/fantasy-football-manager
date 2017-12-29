@@ -92,15 +92,23 @@
 			$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 			$managersCollection = $mongoDB->connectToTable('managers');
 
-
+			//The curreunt manager that is playing, later it will be returned from $_SESSION['managerID']
 			$managerID = 41; //41 sau 42 sau 420
+
 			//$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection);
-			
+
+			/* Get all players or benched ones for a manager
 			$includeStartingEleven = False;
 			$team = $mongoDB->getAllPlayers($managerID, $managersCollection, $playersCollection, $activeTeamsCollection, $includeStartingEleven);
 			echo var_dump($team);
+			*/
 
-			
+
+			/*	Get all managers
+				
+			*/
+			$managers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
+			echo var_dump($managers);
 		?>
 		
 		<script type="text/Javascript"  async=false>
