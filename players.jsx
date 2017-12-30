@@ -25,48 +25,78 @@ function Card({player}) {
     }
 
     return (
-    <div className="playercard fut16 card-small gold" style={{display: 'inline-block'}}>
-        <div className="hover"></div>
-        <div className="playercard-rating">{player.overall}</div>
-        <div className="playercard-name">
-            <span>{displayName}</span>
-        </div>
-        <div className="playercard-position">{player.positions[0]}</div>
-        <div className="playercard-nation"><img src={player.flag}/></div>
-        <div className="playercard-club"><img src={player.club_logo}/></div>
-        <div className="playercard-picture">
-            <img src={player.photo}/>
-        </div>
-        <div className="playercard-mid-bar">
+    <div data-toggle="modal" data-target="#replaceModal">
+        <div className="playercard fut16 card-small gold" style={{display: 'inline-block'}}>
+            <div className="hover"></div>
+            <div className="playercard-rating">{player.overall}</div>
+            <div className="playercard-name">
+                <span>{displayName}</span>
+            </div>
+            <div className="playercard-position">{player.positions[0]}</div>
+            <div className="playercard-nation"><img src={player.flag}/></div>
+            <div className="playercard-club"><img src={player.club_logo}/></div>
+            <div className="playercard-picture">
+                <img src={player.photo}/>
+            </div>
+            <div className="playercard-mid-bar">
+            </div>
+
+            <div className="playercard-attr playercard-attr1">{statsArray[0][0]} {statsArray[0][1]}</div>
+            <div className="playercard-attr playercard-attr2">{statsArray[1][0]} {statsArray[1][1]}</div>
+            <div className="playercard-attr playercard-attr3">{statsArray[2][0]} {statsArray[2][1]}</div>
+            <div className="playercard-attr playercard-attr4">{statsArray[3][0]} {statsArray[3][1]}</div>
+            <div className="playercard-attr playercard-attr5">{statsArray[4][0]} {statsArray[4][1]}</div>
+            <div className="playercard-attr playercard-attr6">{statsArray[5][0]} {statsArray[5][1]}</div>
         </div>
 
-        <div className="playercard-attr playercard-attr1">{statsArray[0][0]} {statsArray[0][1]}</div>
-        <div className="playercard-attr playercard-attr2">{statsArray[1][0]} {statsArray[1][1]}</div>
-        <div className="playercard-attr playercard-attr3">{statsArray[2][0]} {statsArray[2][1]}</div>
-        <div className="playercard-attr playercard-attr4">{statsArray[3][0]} {statsArray[3][1]}</div>
-        <div className="playercard-attr playercard-attr5">{statsArray[4][0]} {statsArray[4][1]}</div>
-        <div className="playercard-attr playercard-attr6">{statsArray[5][0]} {statsArray[5][1]}</div>
+        <div className="modal" id="replaceModal" tabIndex="-1" role="dialog" aria-hidden="true">
+            <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Replace player</h5>
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div className="modal-body">
+                    <PlayerList items={[{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]} />
+                </div>
+                <div className="modal-footer">
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
     )
 }
 
-function GenericList({items}) {
+function PlayerList({items}) {
     return (
-        <ul>
-          {items.map(function(listValue){
-            return <li key={listValue.name}><PlayerListItem player={listValue}/></li>;
-          })}
-        </ul>
+        <div className="managerlist btn-group" role="group">
+            <div className="container">
+            <div className="row">
+                <div className="col-4 managerlistitem"><b>Player name</b></div>
+                <div className="col-2 managerlistitem"><b>Player rating</b></div>
+                <div className="col-2 managerlistitem"><b>Player position</b></div>
+                <div className="col-4 managerlistitem"></div>
+            </div>
+                {items.map(function(listValue){
+                    return <PlayerListItem key={listValue.name} player={listValue}/>;
+                })}
+            </div>
+        </div>
     )
 }
 
 function PlayerListItem({player}){
     return (
         <div className="row">
-            <div>{player.name}</div>
-            <div>{player.overall}</div>
-            <button className="replace">Replace</button>
+            <div className="col-4 managerlistitem">{player.name}</div>
+            <div className="col-2 managerlistitem">{player.overall}</div>
+            <div className="col-2 managerlistitem">{player.overall}</div>            
+            <div className="col-4 managerlistitem"><button className="btn btn-primary" data-toggle="modal" data-target="#replaceModal">Replace</button></div>
         </div>
+
     )
 }
 
@@ -108,22 +138,7 @@ function renderTeam() {
 }
 
 function openDialog() {
-    $("#dialog").dialog({
-    autoOpen: false
-    });
-
-    //Open it when #opener is clicked
-    $("#opener").click(function () {
-        $("#dialog").dialog("open");
-    });
-
-    //When the button in the form is clicked, take the input value and set that as the value of `.myTarget`
-    $('.formSaver').on('click', function () {
-        $('.myTarget').text($('.myInput').val());
-        $("#dialog").dialog('close');
-    });
-
-    var reactVar = React.createElement(GenericList, {"items" : [{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]});
+    var reactVar = React.createElement(PlayerList, {"items" : [{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]});
     ReactDOM.render(reactVar, document.getElementById("content"));
 }
 
@@ -151,3 +166,4 @@ function playTab() {
 }
 
 playTab();
+

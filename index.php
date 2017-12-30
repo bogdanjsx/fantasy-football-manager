@@ -177,8 +177,9 @@
 			
 			function playMatch(home, away)
 			{
+				
 				<?php
-				 $homeID = 41;
+				 $homeID = 41; 
 				 $awayID = 42;
 				 ?>
 				var matchResult = 'The match is over. The score was:\n' + '<?php
