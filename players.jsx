@@ -60,15 +60,35 @@ function GenericList({items}) {
     )
 }
 
+function ManagerList({items}) {
+    return (
+        <div className="container">
+          {items.map(function(listValue){
+            return <ManagerListItem key={listValue.team_name} manager={listValue}/>;
+          })}
+        </div>
+    )
+}
+
 function PlayerListItem({player}){
     return (
-        <div>
+        <div className="row">
             <div>{player.name}</div>
             <div>{player.overall}</div>
             <button className="replace">Replace</button>
         </div>
     )
 }
+
+function ManagerListItem({manager}){
+    return (
+        <div className="row">
+            <div className="col-md">{manager.team_name}</div>
+            <div className="col-md">{manager.overall}</div>
+            <div className="col-md"><button className="play">Play</button></div>
+        </div>
+    )
+} 
 
 function renderTeam() {
     var activeTeam = getStartingEleven();
@@ -99,3 +119,10 @@ function openDialog() {
     var reactVar = React.createElement(GenericList, {"items" : [{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]});
     ReactDOM.render(reactVar, document.getElementById("content"));
 }
+
+function playTab() {
+    var reactVar = React.createElement(ManagerList, {"items" : [{"team_name": "ronaldo", "overall": 95}, {"team_name": "messi", "overall": 94}]});
+    ReactDOM.render(reactVar, document.getElementById("content"));
+}
+
+playTab();
