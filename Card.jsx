@@ -54,7 +54,7 @@ function Card({player}) {
             <div className="playercard-attr playercard-attr4">{statsArray[3][0]} {statsArray[3][1]}</div>
             <div className="playercard-attr playercard-attr5">{statsArray[4][0]} {statsArray[4][1]}</div>
             <div className="playercard-attr playercard-attr6">{statsArray[5][0]} {statsArray[5][1]}</div>
-            <div className="playercard-attr playercard-chem" style={{color: chemistryColor}}>Che: {player.chemistry}</div> 
+            <div className="playercard-attr playercard-chem" style={{color: chemistryColor}}>Chm: {player.chemistry}</div> 
         </div>
 
         <div className="modal" id="replaceModal" tabIndex="-1" role="dialog" aria-hidden="true">
