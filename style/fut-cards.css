@@ -834,6 +834,13 @@
   top: 151px;
   left: 74px;
 }
+
+.fut16.playercard.card-small .playercard-chem {
+  top: 169px;
+  left: 45px;
+  font-weight: 800;
+}
+
 .fut16.playercard.card-small .playercard-attr {
   width: 50px;
   font-size: 12px;

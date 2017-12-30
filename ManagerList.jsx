@@ -17,13 +17,14 @@ function ManagerList({items}) {
 
 function ManagerListItem({manager}){
     function playMatch() {
-        $('#playModal').modal({show: true})
+        $('#matchResults').html('Please wait for the match to be played.');
+        $('#playModal').modal({show: true});
 
         $.ajax({
             method: "POST",
             url: "api.php/playMatch/" + manager.manager_id
         }).done(function(msg) {
-                $('#matchResults').html(msg);
+            $('#matchResults').html(msg);
         });
     }
     return (
@@ -42,14 +43,13 @@ function ManagerListItem({manager}){
                         </button>
                     </div>
                     <div className="modal-body" id="matchResults">
-                        Please wait for the match to be played.
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                     </div>
                 </div>
-          </div>
+            </div>
         </div>
     )
 } 

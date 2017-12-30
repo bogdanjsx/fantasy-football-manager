@@ -23,6 +23,13 @@ function Card({player}) {
             [player['physical'], 'PHY']
         ];
     }
+    let chemistryColor = "red";
+    if (player.chemistry > 4) {
+        chemistryColor = "#d8b82b";
+        if (player.chemistry > 7) {
+            chemistryColor = "#2bd136";
+        }
+    }
 
     return (
     <div data-toggle="modal" data-target="#replaceModal">
@@ -47,6 +54,7 @@ function Card({player}) {
             <div className="playercard-attr playercard-attr4">{statsArray[3][0]} {statsArray[3][1]}</div>
             <div className="playercard-attr playercard-attr5">{statsArray[4][0]} {statsArray[4][1]}</div>
             <div className="playercard-attr playercard-attr6">{statsArray[5][0]} {statsArray[5][1]}</div>
+            <div className="playercard-attr playercard-chem" style={{color: chemistryColor}}>Che: {player.chemistry}</div> 
         </div>
 
         <div className="modal" id="replaceModal" tabIndex="-1" role="dialog" aria-hidden="true">

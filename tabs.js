@@ -6,7 +6,9 @@ function myTeamTab() {
         activeTeam = JSON.parse(activeTeam);
 
         for(const playerPosition in activeTeam){
-            var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[playerPosition]["player"])});
+            player = JSON.parse(activeTeam[playerPosition]["player"]);
+            player["chemistry"] = JSON.parse(activeTeam[playerPosition]["chemistry"])
+            var reactVar = React.createElement(Card, {"player" : player});
             ReactDOM.render(reactVar, document.getElementById(playerPosition));
         }
     });
