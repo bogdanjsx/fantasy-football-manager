@@ -1,12 +1,12 @@
 function PlayerList({items}) {
     return (
-        <div className="managerlist btn-group" role="group">
+        <div className="playerlist btn-group" role="group">
             <div className="container">
             <div className="row">
-                <div className="col-4 managerlistitem"><b>Player name</b></div>
-                <div className="col-2 managerlistitem"><b>Player rating</b></div>
-                <div className="col-2 managerlistitem"><b>Player position</b></div>
-                <div className="col-4 managerlistitem"></div>
+                <div className="col-4 playerlistitem"><b>Player name</b></div>
+                <div className="col-2 playerlistitem"><b>Player rating</b></div>
+                <div className="col-2 playerlistitem"><b>Player position</b></div>
+                <div className="col-4 playerlistitem"></div>
             </div>
                 {items.map(function(listValue){
                     return <PlayerListItem key={listValue.name} player={listValue}/>;
@@ -19,10 +19,10 @@ function PlayerList({items}) {
 function PlayerListItem({player}){
     return (
         <div className="row">
-            <div className="col-4 managerlistitem">{player.name}</div>
-            <div className="col-2 managerlistitem">{player.overall}</div>
-            <div className="col-2 managerlistitem">{player.overall}</div>            
-            <div className="col-4 managerlistitem"><button className="btn btn-primary" data-toggle="modal" data-target="#replaceModal">Replace</button></div>
+            <div className="col-4 playerlistitem">{player.name}</div>
+            <div className="col-2 playerlistitem">{player.overall}</div>
+            <div className="col-2 playerlistitem">{player.overall}</div>            
+            <div className="col-4 playerlistitem"><button className="btn btn-primary" data-toggle="modal" data-target="#replaceModal">Replace</button></div>
         </div>
 
     )

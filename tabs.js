@@ -17,7 +17,7 @@ function myTeamTab() {
 function myPlayersTab() {
     $.ajax({
         method: "GET",
-        url: "api.php/getAllPlayers/"
+        url: "api.php/getBenchedPlayers/"
     }).done(function(itemsArray) {
         itemsArray = JSON.parse(itemsArray).map((item) => JSON.parse(item));
         var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
@@ -35,6 +35,10 @@ function playTab() {
         var reactVar = React.createElement(ManagerList, {"items" : itemsArray});
         ReactDOM.render(reactVar, document.getElementById("content"));
     });
+}
+
+function statsTab() {
+
 }
 
 playTab();
