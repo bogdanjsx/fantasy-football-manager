@@ -119,6 +119,7 @@ function ManagerList({items}) {
 
 function ManagerListItem({manager}){
     function playMatch() {
+        $('#matchResults').html('Please wait for the match to be played.');
         $('#playModal').modal({show: true})
 
         $.ajax({
@@ -145,7 +146,6 @@ function ManagerListItem({manager}){
                         </button>
                     </div>
                     <div className="modal-body" id="matchResults">
-                        Please wait for the match to be played.
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
