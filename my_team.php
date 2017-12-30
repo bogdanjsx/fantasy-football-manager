@@ -15,23 +15,23 @@
       <div id="content">
         <div id="team">
           <div id="attack">
-            <div id="player0" class="playercard"/></div>
-            <div id="player1" class="playercard"/></div>
+            <div id="LST" class="playercard"/></div>
+            <div id="RST" class="playercard"/></div>
           </div>
           <div id="midfield">
-            <div id="player2" class="playercard"/></div>
-            <div id="player3" class="playercard"/></div>
-            <div id="player4" class="playercard"/></div>
-            <div id="player5" class="playercard"/></div>
+            <div id="LM" class="playercard"/></div>
+            <div id="LCM" class="playercard"/></div>
+            <div id="RCM" class="playercard"/></div>
+            <div id="RM" class="playercard"/></div>
           </div>
           <div id="defense">
-            <div id="player6" class="playercard"/></div>
-            <div id="player7" class="playercard"/></div>
-            <div id="player8" class="playercard"/></div>
-            <div id="player9" class="playercard"/></div>
+            <div id="LB" class="playercard"/></div>
+            <div id="LCB" class="playercard"/></div>
+            <div id="RCB" class="playercard"/></div>
+            <div id="RB" class="playercard"/></div>
           </div>
           <div id="goalkeeper">
-            <div id="player10" class="playercard"/></div>
+            <div id="GK" class="playercard"/></div>
           </div>
         </div>
       </div>

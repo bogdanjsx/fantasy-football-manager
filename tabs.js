@@ -3,12 +3,11 @@ function myTeamTab() {
         method: "GET",
         url: "api.php/getStartingEleven/"
     }).done(function(activeTeam) {
-        window.x = activeTeam;
-        console.log(activeTeam[0])
-        activeTeam = JSON.parse(activeTeam)
-        for(let i = 0; i < 11; i++) {
-            var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[i])});
-            ReactDOM.render(reactVar, document.getElementById("player" + i));
+        activeTeam = JSON.parse(activeTeam);
+
+        for(const playerPosition in activeTeam){
+            var reactVar = React.createElement(Card, {"player" : JSON.parse(activeTeam[playerPosition]["player"])});
+            ReactDOM.render(reactVar, document.getElementById(playerPosition));
         }
     });
 }
@@ -29,5 +28,5 @@ function playTab() {
     });
 }
 
-playTab();
+//playTab();
 

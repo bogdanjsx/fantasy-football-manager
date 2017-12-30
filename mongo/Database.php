@@ -44,7 +44,7 @@ class Database extends Singleton
 	}
 
 	/**
-		Returns the specified player or a random one
+		Returns the player on the specified position or a random one
 	*/
 	public function getPlayer($collection, $random = True, $playerID = null)
 	{
@@ -82,10 +82,14 @@ class Database extends Singleton
 
 		$startingPlayers = [];
 
-		foreach($startingTeam as $playerID) 
+		foreach($startingTeam as $position => $playerArray) 
 		{
-		   $player = $this->getPlayer($playerCollection, False, $playerID);
-		   $startingPlayers[] = $player;
+		   $player = $this->getPlayer($playerCollection, False, $playerArray["id"]);
+
+		   $startingPlayers[$position] = [
+		   		"player" => $player,
+		   		"chemistry" => $playerArray["chemistry"]
+		   	];
 		};
 
 		return $startingPlayers;
@@ -138,9 +142,9 @@ class Database extends Singleton
 		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
 		  
 		   $overall = 0;
-		   foreach($startingEleven as $player)
+		   foreach($startingEleven as $playerArray)
 		   {
-		   		$decodedPlayer = json_decode($player);
+		   		$decodedPlayer = json_decode($playerArray["player"]);
 		   		$vars = get_object_vars($decodedPlayer);
 
 		   		$overall += $vars["overall"];
@@ -185,9 +189,10 @@ class Database extends Singleton
 		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
 		  
 		   $overall = 0;
-		   foreach($startingEleven as $player)
+
+		   foreach($startingEleven as $playerArray)
 		   {
-		   		$decodedPlayer = json_decode($player);
+		   		$decodedPlayer = json_decode($playerArray["player"]);
 		   		$vars = get_object_vars($decodedPlayer);
 
 		   		$overall += $vars["overall"];
@@ -221,13 +226,19 @@ class Database extends Singleton
 		$allAvailablePlayers = $this->getAvailablePlayers($managerCollection, $playerCollection, $managerID);
 		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);
 
+		$activePlayers = [];
+		foreach($startingEleven as $playerArray)
+		{
+			$activePlayers[] = $playerArray["player"];
+		}
+
 		if($includeStartingEleven)
 		{
 			return $allAvailablePlayers;
 		}
 		else
 		{
-			return getBenchedPlayers($allAvailablePlayers, $startingEleven);
+			return getBenchedPlayers($allAvailablePlayers, $activePlayers);
 		}
 	}
 
