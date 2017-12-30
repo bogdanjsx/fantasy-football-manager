@@ -18,6 +18,7 @@
 
 	<script type="text/babel" src="Card.jsx"></script>
 	<script type="text/babel" src="PlayerList.jsx"></script>
+	<script type="text/babel" src="AllPlayersList.jsx"></script>
 	<script type="text/babel" src="ManagerList.jsx"></script>
 	<script type="text/javascript" src="tabs.js"></script>
 

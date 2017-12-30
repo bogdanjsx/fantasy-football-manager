@@ -403,11 +403,17 @@ canvas
 
 .managerlistitem
 {
-	padding: 2px 0px;
+	padding: 8px;
 	border: black 2px solid;
 }
 
 .managerlist
 {
-	width: 500px;
+	width: 800px;
+}
+
+#playerList
+{
+	max-height: 700px;
+	overflow-y: scroll;
 }
