@@ -400,3 +400,14 @@ canvas
 	margin: 2px 20px;
 	float: none;
 }
+
+.managerlistitem
+{
+	padding: 2px 0px;
+	border: black 2px solid;
+}
+
+.managerlist
+{
+	width: 500px;
+}

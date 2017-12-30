@@ -60,16 +60,6 @@ function GenericList({items}) {
     )
 }
 
-function ManagerList({items}) {
-    return (
-        <div className="container">
-          {items.map(function(listValue){
-            return <ManagerListItem key={listValue.team_name} manager={listValue}/>;
-          })}
-        </div>
-    )
-}
-
 function PlayerListItem({player}){
     return (
         <div className="row">
@@ -80,12 +70,29 @@ function PlayerListItem({player}){
     )
 }
 
+function ManagerList({items}) {
+    return (
+        <div className="managerlist">
+            <div className="container">
+            <div className="row">
+            <div className="col-8 managerlistitem"><b>Team name</b></div>
+            <div className="col-2 managerlistitem"><b>Team rating</b></div>
+            <div className="col-2 managerlistitem"></div>
+            </div>
+            {items.map(function(listValue){
+                return <ManagerListItem key={listValue.team_name} manager={listValue}/>;
+            })}
+            </div>
+        </div>
+    )
+}
+
 function ManagerListItem({manager}){
     return (
         <div className="row">
-            <div className="col-md">{manager.team_name}</div>
-            <div className="col-md">{manager.overall}</div>
-            <div className="col-md"><button className="play">Play</button></div>
+            <div className="col-8 managerlistitem">{manager.team_name}</div>
+            <div className="col-2 managerlistitem">{manager.overall}</div>
+            <div className="col-2 managerlistitem"><button className="btn btn-primary">Play</button></div>
         </div>
     )
 } 
