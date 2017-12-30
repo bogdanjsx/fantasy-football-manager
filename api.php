@@ -49,7 +49,20 @@ switch ($functionName)
  -     ReactDOM.render(reactVar, document.getElementById("content"));
 		*/
 		$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
-		echo json_encode($awayManagers);
+
+		$itemsArray = [];
+		foreach($awayManagers as $managerInfo)
+		{
+			$tempArray = [
+				"manager_id" => $managerInfo["manager_id"],
+				"team_name" => $managerInfo["team_name"],
+	           	"overall" => round($managerInfo["overall"])
+			];
+
+			$itemsArray[] = $tempArray;
+		}
+
+		echo json_encode($itemsArray);
 		break;
 
 	case 'playMatch':

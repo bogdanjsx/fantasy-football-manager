@@ -22,11 +22,10 @@ function playTab() {
         method: "GET",
         url: "api.php/getPlayOpponents/"
     }).done(function(itemsArray) {
-        console.log(itemsArray)
+        itemsArray = JSON.parse(itemsArray);
         var reactVar = React.createElement(ManagerList, {"items" : itemsArray});
         ReactDOM.render(reactVar, document.getElementById("content"));
     });
 }
 
-//playTab();
-
+playTab();
