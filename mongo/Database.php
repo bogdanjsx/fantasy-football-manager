@@ -231,6 +231,11 @@ class Database extends Singleton
 		}
 	}
 
+	public function replacePlayer($managerID, $managerCollection, $playerCollection, $activeTeamsCollection)
+	{
+
+	}
+	
 	public function getDatabase()
 	{
 		return $this->database;
