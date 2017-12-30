@@ -127,16 +127,6 @@
 		?>
 		
 		<script type="text/Javascript"  async=false>
-
-			$.ajax({
-				  method: "POST",
-				  url: "api.php/playMatch/42"
-				})
-				  .done(function( msg ) 
-				  {
-				    alert( "Data Saved: " + msg );
-				  });
-
 			function generateRandomPlayer(count)
 			{
 				var randomPlayerList = [];
