@@ -11,18 +11,21 @@ class Match
 
 	private $homeGoals, $awayGoals;
 
-	public function __construct($homeManagerArray, $awayManagerArray)
+	public function __construct($homeManagerArray, $awayManagerArray, $managersCollection)
 	{
 		$this->homeManagerArray = $homeManagerArray;
 		$this->awayManagerArray = $awayManagerArray;
 		$this->homeGoals = 0;
 		$this->awayGoals = 0;
+
+		$this->managersCollection = $managersCollection;
 	}
 
 	//Simulates the match and returns a score
 	public function simulateMatch()
 	{
 		$this->getRandomScore();
+		$this->updateRecord();
 
 		return $this->publishScore();
 	}
@@ -107,6 +110,67 @@ class Match
 		$score = $homeTeamName . " " . $this->homeGoals . " - " . $this->awayGoals . " " . $awayTeamName;
 
 		return $score;
+	}
+
+	private function updateRecord()
+	{
+		$homeRecord = $this->homeManagerArray['record'];
+		$awayRecord = $this->awayManagerArray['record'];
+
+		$homeCoins = $this->homeManagerArray['coins'];
+		$awayCoins = $this->awayManagerArray['coins'];
+
+		if($this->homeGoals > $this->awayGoals)
+		{
+			$homeRecord['wins'] ++;
+			$awayRecord['losses'] ++;
+			$homeCoins += 200 * ($this->homeGoals - $this->awayGoals);
+		}
+		else if($this->homeGoals < $this->awayGoals)
+		{
+			$homeRecord['losses'] ++;
+			$awayRecord['wins'] ++;
+			$awayCoins += 200 * ($this->awayGoals - $this->homeGoals);
+		}
+		else
+		{
+			$homeRecord['draws'] ++;
+			$awayRecord['draws'] ++;
+
+			$homeCoins += 100;
+			$awayCoins += 100;
+		}
+
+		$homeGoalDifference = $this->homeManagerArray['goal_difference'];
+		$awayGoalDifference = $this->awayManagerArray['goal_difference'];
+
+		$homeGoalDifference['goals_for'] += $this->homeGoals;
+		$homeGoalDifference['goals_against'] += $this->awayGoals;
+
+		$awayGoalDifference['goals_against'] += $this->homeGoals;
+		$awayGoalDifference['goals_for'] += $this->awayGoals;
+
+
+
+		$this->managersCollection->updateOne(
+			['_id' => $this->homeManagerArray['manager_id']],
+			['$set' => [
+						'record' => $homeRecord,
+						'goal_difference' => $homeGoalDifference,
+						'coins' => $homeCoins
+					]
+			]
+		);
+
+		$this->managersCollection->updateOne(
+			['_id' => $this->awayManagerArray['manager_id']],
+			['$set' => [
+						'record' => $awayRecord,
+						'goal_difference' => $awayGoalDifference,
+						'coins' => $awayCoins
+					]
+			]
+		);
 	}
 }
 ?>

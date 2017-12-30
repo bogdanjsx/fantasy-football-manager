@@ -146,12 +146,20 @@ class Database extends Singleton
 		   		$overall += $vars["overall"];
 		   }
 
-		   $overall /= 11;		  
+		   $overall /= 11;
+
+		   $record = $objManager["record"];
+		   $goalDifference = $objManager["goal_difference"];
+		   $coins = $objManager["coins"];
+
 		   $managers[$objManager['_id']] = array(
+		   								"manager_id" => $objManager['_id'],
 		   								"team_name" => $objManager['team_name'],
 		   								"starting_eleven" => $startingEleven,
 		   								"overall" => $overall,
-		   								"record" => null
+		   								"record" => $record,
+		   								"goal_difference" => $goalDifference,
+		   								"coins" => $coins
 		   							);
 		};
 
@@ -185,12 +193,20 @@ class Database extends Singleton
 		   		$overall += $vars["overall"];
 		   }
 
-		   $overall /= 11;		  
+		   $overall /= 11;	
+
+		   $record = $objManager["record"];
+		   $goalDifference = $objManager["goal_difference"];
+		   $coins = $objManager["coins"];
+
 		   $managers[$objManager['_id']] = array(
+		   								"manager_id" => $objManager['_id'],
 		   								"team_name" => $objManager['team_name'],
 		   								"starting_eleven" => $startingEleven,
 		   								"overall" => $overall,
-		   								"record" => "0-0-0"
+		   								"record" => $record,
+		   								"goal_difference" => $goalDifference,
+		   								"coins" => $coins
 		   							);
 		};
 
