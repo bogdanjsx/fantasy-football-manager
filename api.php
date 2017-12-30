@@ -26,6 +26,7 @@ switch ($functionName)
 		break;
 
 	case 'getPlayOpponents':
+		// Transform object to list
 		$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
 		echo json_encode($awayManagers);
 		break;
