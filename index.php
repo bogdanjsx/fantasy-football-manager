@@ -119,11 +119,11 @@
 
 			*/
 			$homeManager = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
-			echo var_dump($homeManager);
+			//echo var_dump($homeManager);
 
 			//Simulate match between two teams
-			$match = new Match($homeManager[$managerID], $awayManagers[$awayManagerID], $managersCollection);
-			echo $match->simulateMatch();
+			//$match = new Match($homeManager[$managerID], $awayManagers[$awayManagerID], $managersCollection);
+			//echo $match->simulateMatch();
 		?>
 		
 		<script type="text/Javascript"  async=false>
@@ -154,6 +154,16 @@
 					?>
 
 				return startingEleven;
+			}
+
+			function getPlayOpponents()
+			{
+				var opposingManagers = <?php
+					$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $managerID);
+					echo json_encode($awayManagers);
+					?>
+
+				return opposingManagers;
 			}
 			
 

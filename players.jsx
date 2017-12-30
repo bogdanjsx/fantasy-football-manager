@@ -128,8 +128,26 @@ function openDialog() {
 }
 
 function playTab() {
-    var reactVar = React.createElement(ManagerList, {"items" : [{"team_name": "ronaldo", "overall": 95}, {"team_name": "messi", "overall": 94}]});
-    ReactDOM.render(reactVar, document.getElementById("content"));
+    var awayManagers = getPlayOpponents();
+    var count = awayManagers.length;
+
+    var itemsArray = [];
+    
+    for(const managerID in awayManagers)
+    {
+        var tempArray = {
+            "manager_id" : awayManagers[managerID]["manager_id"],
+            "team_name" : awayManagers[managerID]["team_name"],
+            "overall" : Math.round(awayManagers[managerID]["overall"])
+        };
+
+       itemsArray.push(tempArray);
+       
+    }
+
+     var reactVar = React.createElement(ManagerList, {"items" : itemsArray});
+     ReactDOM.render(reactVar, document.getElementById("content"));
+    
 }
 
 playTab();
