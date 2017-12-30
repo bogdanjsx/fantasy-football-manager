@@ -92,7 +92,7 @@ function ManagerListItem({manager}){
         <div className="row">
             <div className="col-8 managerlistitem">{manager.team_name}</div>
             <div className="col-2 managerlistitem">{manager.overall}</div>
-            <div className="col-2 managerlistitem"><button className="btn btn-primary">Play</button></div>
+            <div className="col-2 managerlistitem"><button className="btn btn-primary" onClick={function() {alert(playMatch(41, manager.manager_id))}}>Play</button></div>
         </div>
     )
 } 

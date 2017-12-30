@@ -166,14 +166,25 @@
 				return opposingManagers;
 			}
 			
+			function playMatch(home, away)
+			{
+				<?php
+				 $homeID = 41;
+				 $awayID = 42;
+				 ?>
+				var matchResult = 'The match is over. The score was:\n' + '<?php
+					$match = new Match($homeManager[$homeID], $awayManagers[$awayID], $managersCollection);
+					echo $match->simulateMatch();
+				?>' + '\nHead over to My Team to see your rewards!';
+				
+				return matchResult;
+			}
 
  		 </script>
-		<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
-		<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
       </div>
     </div>
     <div id="footer" style="cursor:pointer">
-      <p><a href="index.php">Play</a> | <a onclick="goTo('my_team.php')">My team</a> | <a onclick="goTo('transfer_market.php')">Transfer market</a> | <a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | <a onclick="goTo('stats.php')">Stats</a> | <a onclick="goTo('my_account.php')">My account</a></p>
+      <p><a href="index.php">Play</a> | <a onclick="goTo('my_team.php', renderTeam)">My team</a> | <a onclick="goTo('transfer_market.php')">Transfer market</a> | <a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | <a onclick="goTo('stats.php')">Stats</a> | <a onclick="goTo('my_account.php')">My account</a></p>
       <p>Copyright &copy; Fantasy football manager</p>
 		</div>
 	</div>
