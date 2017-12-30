@@ -39,6 +39,19 @@ switch ($functionName)
 		echo $match->simulateMatch();
 		break;
 
+	case 'getAllPlayers':
+		$includeStartingEleven = True;
+		$team = $mongoDB->getAllPlayers($myManagerID, $managersCollection, $playersCollection, $activeTeamsCollection, $includeStartingEleven);
+		echo json_encode($team);
+		break;
+
+	case 'getBenchedPlayers':
+		$includeStartingEleven = False;
+		$team = $mongoDB->getAllPlayers($myManagerID, $managersCollection, $playersCollection, $activeTeamsCollection, $includeStartingEleven);
+		echo json_encode($team);
+		break;
+
+	//TODO
 	case 'replacePlayer':
 		$startingIndex = array_shift($request) + 0;
 		$benchedPlayerID = array_shift($request) + 0;
