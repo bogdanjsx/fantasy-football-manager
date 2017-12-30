@@ -15,8 +15,15 @@ function myTeamTab() {
 }
 
 function myPlayersTab() {
-    var reactVar = React.createElement(PlayerList, {"items" : [{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]});
-    ReactDOM.render(reactVar, document.getElementById("content"));
+    $.ajax({
+        method: "GET",
+        url: "api.php/getAllPlayers/"
+    }).done(function(itemsArray) {
+        itemsArray = JSON.parse(itemsArray).map((item) => JSON.parse(item));
+        var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
+        ReactDOM.render(reactVar, document.getElementById("playerList"));
+    });
+
 }
 
 function playTab() {

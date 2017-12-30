@@ -6,7 +6,7 @@ $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 
 $functionName = preg_replace('/[^a-z0-9_]+/i','',array_shift($request));
 
-$myManagerID = 41; //For the moment, in the future will be $_SESSION['managerID']
+$myManagerID = 42; //For the moment, in the future will be $_SESSION['managerID']
 $mongoDB = Database::instance();
 $mongoDB->setCredentials();
 $playersCollection = $mongoDB->connectToTable('player_classes');

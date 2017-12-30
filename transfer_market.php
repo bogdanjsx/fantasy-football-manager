@@ -18,13 +18,8 @@
   <div id="main">
     <div id="site_content">
       <div id="content">
-        <div>Here is the rest of the page. Hopefully we can get the value from the dialog form?! Should display <span class="myTarget">here</span> when finished.</div>
-        <div id="dialog" title="Basic dialog">
-            <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-            <input class="myInput" type="text" />
-            <button class="formSaver">Save me!</button>
+        <div id="playerList">
         </div>
-        <button id="opener">Open Dialog</button>
       </div>
     </div>
   </div>
