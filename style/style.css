@@ -412,6 +412,18 @@ canvas
 	width: 800px;
 }
 
+.playerlistitem
+{
+	padding: 2px;
+	border: black 2px solid;
+}
+
+.playerlist
+{
+	width: 600px;
+}
+
+
 #playerList
 {
 	max-height: 700px;

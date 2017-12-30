@@ -63,7 +63,7 @@
 				<li id=2><a onclick="goTo('my_team.php', myTeamTab);setSelected(2);">My team</a></li>
 				<li id=3><a onclick="goTo('transfer_market.php', myPlayersTab);setSelected(3)">Transfer market</a></li>
 				<li id=4><a onclick="goTo('weekly_challenge.php');setSelected(4)">Weekly challenge</a></li>
-				<li id=5><a onclick="goTo('stats.php');setSelected(5)">Stats</a></li>
+				<li id=5><a onclick="goTo('stats.php, statsTab');setSelected(5)">Stats</a></li>
 				<li id=6><a onclick="goTo('my_account.php');setSelected(6)">My account</a></li>
 				</ul>
 			</div>
@@ -89,7 +89,8 @@
 				<a onclick="goTo('my_team.php', myTeamTab)">My team</a> | 
 				<a onclick="goTo('transfer_market.php', myPlayersTab)">Transfer market</a> | 
 				<a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | 
-				<a onclick="goTo('stats.php')">Stats</a> | <a onclick="goTo('my_account.php')">My account</a>
+				<a onclick="goTo('stats.php', statsTab)">Stats</a> | 
+				<a onclick="goTo('my_account.php')">My account</a>
 			</p>
 			<p>Copyright &copy; Fantasy football manager</p>
 		</div>
