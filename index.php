@@ -79,9 +79,6 @@
 				else {
 					echo "<p>You are not logged in! To register or log into your account access the Login page.</p>";
 				}
-
-				require 'mongo/Database.php';
-				require 'mongo/Match.php';
 				?>
 			</div>
 		</div>

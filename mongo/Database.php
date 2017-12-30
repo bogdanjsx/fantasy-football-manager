@@ -242,9 +242,36 @@ class Database extends Singleton
 		}
 	}
 
-	public function replacePlayer($managerID, $managerCollection, $playerCollection, $activeTeamsCollection)
+	public function replacePlayer($managerID, $playerPosition, $substitutePlayerID, $playerCollection, $activeTeamsCollection)
 	{
+		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);
 
+		$outputArray = [];
+
+		foreach($startingEleven as $position => $playerArray)
+		{
+			if($position == $playerPosition)
+			{
+				$playerID = $substitutePlayerID;
+			}
+			else
+			{
+				$objPlayer = json_decode($playerArray["player"]);
+				$vars = get_object_vars($objPlayer);
+				$playerID = $vars["_id"];
+			}
+			
+			$outputArray[$position] = [
+				"id" => $playerID,
+				"chemistry" => 1
+			];
+		}
+
+		$activeTeamsCollection->updateOne(
+			['_id' => $managerID],
+			['$set' => ['players' => $outputArray]
+			]
+		);
 	}
 	
 	public function getDatabase()

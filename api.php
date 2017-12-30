@@ -44,7 +44,7 @@ switch ($functionName)
 		break;
 
 	case 'playMatch':
-		$awayManagerID = array_shift($request) + 0;
+		$awayManagerID = $request[0];
 		$homeManager = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
 		$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
 
@@ -64,10 +64,10 @@ switch ($functionName)
 		echo json_encode($team);
 		break;
 
-	//TODO
 	case 'replacePlayer':
-		$startingIndex = array_shift($request) + 0;
-		$benchedPlayerID = array_shift($request) + 0;
+		$activePlayerPosition = $request[0];
+		$benchedPlayerID = $request[1];
+		$mongoDB->replacePlayer($myManagerID, $activePlayerPosition, $benchedPlayerID, $playersCollection, $activeTeamsCollection);
 		break;
 }
 ?>
