@@ -1,17 +1,24 @@
 function myTeamTab() {
     $.ajax({
         method: "GET",
-        url: "api.php/getStartingEleven/"
-    }).done(function(activeTeam) {
-        activeTeam = JSON.parse(activeTeam);
-
-        for(const playerPosition in activeTeam){
-            player = JSON.parse(activeTeam[playerPosition]["player"]);
-            player["chemistry"] = JSON.parse(activeTeam[playerPosition]["chemistry"])
-            var reactVar = React.createElement(Card, {"player" : player});
-            ReactDOM.render(reactVar, document.getElementById(playerPosition));
-        }
+        url: "api.php/getBenchedPlayers/"
+    }).done(function(bench) {
+        bench = JSON.parse(bench).map((player) => JSON.parse(player))
+        $.ajax({
+            method: "GET",
+            url: "api.php/getStartingEleven/"
+        }).done(function(activeTeam) {
+            activeTeam = JSON.parse(activeTeam);
+    
+            for(const playerPosition in activeTeam){
+                player = JSON.parse(activeTeam[playerPosition]["player"]);
+                player["chemistry"] = JSON.parse(activeTeam[playerPosition]["chemistry"])
+                var reactVar = React.createElement(Card, {"player" : player, "position": playerPosition, "bench": bench});
+                ReactDOM.render(reactVar, document.getElementById(playerPosition));
+            }
+        });
     });
+
 }
 
 function myPlayersTab() {

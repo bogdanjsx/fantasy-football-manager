@@ -286,7 +286,7 @@ class Database extends Singleton
 			}
 			
 			$outputArray[$position] = [
-				"id" => $playerID,
+				"id" => (int)$playerID,
 				"chemistry" => 1
 			];
 		}

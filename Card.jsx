@@ -1,4 +1,4 @@
-function Card({player}) {
+function Card({player, bench, position}) {
     // Only display last name of player
     let displayName = player.name.split('.')
     displayName = displayName[displayName.length - 1]
@@ -31,8 +31,11 @@ function Card({player}) {
         }
     }
 
+    let modalId = "replaceModal" + position
+    let dataTarget = "#replaceModal" + position
+
     return (
-    <div data-toggle="modal" data-target="#replaceModal">
+    <div data-toggle="modal" data-target={dataTarget}>
         <div className="playercard fut16 card-small gold" style={{display: 'inline-block'}}>
             <div className="hover"></div>
             <div className="playercard-rating">{player.overall}</div>
@@ -57,7 +60,7 @@ function Card({player}) {
             <div className="playercard-attr playercard-chem" style={{color: chemistryColor}}>Chm: {player.chemistry}</div> 
         </div>
 
-        <div className="modal" id="replaceModal" tabIndex="-1" role="dialog" aria-hidden="true">
+        <div className="modal" id={modalId} tabIndex="-1" role="dialog" aria-hidden="true">
             <div className="modal-dialog modal-lg" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -67,7 +70,7 @@ function Card({player}) {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <PlayerList items={[{"name": "ronaldo", "overall": 95}, {"name": "messi", "overall": 94}]} />
+                    <PlayerList items={bench} position={position}/>
                 </div>
                 <div className="modal-footer">
                 </div>
