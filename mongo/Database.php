@@ -242,9 +242,33 @@ class Database extends Singleton
 		}
 	}
 
-	public function replacePlayer($managerID, $playerPosition, $substitutePlayerID, $playerCollection, $activeTeamsCollection)
+	public function replacePlayer($managerID, $playerPosition, $substitutePlayerID, $managerCollection, $playerCollection, $activeTeamsCollection)
 	{
-		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);
+		//Check if position is valid
+		$validPositions = ["RST", "LST", "LM", "LCM", "RCM", "RM", "LB", "LCB", "RCB", "RB", "GK"];
+
+		if(!in_array($playerPosition, $validPositions))
+		{
+			throw new Exception("Invalid player position " . $playerPosition . " not found in " . json_encode($validPositions));
+		}
+
+		//Check if player is benched
+		$benchedPlayers = $this->getAllPlayers($managerID, $managerCollection, $playerCollection, $activeTeamsCollection, False);
+		$benchedIDs = [];
+		foreach($benchedPlayers as $playerArray)
+		{
+			$objPlayer = json_decode($playerArray);
+			$vars = get_object_vars($objPlayer);
+			$playerID = $vars["_id"];
+			$benchedIDs[] = $playerID;
+		}
+
+		if(!in_array($substitutePlayerID, $benchedIDs))
+		{
+			throw new Exception("Invalid substitute player ID " . $substitutePlayerID . " not found in benched players list " . json_encode($benchedIDs));
+		}
+
+		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);		
 
 		$outputArray = [];
 

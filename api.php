@@ -67,7 +67,7 @@ switch ($functionName)
 	case 'replacePlayer':
 		$activePlayerPosition = $request[0];
 		$benchedPlayerID = $request[1];
-		$mongoDB->replacePlayer($myManagerID, $activePlayerPosition, $benchedPlayerID, $playersCollection, $activeTeamsCollection);
+		$mongoDB->replacePlayer($myManagerID, $activePlayerPosition, $benchedPlayerID, $managersCollection, $playersCollection, $activeTeamsCollection);
 		break;
 }
 ?>
