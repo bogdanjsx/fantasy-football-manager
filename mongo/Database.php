@@ -46,25 +46,143 @@ class Database extends Singleton
 	/**
 		Returns the player on the specified position or a random one
 	*/
-	public function getPlayer($collection, $random = True, $playerID = null)
+	public function getPlayer($playerCollection, $random = True, $playerID = null)
 	{
-		$playersCount = $collection->count();
+		$playersCount = $playerCollection->count();
 
 		if($random)
 		{
 			$playerID = mt_rand(0, $playersCount);
 		}
 
-		$cursor = $collection->find([
+		$cursor = $playerCollection->find([
 			'_id' => $playerID
 		]);
 
-		foreach ($cursor as $randomPlayer) 
+		foreach ($cursor as $player) 
 		{
-		   $playerArray = bsonUnserialize($randomPlayer);
+		   $playerArray = bsonUnserialize($player);
 		};
 
 		return json_encode($playerArray);
+	}
+
+	//Gets chemistry of a starting 11 player
+	public function getChemistry($teamMates, $playerCollection, $playerID, $playerPosition)
+	{
+		//Check if position is valid
+		$validPositions = ["RST", "LST", "LM", "LCM", "RCM", "RM", "LB", "LCB", "RCB", "RB", "GK"];
+
+		if(!in_array($playerPosition, $validPositions))
+		{
+			throw new Exception("Chemistry calculation: Invalid player position " . $playerPosition . " not found in " . json_encode($validPositions));
+		}
+
+		$cursor = $playerCollection->find([
+			'_id' => $playerID
+		]);
+
+		foreach ($cursor as $player) 
+		{
+		   $playerArray = bsonUnserialize($player);
+		   $club = $playerArray["club"];
+		   $nationality = $playerArray["nationality"];
+		   $positions = bsonUnserialize($playerArray["positions"]);
+
+		   foreach($positions as $key => $position)
+		   {
+		   		switch($position)
+		   		{
+		   			case "LW":
+		   				$positions[$key] = "LM";
+		   				break;
+
+		   			case "RW":
+		   				$positions[$key] = "RM";
+		   				break;
+
+		   			case "CAM":
+		   				$positions[$key] = "CM";
+		   				break;
+		   				
+		   			case "CDM":
+		   				$positions[$key] = "CM";
+		   				break;
+
+		   			case "RWB":
+		   				$positions[$key] = "RB";
+		   				break;	
+		   				
+		   			case "LWB":
+		   				$positions[$key] = "LB";
+		   				break;					
+		   		}
+		   }
+		};
+
+		$chemistryRating = 1;
+
+		//Get position chemistry
+		if(in_array($playerPosition, ["LST", "RST"]))
+		{
+			$realPosition = "ST";
+		}
+		else if(in_array($playerPosition, ["LCM", "RCM"]))
+		{
+			$realPosition = "CM";
+		}
+		else if(in_array($playerPosition, ["LCB", "RCB"]))
+		{
+			$realPosition = "CB";
+		}
+		else
+		{
+			$realPosition = $playerPosition;
+		}
+
+		if($realPosition == $positions[0])
+		{
+			$chemistryRating += 3;
+		}
+		else if(in_array($realPosition, $positions))
+		{
+			$chemistryRating += 2;
+		}
+
+		$linkedTeammates = [
+			"LST" => ["RST", "LM", "LCM"],
+			"RST" => ["LST", "RM", "RCM"],
+			"LM" => ["LST", "LB", "LCM"],
+			"LCM" => ["LM", "LST", "LCB", "RCM"],
+			"RCM" => ["RST", "LCM", "RM", "RCB"],
+			"RM" => ["RST", "RCM", "RB"],
+			"LB" => ["LM", "LCB"],
+			"LCB" => ["LB", "LCM", "RCB", "GK"],
+			"RCB" => ["LCB", "RCM", "RB", "GK"],
+			"RB" => ["RM", "RCB"],
+			"GK" => ["LCB", "RCB"]
+		];
+
+		$linkedPositions = $linkedTeammates[$playerPosition];
+
+		foreach($linkedPositions as $linkedPosition)
+		{
+			if($teamMates[$linkedPosition]["club"] == $club)
+			{
+				$chemistryRating += 4;
+			}
+			else if($teamMates[$linkedPosition]["nationality"] == $nationality)
+			{
+				$chemistryRating += 2;
+			}
+		}
+	
+		if($chemistryRating > 10)
+		{
+			$chemistryRating = 10;
+		}
+
+		return $chemistryRating;
 	}
 
 	public function getStartingEleven($activeTeamsCollection, $playerCollection, $managerID)
@@ -84,13 +202,53 @@ class Database extends Singleton
 
 		foreach($startingTeam as $position => $playerArray) 
 		{
-		   $player = $this->getPlayer($playerCollection, False, $playerArray["id"]);
+		    $player = $this->getPlayer($playerCollection, False, $playerArray["id"]);
 
-		   $startingPlayers[$position] = [
+		   	$startingPlayers[$position] = [
 		   		"player" => $player,
-		   		"chemistry" => $playerArray["chemistry"]
+		   		"chemistry" => 1
 		   	];
 		};
+
+		$teamMates = [];
+
+		foreach($startingPlayers as $position => $teammate)
+		{
+			$decodedPlayer = json_decode($teammate["player"]);
+			$vars = get_object_vars($decodedPlayer);
+
+			$teamMates[$position] = [
+				"nationality" => $vars["nationality"],
+				"club" => $vars["club"]
+			];
+		}
+
+		foreach($startingTeam as $position => $playerArray) 
+		{
+		    $startingPlayers[$position]["chemistry"] = $this->getChemistry($teamMates, $playerCollection, $playerArray["id"], $position);
+		};
+
+		//Update DB
+		$outputArray = [];
+
+		foreach($startingPlayers as $position => $playerArray)
+		{
+			$objPlayer = json_decode($playerArray["player"]);
+			$vars = get_object_vars($objPlayer);
+			$playerID = $vars["_id"];
+			$playerChemistry = $startingPlayers[$position]["chemistry"];
+			
+			$outputArray[$position] = [
+				"id" => (int)$playerID,
+				"chemistry" => $playerChemistry
+			];
+		}
+
+		$activeTeamsCollection->updateOne(
+			['_id' => $managerID],
+			['$set' => ['players' => $outputArray]
+			]
+		);
 
 		return $startingPlayers;
 	}
@@ -249,7 +407,7 @@ class Database extends Singleton
 
 		if(!in_array($playerPosition, $validPositions))
 		{
-			throw new Exception("Invalid player position " . $playerPosition . " not found in " . json_encode($validPositions));
+			throw new Exception("Player replace: Invalid player position " . $playerPosition . " not found in " . json_encode($validPositions));
 		}
 
 		//Check if player is benched
@@ -270,6 +428,19 @@ class Database extends Singleton
 
 		$startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $managerID);		
 
+		$teamMates = [];
+
+		foreach($startingEleven as $position => $teammate)
+		{
+			$decodedPlayer = json_decode($teammate["player"]);
+			$vars = get_object_vars($decodedPlayer);
+
+			$teamMates[$position] = [
+				"nationality" => $vars["nationality"],
+				"club" => $vars["club"]
+			];
+		}
+
 		$outputArray = [];
 
 		foreach($startingEleven as $position => $playerArray)
@@ -287,7 +458,7 @@ class Database extends Singleton
 			
 			$outputArray[$position] = [
 				"id" => (int)$playerID,
-				"chemistry" => 1
+				"chemistry" => $this->getChemistry($teamMates, $playerCollection, (int)$playerID, $position)
 			];
 		}
 
