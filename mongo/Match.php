@@ -449,10 +449,10 @@ class Match
 			//Both teams need to score
 			else
 			{
-				$randomNumber = mt_rand(0, 1);
+				$randomNumber = mt_rand(0, 100);
 
 				//Home scores
-				if($randomNumber == 0)
+				if($randomNumber > 50)
 				{
 					$tempHomeGoals ++;
 					$reportText .= $randomReport["minutes"][$i] . "' " . $tempHomeGoals . "-" . $tempAwayGoals;

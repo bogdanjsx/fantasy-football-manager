@@ -44,7 +44,7 @@ class Database extends Singleton
 	}
 
 	/**
-		Returns the player on the specified position or a random one
+		Returns the player with the specified ID or a random one
 	*/
 	public function getPlayer($playerCollection, $random = True, $playerID = null)
 	{
@@ -486,9 +486,194 @@ class Database extends Singleton
 		);
 	}
 	
-	public function getDatabase()
+	//Doesn't return the players belonging to the specified manager
+	public function getTransferMarketPlayers($myManagerID, $transferMarketCollection, $playersCollection)
 	{
-		return $this->database;
+		$cursorTransferMarket = $transferMarketCollection->find([
+			'manager_id' => ['$ne' => $myManagerID]
+		]);
+
+		$marketDetails = [];
+
+		foreach ($cursorTransferMarket as $marketEntry) 
+		{
+		   $objMarketEntry = bsonUnserialize($marketEntry);
+		   $player = $this->getPlayer($playersCollection, False, $objMarketEntry["player_id"]);
+
+		   $marketDetails[] = [
+		   		"player_id" => $player,
+		   		"price" => $objMarketEntry["price"]
+		   	];
+		}
+
+		return $marketDetails;
+	}
+
+	//Returns players currently selling in the transfer market for a manager
+	public function getSellingPlayers($myManagerID, $playersCollection, $managerCollection)
+	{
+		$cursorManager = $managerCollection->find([
+			'_id' => $myManagerID
+		]);
+
+		foreach ($cursorManager as $managerInformation) 
+		{
+		   $managerInfo = bsonUnserialize($managerInformation);
+		};
+
+		$sellingPlayers = $managerInfo["market_players"];
+
+		$playersArray = [];
+
+		foreach($sellingPlayers as $playerID) 
+		{
+		   $player = $this->getPlayer($playersCollection, False, $playerID);
+		   $playersArray[] = $player;
+		};
+
+		return $playersArray;
+	}
+
+	public function sellPlayer($sellingPlayerID, $coins, $managerID, $managerCollection, $playerCollection, $transferMarketCollection, $activeTeamsCollection)
+	{
+		//Check if player is benched
+		$benchedPlayers = $this->getAllPlayers($managerID, $managerCollection, $playerCollection, $activeTeamsCollection, False);
+		$benchedIDs = [];
+
+		foreach($benchedPlayers as $playerArray)
+		{
+			$objPlayer = json_decode($playerArray);
+			$vars = get_object_vars($objPlayer);
+			$playerID = $vars["_id"];
+			$benchedIDs[] = $playerID;
+		}
+
+		if(!in_array($sellingPlayerID, $benchedIDs))
+		{
+			throw new Exception("Cannot sell player with ID " . $sellingPlayerID . " because he is not in the benched players list " . json_encode($benchedIDs));
+		}
+
+		$cursor = $managerCollection->find([
+			'_id' => $managerID
+		]);
+
+		foreach($cursor as $managerDetails) 
+		{
+		   $managerInfo = bsonUnserialize($managerDetails);
+		};
+
+		$allPlayers = (array)($managerInfo["players"]);
+		$transferredPlayers = $managerInfo["market_players"];
+
+		if(($key = array_search($sellingPlayerID, $allPlayers)) !== false)
+		{
+			unset($allPlayers[$key]);
+			$allPlayers = array_values($allPlayers);
+			$transferredPlayers[] = $sellingPlayerID;
+		}
+		else
+		{
+			throw new Exception("Player sell: Didn't find benched player with ID " . $sellingPlayerID);
+		}
+		
+		$managerCollection->updateOne(
+			['_id' => $managerID],
+			['$set' => [
+				'players' => $allPlayers,
+				'market_players' => $transferredPlayers
+				]
+			]
+		);
+
+		$transferMarketCollection->insertOne([
+			'player_id' => $sellingPlayerID,
+			'price' => $coins,
+			'manager_id' => $managerID
+		]
+		);
+		
+	}
+
+	//If managerOwnerID = myManagerID, then the player in cause is sent back to the team
+	public function buyPlayer($newPlayerID, $managerOwnerID, $myManagerID, $managerCollection, $transferMarketCollection, $playerCollection, $activeTeamsCollection)
+	{
+		//Check if player is already in my team
+		$allMyPlayers = $this->getAllPlayers($myManagerID, $managerCollection, $playerCollection, $activeTeamsCollection, True);
+		$myIDs = [];
+
+		foreach($allMyPlayers as $playerArray)
+		{
+			$objPlayer = json_decode($playerArray);
+			$vars = get_object_vars($objPlayer);
+			$playerID = $vars["_id"];
+			$myIDs[] = $playerID;
+		}
+
+		if(in_array($newPlayerID, $myIDs))
+		{
+			throw new Exception("Cannot buy player with ID " . $newPlayerID . " because he is already in my team " . json_encode($myIDs));
+		}
+
+		//Check if I have enough coins to buy the player
+		$cursorTransferMarket = $transferMarketCollection->find([
+			'player_id' => $newPlayerID
+		]);
+
+		foreach($cursorTransferMarket as $objTransactionDetails) 
+		{
+		   $transactionDetails = bsonUnserialize($objTransactionDetails);
+		};
+
+		$playerValue = $transactionDetails['price'];
+
+		$cursorManager = $managerCollection->find([
+			'_id' => $myManagerID
+		]);
+
+		foreach($cursorManager as $objManagerDetails) 
+		{
+		   $managerDetails = bsonUnserialize($objManagerDetails);
+		};
+
+
+		$myCoins = $managerDetails["coins"];
+
+		$myAllPlayers = (array)($managerDetails["players"]);
+		$myTransferredPlayers = (array)$managerDetails["market_players"];
+
+		//Cancel a previous transaction
+		if($managerOwnerID == $myManagerID)
+		{
+			$myAllPlayers[] = $newPlayerID;
+
+			$key = array_search($newPlayerID, $myTransferredPlayers);
+			unset($myTransferredPlayers[$key]);
+			$myTransferredPlayers = array_values($myTransferredPlayers);
+
+			$managerCollection->updateOne(
+				['_id' => $myManagerID],
+				['$set' => [
+					'players' => $myAllPlayers,
+					'market_players' => $myTransferredPlayers
+					]
+				]
+			);
+
+			$transferMarketCollection->deleteOne([
+				'player_id' => $newPlayerID,
+				'manager_id' => $managerOwnerID
+			]
+			);
+			
+		}
+		//Buy a new player
+		else
+		{
+			if($myCoins < $playerValue)
+			{
+				throw new Exception("Cannot buy player with ID " . $newPlayerID . " because I don't have enough coins.");
+			}
+		}
 	}
 }
 ?>
