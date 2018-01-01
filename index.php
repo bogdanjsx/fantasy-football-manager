@@ -80,24 +80,6 @@
 				else {
 					echo "<p>You are not logged in! To register or log into your account access the Login page.</p>";
 				}
-
-				/*
-				require 'mongo/Database.php';
-				require 'mongo/Match.php';
-
-				$myManagerID = 41; //For the moment, in the future will be $_SESSION['managerID']
-				$mongoDB = Database::instance();
-				$mongoDB->setCredentials();
-				$playersCollection = $mongoDB->connectToTable('player_classes');
-				$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
-				$managersCollection = $mongoDB->connectToTable('managers');
-				$transferMarketCollection = $mongoDB->connectToTable('transfer_market');
-
-				$playerID = 1338;
-				$ownerID = 41;
-				$marketDetails = $mongoDB->buyPlayer($playerID, $ownerID, $myManagerID, $managersCollection, $transferMarketCollection, $playersCollection, $activeTeamsCollection);
-				//echo var_dump($marketDetails);
-				*/
 				?>
 			</div>
 		</div>

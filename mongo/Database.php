@@ -673,6 +673,55 @@ class Database extends Singleton
 			{
 				throw new Exception("Cannot buy player with ID " . $newPlayerID . " because I don't have enough coins.");
 			}
+
+			//Update my details
+			$myAllPlayers[] = $newPlayerID;
+			$myCoins -= $playerValue;
+
+			$managerCollection->updateOne(
+				['_id' => $myManagerID],
+				['$set' => [
+					'players' => $myAllPlayers,
+					'coins' => $myCoins
+					]
+				]
+			);
+
+			//Update old owner's details
+			$cursorOtherManager = $managerCollection->find([
+				'_id' => $managerOwnerID
+			]);
+
+			foreach($cursorOtherManager as $objManagerDetails) 
+			{
+			   $otherManagerDetails = bsonUnserialize($objManagerDetails);
+			};
+
+			$transferredPlayers = (array)$otherManagerDetails["market_players"];
+
+			$key = array_search($newPlayerID, $transferredPlayers);
+			unset($transferredPlayers[$key]);
+			$transferredPlayers = array_values($transferredPlayers);
+
+			$managerCoins = $otherManagerDetails["coins"];
+			$managerCoins += $playerValue;
+
+			$managerCollection->updateOne(
+				['_id' => $managerOwnerID],
+				['$set' => [
+					'coins' => $managerCoins,
+					'market_players' => $transferredPlayers
+					]
+				]
+			);
+			
+			//Delete transaction from transfer market
+			$transferMarketCollection->deleteOne([
+				'player_id' => $newPlayerID,
+				'manager_id' => $managerOwnerID
+			]
+			);
+			
 		}
 	}
 }
