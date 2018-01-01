@@ -344,7 +344,7 @@ class Match
 		//Get random minutes
 		for ($i = 0; $i < $totalGoals; $i ++) 
 		{
-		    $randomReport["minutes"][] = mt_rand(0, 90);
+		    $randomReport["minutes"][] = mt_rand(1, 90);
 		}
 
 		sort($randomReport["minutes"]);
