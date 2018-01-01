@@ -69,5 +69,10 @@ switch ($functionName)
 		$benchedPlayerID = $request[1];
 		$mongoDB->replacePlayer($myManagerID, $activePlayerPosition, $benchedPlayerID, $managersCollection, $playersCollection, $activeTeamsCollection);
 		break;
+
+	case 'getMyStats':
+		$homeManager = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
+		echo json_encode($homeManager);
+		break;
 }
 ?>
