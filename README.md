@@ -22,3 +22,7 @@ Put in wamp64\bin\php\php5.6.31\ext the contents from php_mongodb-1.3.4-5.6-ts-v
 Download it from http://pecl.php.net/package/mongodb
 
 API reference: https://docs.mongodb.com/php-library/current/reference/
+
+
+Hello to all football fans, we are here to bring you a live commentary of the following match, describing all the most interesting and important moments. We'll make sure you won't miss a thing, so just sit back and have fun.
+The starting XIs were already announced and you can go through them in the Lineups section.

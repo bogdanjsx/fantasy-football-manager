@@ -49,6 +49,7 @@ switch ($functionName)
 		$awayManagers = $mongoDB->getAllManagers($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
 
 		$match = new Match($homeManager[$myManagerID], $awayManagers[$awayManagerID], $managersCollection);
+		echo $match->simulatePreview();
 		echo $match->simulateMatch();
 		break;
 

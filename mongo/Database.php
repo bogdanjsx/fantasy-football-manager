@@ -300,12 +300,20 @@ class Database extends Singleton
 		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
 		  
 		   $overall = 0;
+		   $teamChemistry = 0;
+
 		   foreach($startingEleven as $playerArray)
 		   {
+		   		$teamChemistry += $playerArray["chemistry"];
 		   		$decodedPlayer = json_decode($playerArray["player"]);
 		   		$vars = get_object_vars($decodedPlayer);
 
 		   		$overall += $vars["overall"];
+		   }
+
+		   if($teamChemistry > 100)
+		   {
+		   		$teamChemistry = 100;
 		   }
 
 		   $overall /= 11;
@@ -319,6 +327,7 @@ class Database extends Singleton
 		   								"team_name" => $objManager['team_name'],
 		   								"starting_eleven" => $startingEleven,
 		   								"overall" => $overall,
+		   								"chemistry" => $teamChemistry,
 		   								"record" => $record,
 		   								"goal_difference" => $goalDifference,
 		   								"coins" => $coins
@@ -347,13 +356,20 @@ class Database extends Singleton
 		   $startingEleven = $this->getStartingEleven($activeTeamsCollection, $playerCollection, $objManager['_id']);
 		  
 		   $overall = 0;
+		   $teamChemistry = 0;
 
 		   foreach($startingEleven as $playerArray)
 		   {
+		   		$teamChemistry += $playerArray["chemistry"];
 		   		$decodedPlayer = json_decode($playerArray["player"]);
 		   		$vars = get_object_vars($decodedPlayer);
 
 		   		$overall += $vars["overall"];
+		   }
+
+		   if($teamChemistry > 100)
+		   {
+		   		$teamChemistry = 100;
 		   }
 
 		   $overall /= 11;	
@@ -367,6 +383,7 @@ class Database extends Singleton
 		   								"team_name" => $objManager['team_name'],
 		   								"starting_eleven" => $startingEleven,
 		   								"overall" => $overall,
+		   								"chemistry" => $teamChemistry,
 		   								"record" => $record,
 		   								"goal_difference" => $goalDifference,
 		   								"coins" => $coins
