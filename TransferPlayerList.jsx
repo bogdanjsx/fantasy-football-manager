@@ -12,7 +12,7 @@ function TransferPlayerList({items}) {
                 <div className="col-2 transferlistitem"></div>
             </div>
                 {items.map(function(listValue){
-                    return <TransferPlayerListItem key={listValue.name} player={listValue}/>;
+                    return <TransferPlayerListItem key={listValue._id + '_' + listValue.ownerId} player={listValue}/>;
                 })}
             </div>
         </div>
@@ -25,7 +25,7 @@ function TransferPlayerListItem({player}){
         $("#loadingModal").modal('show');
         $.ajax({
             method: "POST",
-            url: "api.php/buyPlayer/" + player._id + "/" +player.ownerId
+            url: "api.php/buyPlayer/" + player._id + "/" + player.ownerId
         }).done(function(response) {
             transferMarketTab();
         });
