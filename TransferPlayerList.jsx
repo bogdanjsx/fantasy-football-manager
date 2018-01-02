@@ -20,7 +20,17 @@ function TransferPlayerList({items}) {
 }
 
 function TransferPlayerListItem({player}){
-    console.log(player)
+
+    function buyPlayer() {
+        $("#loadingModal").modal('show');
+        $.ajax({
+            method: "POST",
+            url: "api.php/buyPlayer/" + player._id + "/" +player.ownerId
+        }).done(function(response) {
+            transferMarketTab();
+        });
+    }
+
     return (
         <div className="row">
             <div className="col-3 transferlistitem">{player.name}</div>
@@ -29,7 +39,7 @@ function TransferPlayerListItem({player}){
             <div className="col-2 transferlistitem"><img className="transferlistflagimage" src={player.flag} /></div>
             <div className="col-1 transferlistitem"><img className="transferlistclubimage" src={player.club_logo} /></div>
             <div className="col-2 transferlistitem">{player.price}</div>            
-            <div className="col-2 transferlistitem"><button className="btn btn-primary">Buy</button></div>
+            <div className="col-2 transferlistitem"><button className="btn btn-primary" onClick={buyPlayer}>Buy</button></div>
         </div>
 
     )

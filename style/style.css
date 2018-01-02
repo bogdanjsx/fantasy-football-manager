@@ -452,3 +452,14 @@ canvas
 	width: 50px;
 	height: 35px;
 }
+
+.coinIcon
+{
+	width: 30px;
+	height: 30px;
+}
+
+.statsRecordBox
+{
+	padding-bottom: 15px;
+}

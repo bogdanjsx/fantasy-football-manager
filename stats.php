@@ -13,6 +13,8 @@
   <div id="main">
     <div id="site_content">
       <div id="content">
+        <div id="stats">
+        </div>
       </div>
     </div>
   </div>

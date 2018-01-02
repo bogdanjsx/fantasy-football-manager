@@ -59,6 +59,7 @@ function transferMarketTab() {
                 console.log(item)
                 data = JSON.parse(item.player_id)
                 data.price = item.price;
+                data.ownerId = item.ownerId;
                 return data;
             }
         );
@@ -76,9 +77,9 @@ function statsTab() {
     }).done(function(stats) {
         $("#loadingModal").modal('hide');
         console.log(stats);
-        document.getElementById("content").innerHTML = stats;
-        // var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
-        // ReactDOM.render(reactVar, document.getElementById("playerList"));
+        window.stats = stats
+        var reactVar = React.createElement(Stats, {"stats" : JSON.parse(stats)});
+        ReactDOM.render(reactVar, document.getElementById("stats"));
     });
 }
 
