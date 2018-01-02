@@ -19,6 +19,7 @@
 	<script type="text/babel" src="Card.jsx"></script>
 	<script type="text/babel" src="PlayerList.jsx"></script>
 	<script type="text/babel" src="AllPlayersList.jsx"></script>
+	<script type="text/babel" src="TransferPlayerList.jsx"></script>
 	<script type="text/babel" src="ManagerList.jsx"></script>
 	<script type="text/javascript" src="tabs.js"></script>
 
@@ -61,13 +62,28 @@
 				<ul id="menu" style="cursor:pointer">
 				<li id=1 class="selected"><a href='index.php' onclick="setSelected(1)">Play</a></li>
 				<li id=2><a onclick="goTo('my_team.php', myTeamTab);setSelected(2);">My team</a></li>
-				<li id=3><a onclick="goTo('transfer_market.php', myPlayersTab);setSelected(3)">Transfer market</a></li>
-				<li id=4><a onclick="goTo('weekly_challenge.php');setSelected(4)">Weekly challenge</a></li>
-				<li id=5><a onclick="goTo('stats.php, statsTab');setSelected(5)">Stats</a></li>
+				<li id=3><a onclick="goTo('transfer_market.php', myPlayersTab);setSelected(3)">My players</a></li>
+				<li id=4><a onclick="goTo('weekly_challenge.php', transferMarketTab);setSelected(4)">Transfer market</a></li>
+				<li id=5><a onclick="goTo('stats.php', statsTab);setSelected(5)">Stats</a></li>
 				<li id=6><a onclick="goTo('my_account.php');setSelected(6)">My account</a></li>
 				</ul>
 			</div>
 		</div>
+
+		<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loadingModalLabel">Please wait</h5>
+              </div>
+              <div class="modal-body">
+              Your request is processing, please wait...
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+
 		<div id="site_content">
 			<div id="content">
 				<?php
@@ -87,8 +103,8 @@
 			<p>
 				<a href="index.php">Play</a> | 
 				<a onclick="goTo('my_team.php', myTeamTab)">My team</a> | 
-				<a onclick="goTo('transfer_market.php', myPlayersTab)">Transfer market</a> | 
-				<a onclick="goTo('weekly_challenge.php')">Weekly challenge</a> | 
+				<a onclick="goTo('transfer_market.php', myPlayersTab)">My players</a> | 
+				<a onclick="goTo('weekly_challenge.php', transferMarketTab)">Transfer Market</a> | 
 				<a onclick="goTo('stats.php', statsTab)">Stats</a> | 
 				<a onclick="goTo('my_account.php')">My account</a>
 			</p>

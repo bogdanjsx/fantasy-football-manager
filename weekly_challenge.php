@@ -13,7 +13,22 @@
   <div id="main">
     <div id="site_content">
       <div id="content">
-		<p></p><p></p><p></p><p></p><p></p><p></p>
+
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loadingModalLabel">Please wait</h5>
+              </div>
+              <div class="modal-body">
+              Your request is processing, please wait...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="playerList"> 
+        </div>
       </div>
     </div>
 	</div>

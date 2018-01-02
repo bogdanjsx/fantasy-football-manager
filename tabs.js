@@ -1,4 +1,5 @@
 function myTeamTab() {
+    $("#loadingModal").modal('show');
     $.ajax({
         method: "GET",
         url: "api.php/getBenchedPlayers/"
@@ -9,7 +10,7 @@ function myTeamTab() {
             url: "api.php/getStartingEleven/"
         }).done(function(activeTeam) {
             activeTeam = JSON.parse(activeTeam);
-    
+            $("#loadingModal").modal('hide');
             for(const playerPosition in activeTeam){
                 player = JSON.parse(activeTeam[playerPosition]["player"]);
                 player["chemistry"] = JSON.parse(activeTeam[playerPosition]["chemistry"])
@@ -17,18 +18,6 @@ function myTeamTab() {
                 ReactDOM.render(reactVar, document.getElementById(playerPosition));
             }
         });
-    });
-
-}
-
-function myPlayersTab() {
-    $.ajax({
-        method: "GET",
-        url: "api.php/getBenchedPlayers/"
-    }).done(function(itemsArray) {
-        itemsArray = JSON.parse(itemsArray).map((item) => JSON.parse(item));
-        var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
-        ReactDOM.render(reactVar, document.getElementById("playerList"));
     });
 
 }
@@ -44,8 +33,53 @@ function playTab() {
     });
 }
 
-function statsTab() {
+function myPlayersTab() {
+    $("#loadingModal").modal('show');
+    $.ajax({
+        method: "GET",
+        url: "api.php/getBenchedPlayers/"
+    }).done(function(itemsArray) {
+        $("#loadingModal").modal('hide');
+        itemsArray = JSON.parse(itemsArray).map((item) => JSON.parse(item));
+        var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
+        ReactDOM.render(reactVar, document.getElementById("playerList"));
+    });
+}
 
+
+function transferMarketTab() {
+    $("#loadingModal").modal('show');
+    $.ajax({
+        method: "GET",
+        url: "api.php/getTransferMarketPlayers/"
+    }).done(function(players) {
+        $("#loadingModal").modal('hide');
+        players = JSON.parse(players).map((item) =>
+            {
+                console.log(item)
+                data = JSON.parse(item.player_id)
+                data.price = item.price;
+                return data;
+            }
+        );
+        var reactVar = React.createElement(TransferPlayerList, {"items" : players});
+        ReactDOM.render(reactVar, document.getElementById("playerList"));
+    });
+
+}
+
+function statsTab() {
+    $("#loadingModal").modal('show');
+    $.ajax({
+        method: "GET",
+        url: "api.php/getMyStats/"
+    }).done(function(stats) {
+        $("#loadingModal").modal('hide');
+        console.log(stats);
+        document.getElementById("content").innerHTML = stats;
+        // var reactVar = React.createElement(AllPlayersList, {"items" : itemsArray});
+        // ReactDOM.render(reactVar, document.getElementById("playerList"));
+    });
 }
 
 playTab();

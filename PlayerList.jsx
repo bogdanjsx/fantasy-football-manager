@@ -20,6 +20,8 @@ function PlayerListItem({player, position}){
     let dataTarget = "#replaceModal" + position;
     function replacePlayer() {
         $(dataTarget).modal('hide');
+        $("#loadingModal").modal('show');
+        
         $.ajax({
             method: "POST",
             url: "api.php/replacePlayer/" + position + "/" + player._id
