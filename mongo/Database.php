@@ -502,8 +502,8 @@ class Database extends Singleton
 
 		   $marketDetails[] = [
 		   		"player_id" => $player,
-		   		"price" => $objMarketEntry["price"],
-		   		"ownerId" => $objMarketEntry["manager_id"]
+		   		"price" => (int)$objMarketEntry["price"],
+		   		"ownerId" => (int)$objMarketEntry["manager_id"]
 		   	];
 		}
 
@@ -570,7 +570,7 @@ class Database extends Singleton
 		{
 			unset($allPlayers[$key]);
 			$allPlayers = array_values($allPlayers);
-			$transferredPlayers[] = $sellingPlayerID;
+			$transferredPlayers[] = (int)$sellingPlayerID;
 		}
 		else
 		{
@@ -587,9 +587,9 @@ class Database extends Singleton
 		);
 
 		$transferMarketCollection->insertOne([
-			'player_id' => $sellingPlayerID,
-			'price' => $coins,
-			'manager_id' => $managerID
+			'player_id' => (int)$sellingPlayerID,
+			'price' => (int)$coins,
+			'manager_id' => (int)$managerID
 		]
 		);
 		
@@ -645,7 +645,7 @@ class Database extends Singleton
 		//Cancel a previous transaction
 		if($managerOwnerID == $myManagerID)
 		{
-			$myAllPlayers[] = $newPlayerID;
+			$myAllPlayers[] = (int)$newPlayerID;
 
 			$key = array_search($newPlayerID, $myTransferredPlayers);
 			unset($myTransferredPlayers[$key]);
@@ -661,8 +661,8 @@ class Database extends Singleton
 			);
 
 			$transferMarketCollection->deleteOne([
-				'player_id' => $newPlayerID,
-				'manager_id' => $managerOwnerID
+				'player_id' => (int)$newPlayerID,
+				'manager_id' => (int)$managerOwnerID
 			]
 			);
 			
@@ -676,14 +676,14 @@ class Database extends Singleton
 			}
 
 			//Update my details
-			$myAllPlayers[] = $newPlayerID;
+			$myAllPlayers[] = (int)$newPlayerID;
 			$myCoins -= $playerValue;
 
 			$managerCollection->updateOne(
 				['_id' => $myManagerID],
 				['$set' => [
 					'players' => $myAllPlayers,
-					'coins' => $myCoins
+					'coins' => (int)$myCoins
 					]
 				]
 			);
@@ -710,7 +710,7 @@ class Database extends Singleton
 			$managerCollection->updateOne(
 				['_id' => $managerOwnerID],
 				['$set' => [
-					'coins' => $managerCoins,
+					'coins' => (int)$managerCoins,
 					'market_players' => $transferredPlayers
 					]
 				]
@@ -718,8 +718,8 @@ class Database extends Singleton
 			
 			//Delete transaction from transfer market
 			$transferMarketCollection->deleteOne([
-				'player_id' => $newPlayerID,
-				'manager_id' => $managerOwnerID
+				'player_id' => (int)$newPlayerID,
+				'manager_id' => (int)$managerOwnerID
 			]
 			);
 			
