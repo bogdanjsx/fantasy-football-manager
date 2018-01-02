@@ -18,13 +18,26 @@ function AllPlayersList({items}) {
 }
 
 function AllPlayersListItem({player}){
+    let inputId = "price" + player._id
+
+    function sellPlayer() {
+        let sellAmount = $("#" + inputId).val();
+        $("#loadingModal").modal('show');
+        $.ajax({
+            method: "POST",
+            url: "api.php/sellPlayer/" + player._id + "/" + sellAmount
+        }).done(function(response) {
+            myPlayersTab();
+        });
+    }
+
     return (
         <div className="row">
             <div className="col-3 managerlistitem">{player.name}</div>
             <div className="col-2 managerlistitem">{player.overall}</div>
             <div className="col-2 managerlistitem">{player.positions[0]}</div>
-            <div className="col-2 managerlistitem"><input type="text" className="form-control" placeholder="Price" /></div>            
-            <div className="col-3 managerlistitem"><button className="btn btn-primary">Sell</button></div>
+            <div className="col-2 managerlistitem"><input id={inputId} type="text" className="form-control" placeholder="Price" /></div>            
+            <div className="col-3 managerlistitem"><button className="btn btn-primary" onClick={sellPlayer}>Sell</button></div>
         </div>
 
     )
