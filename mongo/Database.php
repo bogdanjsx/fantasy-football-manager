@@ -502,7 +502,8 @@ class Database extends Singleton
 
 		   $marketDetails[] = [
 		   		"player_id" => $player,
-		   		"price" => $objMarketEntry["price"]
+		   		"price" => $objMarketEntry["price"],
+		   		"ownerId" => $objMarketEntry["manager_id"]
 		   	];
 		}
 
