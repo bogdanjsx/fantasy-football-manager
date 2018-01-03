@@ -725,5 +725,99 @@ class Database extends Singleton
 			
 		}
 	}
+
+	//Used only once for collection creation
+	public function createClubsCollection($clubsCollection, $playersCollection)
+	{
+		$DBClubs = $playersCollection->distinct('club');
+
+		$clubArray = [];
+
+		foreach($DBClubs as $club)
+		{
+			$cursorDB = $playersCollection->find([
+				'club' => $club
+			]);
+
+			foreach($cursorDB as $playerDetails)
+			{
+				$playerArray = bsonUnserialize($playerDetails);
+				$clubLogo = $playerArray["club_logo"];
+			}
+
+			$clubArray = [
+				"_id" => $club,
+				"logo" => $clubLogo
+			];
+
+			$clubsCollection->insertOne($clubArray);
+		}
+	}
+
+	//Used only once for collection creation
+	public function createCountriesCollection($countriesCollection, $playersCollection)
+	{
+		$DBNationalities = $playersCollection->distinct('nationality');
+
+		$nationalityArray = [];
+
+		foreach($DBNationalities as $nationality)
+		{
+			$cursorDB = $playersCollection->find([
+				'nationality' => $nationality
+			]);
+
+			foreach($cursorDB as $playerDetails)
+			{
+				$playerArray = bsonUnserialize($playerDetails);
+				$nationalityLogo = $playerArray["flag"];
+			}
+
+			$nationalityArray = [
+				"_id" => $nationality,
+				"logo" => $nationalityLogo
+			];
+
+			$countriesCollection->insertOne($nationalityArray);
+		}
+	}
+
+	public function getMyStats($managerID, $managersCollection, $clubsCollection)
+	{
+		$cursorManager = $managersCollection->find([
+			'_id' => $managerID
+		]);
+
+		foreach($cursorManager as $objManagerDetails) 
+		{
+		   $managerDetails = bsonUnserialize($objManagerDetails);
+		};
+
+		$teamName = $managerDetails["team_name"];
+		$record = $managerDetails["record"];
+		$goalDifference = $managerDetails["goal_difference"];
+		$coins = $managerDetails["coins"];
+
+		$cursorCountries = $clubsCollection->find([
+			'_id' => $managerDetails["favourite_team"]
+		]);
+
+		foreach($cursorCountries as $objClubDetails)
+		{
+			$clubDetails = bsonUnserialize($objClubDetails);
+		}
+
+		$teamLogo = $clubDetails["logo"];
+
+		$myStatsArray = [
+			"team_name" => $teamName,
+			"favourite_team_logo" => $teamLogo,
+			"record" => $record,
+			"goal_difference" => $goalDifference,
+			"coins" => (int)$coins
+		];
+
+		return $myStatsArray;
+	}
 }
 ?>

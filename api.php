@@ -13,6 +13,8 @@ $playersCollection = $mongoDB->connectToTable('player_classes');
 $activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 $managersCollection = $mongoDB->connectToTable('managers');
 $transferMarketCollection = $mongoDB->connectToTable('transfer_market');
+$clubsCollection = $mongoDB->connectToTable('clubs');
+$countriesCollection = $mongoDB->connectToTable('countries');
 
 switch ($functionName)
 {
@@ -73,8 +75,8 @@ switch ($functionName)
 		break;
 
 	case 'getMyStats':
-		$homeManager = $mongoDB->getMyTeamInfo($managersCollection, $playersCollection, $activeTeamsCollection, $myManagerID);
-		echo json_encode($homeManager);
+		$myStats = $mongoDB->getMyStats($myManagerID, $managersCollection, $clubsCollection);
+		echo json_encode($myStats);
 		break;
 
 	case 'getTransferMarketPlayers':
