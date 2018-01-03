@@ -819,5 +819,162 @@ class Database extends Singleton
 
 		return $myStatsArray;
 	}
+
+	//Influenced by favourite team
+	public function generateRandomTeam($managerID, $favouriteTeam, $playersCollection, $managersCollection, $activeTeamsCollection)
+	{
+
+	}
+
+	//Returns a GK, defender, midfielder and attacker
+	public function getFavouredPlayers($favouriteTeam, $playersCollection)
+	{
+		$playerCursor = $playersCollection->find([
+			'club' => $favouriteTeam
+		]);
+
+		$clubPlayers = [];
+
+		foreach ($playerCursor as $player) 
+		{
+		   $playerArray = bsonUnserialize($player);
+		   $clubPlayers[] = $playerArray;
+		};
+
+		$goalkeeper = null;
+		$defender = null;
+		$midfielder = null;
+		$attacker = null;
+
+		shuffle($clubPlayers);
+		foreach($clubPlayers as $clubPlayer)
+		{
+			$positions = (array)$clubPlayer['positions'];
+
+			if(is_null($goalkeeper) && count(array_intersect(['GK'], $positions)) > 0)
+			{
+				$goalkeeper = $clubPlayer;
+			}
+			else if(is_null($defender) && count(array_intersect(['CB', 'LB', 'RB', 'LWB', 'RWB'], $positions)) > 0)
+			{
+				$defender = $clubPlayer;
+			}
+			else if(is_null($midfielder) && count(array_intersect(['CDM', 'CM', 'CAM', 'RM', 'LM', 'LW', 'RW'], $positions)) > 0)
+			{
+				$midfielder = $clubPlayer;
+			}
+			else if(is_null($attacker) && count(array_intersect(['ST', 'CF'], $positions)) > 0)
+			{
+				$attacker = $clubPlayer;
+			}
+		}
+
+		$teamPicks = [
+			"goalkeeper" => $goalkeeper,
+			"defender" => $defender,
+			"midfielder" => $midfielder,
+			"attacker" => $attacker,
+		];
+		
+		return $teamPicks;
+	}
+
+	//Gets 15 random players for a manager
+	public function createNewManager($managerID, $favouriteTeam, $teamName, $playersCollection, $managersCollection, $activeTeamsCollection)
+	{
+		$teamPicks = $this->getFavouredPlayers($favouriteTeam, $playersCollection);
+		$teamPicksIDs = [];
+
+		foreach($teamPicks as $teamPick)
+		{
+			$teamPicksIDs[] = $teamPick['_id'];
+		}
+
+		while(count($teamPicksIDs) < 15)
+		{
+			$randomPlayer = (array)json_decode($this->getPlayer($playersCollection));
+
+			if(!in_array($randomPlayer['_id'], $teamPicksIDs))
+			{
+				$teamPicksIDs[] = $randomPlayer['_id'];
+			}
+		}
+
+		$this->createDBObjects($teamPicksIDs, $managerID, $favouriteTeam, $teamName, $playersCollection, $managersCollection, $activeTeamsCollection);
+	}
+
+	//Create DB object
+	public function createDBObjects($teamPicksIDs, $managerID, $favouriteTeam, $teamName, $playersCollection, $managersCollection, $activeTeamsCollection)
+	{	
+		$managersCollection->insertOne([
+			'_id' => (int)$managerID,
+			'players' => $teamPicksIDs,
+			'team_name' => $teamName,
+			'favourite_team' => $favouriteTeam,
+			'record' => [
+				'wins' => (int)0,
+				'draws' => (int)0,
+				'losses' => (int)0
+			],
+			'goal_difference' => [
+				'goals_for' => (int)0,
+				'goals_against' => (int)0
+			],
+			'coins' => (int)0,
+			'market_players' => []
+		]
+		);
+
+   		$activeTeamsCollection->insertOne([
+			'_id' => (int)$managerID,
+			'players' => [
+				'LST' => [
+					'id' => $teamPicksIDs[3],
+					'chemistry' => (int)1
+				],
+				'RST' => [
+					'id' => $teamPicksIDs[4],
+					'chemistry' => (int)1
+				],
+				'LM' => [
+					'id' => $teamPicksIDs[5],
+					'chemistry' => (int)1
+				],
+				'LCM' => [
+					'id' => $teamPicksIDs[2],
+					'chemistry' => (int)1
+				],
+				'RCM' => [
+					'id' => $teamPicksIDs[6],
+					'chemistry' => (int)1
+				],
+				'RM' => [
+					'id' => $teamPicksIDs[7],
+					'chemistry' => (int)1
+				],
+				'LB' => [
+					'id' => $teamPicksIDs[8],
+					'chemistry' => (int)1
+				],
+				'LCB' => [
+					'id' => $teamPicksIDs[1],
+					'chemistry' => (int)1
+				],
+				'RCB' => [
+					'id' => $teamPicksIDs[9],
+					'chemistry' => (int)1
+				],
+				'RB' => [
+					'id' => $teamPicksIDs[10],
+					'chemistry' => (int)1
+				],
+				'GK' => [
+					'id' => $teamPicksIDs[0],
+					'chemistry' => (int)1
+				],
+			]
+		]
+		);
+	}
 }
 ?>

@@ -99,6 +99,12 @@ switch ($functionName)
 		$playerID = $request[0];
 		$ownerID = $request[1];
 		$marketDetails = $mongoDB->buyPlayer($playerID, $ownerID, $myManagerID, $managersCollection, $transferMarketCollection, $playersCollection, $activeTeamsCollection);
+		break;
+
+	case 'createManager':
+		$teamName = $request[0];
+		$favouriteTeam = $request[1];
+		$mongoDB->createNewManager($myManagerID, $favouriteTeam, $teamName, $playersCollection, $managersCollection, $activeTeamsCollection);
 		break;	
 }
 ?>

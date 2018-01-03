@@ -83,4 +83,4 @@ function statsTab() {
     });
 }
 
-//playTab();
+playTab();
