@@ -70,14 +70,12 @@ function transferMarketTab() {
 }
 
 function statsTab() {
-    $("#loadingModal").modal('show');
     $.ajax({
         method: "GET",
         url: "api.php/getMyStats/"
     }).done(function(stats) {
         $("#loadingModal").modal('hide');
         console.log(stats);
-        window.stats = stats
         var reactVar = React.createElement(Stats, {"stats" : JSON.parse(stats)});
         ReactDOM.render(reactVar, document.getElementById("stats"));
     });
