@@ -476,7 +476,7 @@ class Match
 				$goalScorerName = $vars["name"];
 				$goalScorerPhoto = $vars["photo"];
 
-				$randomReport["scorers"]["home"][] = $goalScorerName;
+				$randomReport["scorers"]["away"][] = $goalScorerName;
 				$randomReport["photos"]["away"][] = "<img src=\"". $goalScorerPhoto."\">";
 			}
 		}
