@@ -348,10 +348,6 @@ class Match
 	   			echo $homeTeamPlayers . "<br>";
 	   			$homeTeamPlayers = "";
 	   		}
-	   		else
-	   		{
-	   			$homeTeamPlayers.= " - ";
-	   		}
 		}
 
 		$awayTeamPlayers = "";
@@ -374,10 +370,6 @@ class Match
 	   		{
 	   			echo $awayTeamPlayers . "<br>";
 	   			$awayTeamPlayers = "";
-	   		}
-	   		else
-	   		{
-	   			$awayTeamPlayers.= " - ";
 	   		}
 		}
 	}
