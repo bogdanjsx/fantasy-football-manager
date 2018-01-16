@@ -34,9 +34,18 @@ function Card({player, bench, position}) {
     let modalId = "replaceModal" + position
     let dataTarget = "#replaceModal" + position
 
+    let cardQuality = 'gold'
+    if (player.overall < 80) {
+        cardQuality = 'silver';
+        if (player.overall < 65) {
+            cardQuality = 'bronze';
+        }
+    }
+    let cardClass = "playercard fut16 card-small " + cardQuality
+
     return (
     <div data-toggle="modal" data-target={dataTarget}>
-        <div className="playercard fut16 card-small gold" style={{display: 'inline-block'}}>
+        <div className={cardClass} style={{display: 'inline-block'}}>
             <div className="hover"></div>
             <div className="playercard-rating">{player.overall}</div>
             <div className="playercard-name">
