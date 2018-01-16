@@ -103,7 +103,6 @@
 				<a onclick="goTo('stats.php', statsTab)">Stats</a> | 
 				<a onclick="goTo('my_account.php')">My account</a>
 			</p>
-			<p>Copyright &copy; Fantasy football manager</p>
 		</div>
 	</div>
 </body>
