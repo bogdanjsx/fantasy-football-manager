@@ -10,6 +10,8 @@ if(isset($_POST['register_button']))
 	$email = trim($_POST['email']);
 	$password = trim($_POST['pw']);
 	$passwordRepeat = trim($_POST['pw-repeat']);
+	$teamName = trim($_POST['team_name']);
+	$favTeam = trim($_POST['fav_team']);
 	
 	//Reload page if passwords don't match
 	if($password != $passwordRepeat)
@@ -32,9 +34,13 @@ if(isset($_POST['register_button']))
 	//Get a managerID
 	$mongoDB = Database::instance();
 	$mongoDB->setCredentials();
+	$playersCollection = $mongoDB->connectToTable('player_classes');
+	$activeTeamsCollection = $mongoDB->connectToTable('active_teams');
 	$managersCollection = $mongoDB->connectToTable('managers');
+
 	$newManagerID = $mongoDB->getNewManagerID($managersCollection);
-	
+	$mongoDB->createNewManager($newManagerID, $favTeam, $teamName, $playersCollection, $managersCollection, $activeTeamsCollection);
+
 	$user = new User($username, $password, $email, $newManagerID);
 
 	//Redirect the user

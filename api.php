@@ -1,4 +1,7 @@
 <?php
+ob_start();
+session_start();
+
 require 'mongo/Database.php';
 require 'mongo/Match.php';
 
@@ -6,7 +9,15 @@ $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 
 $functionName = preg_replace('/[^a-z0-9_]+/i','',array_shift($request));
 
-$myManagerID = 41; //For the moment, in the future will be $_SESSION['managerID']
+if(!isset($_SESSION['managerID']))
+{
+	$myManagerID = 41; //Guest account
+}
+else
+{
+	$myManagerID = (int)$_SESSION['managerID'];
+}
+
 $mongoDB = Database::instance();
 $mongoDB->setCredentials();
 $playersCollection = $mongoDB->connectToTable('player_classes');
@@ -110,7 +121,7 @@ switch ($functionName)
 		$newManagerID = $mongoDB->getNewManagerID($managersCollection);
 		echo json_encode($newManagerID);
 		break;
-		
+
 	case 'createManager':
 		$teamName = $request[0];
 		$favouriteTeam = $request[1];

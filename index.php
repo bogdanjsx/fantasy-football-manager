@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -90,9 +94,16 @@
 		<div id="site_content">
 			<div id="content">
 				<?php
-				session_start();
 
-				echo "Please wait for page to load.";
+				if(!isset($_SESSION['managerID']))
+				{
+					echo "<p>You are on a demo account. Login to use the real account.</p>";
+				}
+				else
+				{
+					echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
+				}
+				echo "<p>Please wait for page to load.</p>";
 				?>
 			</div>
 		</div>
