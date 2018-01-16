@@ -1,14 +1,3 @@
-<?php
-ob_start();
-session_start();
-
-require_once 'database/session.php';
-//Check if user is already logged in and redirect to home page
-if(isset($_SESSION['logID']))
-{
-	redirect("index.php", "You are already logged in!");
-}
-?>
 <!DOCTYPE HTML>
 <html>
 
@@ -40,20 +29,36 @@ if(isset($_SESSION['logID']))
 <body>
   <div id="main">
     <div id="site_content">
-      <div id="content">
-        <h1>Login to our site</h1>
-        <form action="database/login.php" method="post">
-          <div class="form_settings">
-            <p><span>Username</span><input type="text" name="user" value="" pattern=".{6,}" title="Username must contain six or more characters" required/></p>
-            <p><span>Password</span><input type="password" name="pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
-            <span>&nbsp;</span><input class="submit" type="submit" name="login_button" value="Login" />
-          </div>
-        </form>
-		
-		<h2><a style="cursor:pointer" onclick="goTo('register.html')">Don't have an account? Register now!</a></h2>
-		<p></p><p></p><p></p><p></p><p></p><p></p>
-      </div>
-    </div>
+      <?php
+      ob_start();
+      session_start();
+      require_once 'database/session.php';
+
+      //Check if user is already logged in and redirect to home page
+      if(isset($_SESSION['logID'])) 
+      {
+        echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
+        echo "<p>To logout from your account acces this <a href=\"database/logout.php\">link</a>.</p>";
+      }
+      else 
+      {
+        echo "<p>You are not logged in! Please register or log into your account.</p>";
+        echo '<div id="content">
+              <h1>Login to our site</h1>
+              <form action="database/login.php" method="post">
+                <div class="form_settings">
+                  <p><span>Username</span><input type="text" name="user" value="" pattern=".{6,}" title="Username must contain six or more characters" required/></p>
+                  <p><span>Password</span><input type="password" name="pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
+                  <span>&nbsp;</span><input class="submit" type="submit" name="login_button" value="Login" />
+                </div>
+              </form>
+          
+              <h2><a style="cursor:pointer" onclick="goTo("register.html")">No account? Register now!</a></h2>
+              <p></p><p></p><p></p><p></p><p></p><p></p>
+                </div>
+              </div>';
+      }
+  ?>
   </div>
 </body>
 </html>

@@ -90,14 +90,7 @@
 				<?php
 				session_start();
 
-				if(isset($_SESSION['logID'])) {
-					echo "<p>You are logged in as " . $_SESSION['username'] . ".</p>";
-					echo "<p>To logout from your account acces this <a href=\"database/logout.php\">link</a>.</p>";
-				}
-				else {
-					echo "<p>You are not logged in! To register or log into your account access the Login page.</p>";
-				}
-				
+				echo "Please wait for page to load.";
 				?>
 			</div>
 		</div>
