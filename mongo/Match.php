@@ -327,10 +327,63 @@ class Match
 		$previewText .= " to have the edge today." . "<br>";
 
 		echo $previewText;
+
+		$homeTeamPlayers = "";
+
+		$counter = 0;
+
+		echo $this->homeManagerArray['team_name'] . ": <br>";
+		foreach($this->homeManagerArray['starting_eleven'] as $playerArray)
+		{
+			$counter ++;
+	   		$decodedPlayer = json_decode($playerArray["player"]);
+	   		$vars = get_object_vars($decodedPlayer);
+
+	   		$playerName = $vars['name'];
+
+	   		$homeTeamPlayers .= $playerName;
+
+	   		if(in_array($counter, [2,6,10,11]))
+	   		{
+	   			echo $homeTeamPlayers . "<br>";
+	   			$homeTeamPlayers = "";
+	   		}
+	   		else
+	   		{
+	   			$homeTeamPlayers.= " - ";
+	   		}
+		}
+
+		$awayTeamPlayers = "";
+
+		$counter = 0;
+
+		echo $this->awayManagerArray['team_name'] . ": <br>";
+		foreach($this->awayManagerArray['starting_eleven'] as $playerArray)
+		{
+			$counter ++;
+	   		$decodedPlayer = json_decode($playerArray["player"]);
+	   		$vars = get_object_vars($decodedPlayer);
+
+	   		$playerName = $vars['name'];
+
+	   		$awayTeamPlayers .= $playerName;
+
+	   		if(in_array($counter, [2,6,10,11]))
+	   		{
+	   			echo $awayTeamPlayers . "<br>";
+	   			$awayTeamPlayers = "";
+	   		}
+	   		else
+	   		{
+	   			$awayTeamPlayers.= " - ";
+	   		}
+		}
 	}
 
 	private function publishMatchReport()
 	{
+		echo "Match report: <br>";
 		$totalGoals = $this->homeGoals + $this->awayGoals;
 
 		$randomReport = [
@@ -381,8 +434,11 @@ class Match
 				$decodedPlayer = json_decode($player);
 				$vars = get_object_vars($decodedPlayer);
 				$goalScorerName = $vars["name"];
-				
+				$goalScorerPhoto = $vars["photo"];
+
 				$randomReport["scorers"]["home"][] = $goalScorerName;
+
+				$randomReport["photos"]["home"][] = "<img src=\"". $goalScorerPhoto."\">";
 			}
 		}
 
@@ -418,8 +474,10 @@ class Match
 				$decodedPlayer = json_decode($player);
 				$vars = get_object_vars($decodedPlayer);
 				$goalScorerName = $vars["name"];
-				
-				$randomReport["scorers"]["away"][] = $goalScorerName;
+				$goalScorerPhoto = $vars["photo"];
+
+				$randomReport["scorers"]["home"][] = $goalScorerName;
+				$randomReport["photos"]["away"][] = "<img src=\"". $goalScorerPhoto."\">";
 			}
 		}
 		
@@ -436,7 +494,7 @@ class Match
 				$tempAwayGoals ++;
 				$reportText .= $randomReport["minutes"][$i] . "' " . $tempHomeGoals . "-" . $tempAwayGoals;
 
-				$reportText .= " " . array_pop($randomReport["scorers"]["away"]) . "<br>";
+				$reportText .= " " . array_pop($randomReport["scorers"]["away"]) . array_pop($randomReport["photos"]["away"]) . "<br>";
 			}
 			//All away goals scored
 			else if($tempAwayGoals == $this->awayGoals)
@@ -444,7 +502,7 @@ class Match
 				$tempHomeGoals ++;
 				$reportText .= $randomReport["minutes"][$i] . "' " . $tempHomeGoals . "-" . $tempAwayGoals;
 
-				$reportText .= " " . array_pop($randomReport["scorers"]["home"]) . "<br>";
+				$reportText .= " " . array_pop($randomReport["scorers"]["home"]) . array_pop($randomReport["photos"]["home"]) ."<br>";
 			}
 			//Both teams need to score
 			else
@@ -457,7 +515,7 @@ class Match
 					$tempHomeGoals ++;
 					$reportText .= $randomReport["minutes"][$i] . "' " . $tempHomeGoals . "-" . $tempAwayGoals;
 
-					$reportText .= " " . array_pop($randomReport["scorers"]["home"]) . "<br>";
+					$reportText .= " " . array_pop($randomReport["scorers"]["home"]) . array_pop($randomReport["photos"]["home"]) ."<br>";
 				}
 				//Away scores
 				else
@@ -465,7 +523,7 @@ class Match
 					$tempAwayGoals ++;
 					$reportText .= $randomReport["minutes"][$i] . "' " . $tempHomeGoals . "-" . $tempAwayGoals;
 
-					$reportText .= " " . array_pop($randomReport["scorers"]["away"]) . "<br>";
+					$reportText .= " " . array_pop($randomReport["scorers"]["away"]) . array_pop($randomReport["photos"]["away"]) ."<br>";
 				}
 			}
 		}
