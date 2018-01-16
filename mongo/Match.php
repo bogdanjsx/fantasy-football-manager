@@ -439,7 +439,7 @@ class Match
 
 				$randomReport["scorers"]["home"][] = $goalScorerName;
 
-				$randomReport["photos"]["home"][] = "<img style=\"width:100px; height:100px;\" src=\"". $goalScorerPhoto."\">";
+				$randomReport["photos"]["home"][] = "<img style=\"width:75px; height:75px;\" src=\"". $goalScorerPhoto."\">";
 			}
 		}
 
@@ -478,7 +478,7 @@ class Match
 				$goalScorerPhoto = $vars["photo"];
 
 				$randomReport["scorers"]["away"][] = $goalScorerName;
-				$randomReport["photos"]["away"][] = "<img style=\"width:100px; height:100px;\" src=\"". $goalScorerPhoto."\">";
+				$randomReport["photos"]["away"][] = "<img style=\"width:75px; height:75px;\" src=\"". $goalScorerPhoto."\">";
 			}
 		}
 		
