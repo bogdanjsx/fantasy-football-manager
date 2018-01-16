@@ -7,22 +7,24 @@
   <meta name="keywords" content="Web Game, HTML, Javascript, PHP, football, manager, simulator" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <script type="text/javascript" src="tabs.js"></script>
   
    <script>
-	  function goTo(site)
-	  {
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("site_content").innerHTML = this.responseText;
+		function goTo(site, callback) {
+			if (!callback) {
+			callback = () => {};
 			}
-		};
-		
-		xmlhttp.open("GET", site, true);
-		xmlhttp.send();
-	  }
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("site_content").innerHTML = this.responseText;
+					callback();
+				}
+			};
+
+			xmlhttp.open("GET", site, true);
+			xmlhttp.send();
+		}
 	</script>
 </head>
 
@@ -53,7 +55,7 @@
                 </div>
               </form>
           
-              <h2><a style="cursor:pointer" onclick="goTo(\'register.html\')">Don\'t have an account? Register now!</a></h2>
+              <h2><a style="cursor:pointer" onclick="goTo(\'register.html\', registerTab)">Don\'t have an account? Register now!</a></h2>
             </div>';
       }
       ?>

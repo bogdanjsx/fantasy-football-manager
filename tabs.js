@@ -75,9 +75,52 @@ function statsTab() {
         url: "api.php/getMyStats/"
     }).done(function(stats) {
         $("#loadingModal").modal('hide');
-        console.log(stats);
         var reactVar = React.createElement(Stats, {"stats" : JSON.parse(stats)});
         ReactDOM.render(reactVar, document.getElementById("stats"));
+    });
+}
+
+function registerTab() {
+    var substringMatcher = function(strs) {
+        return function findMatches(substr, callback) {
+          var matches, substringRegex;
+          matches = [];
+          substrRegex = new RegExp(substr, 'i');
+      
+          $.each(strs, function(i, str) {
+            if (substrRegex.test(str['_id'])) {
+              matches.push(str);
+            }
+          });
+      
+          callback(matches);
+        };
+      };
+
+    $.ajax({
+        method: "GET",
+        url: "api.php/getClubs/"
+    }).done(function(clubs) {
+        clubs = JSON.parse(clubs);
+        club_name = clubs.map((x) => x['_id'])
+
+        $('#fav_team').typeahead({
+            hint: true,
+            highlight: true,
+          },
+          {
+            name: 'clubs',
+            display: '_id',
+            source: substringMatcher(clubs),
+            templates: {
+                empty: [
+                  '<div class="empty-message">',
+                    'No teams match your current input.',
+                  '</div>'
+                ].join('\n'),
+                suggestion: Handlebars.compile('<div><strong>{{_id}}</strong> – <img style="width:20px; height:20px"src="{{logo}}"></img></div>')
+              }
+          });
     });
 }
 
