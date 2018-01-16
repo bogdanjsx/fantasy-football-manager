@@ -340,9 +340,9 @@ class Match
 	   		$vars = get_object_vars($decodedPlayer);
 
 	   		$playerName = $vars['name'];
+	   		$playerPhoto = $vars['photo'];
 
-	   		$homeTeamPlayers .= $playerName;
-
+	   		$homeTeamPlayers .= $playerName . "<img style=\"width:50px; height:50px;\" src=\"". $playerPhoto."\">";
 	   		if(in_array($counter, [2,6,10,11]))
 	   		{
 	   			echo $homeTeamPlayers . "<br>";
@@ -366,8 +366,9 @@ class Match
 	   		$vars = get_object_vars($decodedPlayer);
 
 	   		$playerName = $vars['name'];
+	   		$playerPhoto = $vars['photo'];
 
-	   		$awayTeamPlayers .= $playerName;
+	   		$awayTeamPlayers .= $playerName . "<img style=\"width:50px; height:50px;\" src=\"". $playerPhoto."\">";
 
 	   		if(in_array($counter, [2,6,10,11]))
 	   		{
@@ -438,7 +439,7 @@ class Match
 
 				$randomReport["scorers"]["home"][] = $goalScorerName;
 
-				$randomReport["photos"]["home"][] = "<img src=\"". $goalScorerPhoto."\">";
+				$randomReport["photos"]["home"][] = "<img style=\"width:100px; height:100px;\" src=\"". $goalScorerPhoto."\">";
 			}
 		}
 
@@ -477,7 +478,7 @@ class Match
 				$goalScorerPhoto = $vars["photo"];
 
 				$randomReport["scorers"]["away"][] = $goalScorerName;
-				$randomReport["photos"]["away"][] = "<img src=\"". $goalScorerPhoto."\">";
+				$randomReport["photos"]["away"][] = "<img style=\"width:100px; height:100px;\" src=\"". $goalScorerPhoto."\">";
 			}
 		}
 		
