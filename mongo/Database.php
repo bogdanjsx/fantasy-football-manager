@@ -820,12 +820,19 @@ class Database extends Singleton
 		return $myStatsArray;
 	}
 
-	//Influenced by favourite team
-	public function generateRandomTeam($managerID, $favouriteTeam, $playersCollection, $managersCollection, $activeTeamsCollection)
+	public function getClubs($clubsCollection)
 	{
+		$clubsCursor = $clubsCollection->find();
 
+		$clubsInfo = [];
+		foreach ($clubsCursor as $clubInformation) 
+		{
+		   $clubInfo = bsonUnserialize($clubInformation);
+		   $clubsInfo[] = $clubInfo;
+		};
+
+		return $clubsInfo;
 	}
-
 	//Returns a GK, defender, midfielder and attacker
 	public function getFavouredPlayers($favouriteTeam, $playersCollection)
 	{

@@ -98,7 +98,12 @@ switch ($functionName)
 	case 'buyPlayer':
 		$playerID = $request[0];
 		$ownerID = $request[1];
-		$marketDetails = $mongoDB->buyPlayer($playerID, $ownerID, $myManagerID, $managersCollection, $transferMarketCollection, $playersCollection, $activeTeamsCollection);
+		$mongoDB->buyPlayer($playerID, $ownerID, $myManagerID, $managersCollection, $transferMarketCollection, $playersCollection, $activeTeamsCollection);
+		break;
+
+	case 'getClubs':
+		$clubsDetails = $mongoDB->getClubs($clubsCollection);
+		echo json_encode($clubsDetails);
 		break;
 
 	case 'createManager':
