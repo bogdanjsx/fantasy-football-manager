@@ -56,7 +56,6 @@ function transferMarketTab() {
         $("#loadingModal").modal('hide');
         players = JSON.parse(players).map((item) =>
             {
-                console.log(item)
                 data = JSON.parse(item.player_id)
                 data.price = item.price;
                 data.ownerId = item.ownerId;
@@ -74,7 +73,6 @@ function statsTab() {
         method: "GET",
         url: "api.php/getMyStats/"
     }).done(function(stats) {
-        console.log(stats);
         $("#loadingModal").modal('hide');
         var reactVar = React.createElement(Stats, {"stats" : JSON.parse(stats)});
         ReactDOM.render(reactVar, document.getElementById("stats"));
