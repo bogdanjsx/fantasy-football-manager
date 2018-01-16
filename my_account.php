@@ -53,12 +53,11 @@
                 </div>
               </form>
           
-              <h2><a style="cursor:pointer" onclick="goTo("register.html")">No account? Register now!</a></h2>
-              <p></p><p></p><p></p><p></p><p></p><p></p>
-                </div>
-              </div>';
+              <h2><a style="cursor:pointer" onclick="goTo(\'register.html\')">Don\'t have an account? Register now!</a></h2>
+            </div>';
       }
-  ?>
+      ?>
+    </div>
   </div>
 </body>
 </html>

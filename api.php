@@ -106,6 +106,11 @@ switch ($functionName)
 		echo json_encode($clubsDetails);
 		break;
 
+	case 'getNewManagerID':
+		$newManagerID = $mongoDB->getNewManagerID($managersCollection);
+		echo json_encode($newManagerID);
+		break;
+		
 	case 'createManager':
 		$teamName = $request[0];
 		$favouriteTeam = $request[1];

@@ -4,25 +4,18 @@ require_once 'session.php';
 class User
 {
 	private $ORM = null;
-	private $username, $password, $email;
-	
-	/*
-		Rank 1 is admin;
-		Rank 2 is feedbacking user;
-		Rank 3 is common user;
-	*/
-	private $rank;
+	private $username, $password, $email, $managerID;
 	
 	/**
 	 * Create a user by the parameters given in the database
 	*/
-	public function __construct($username, $password, $email)
+	public function __construct($username, $password, $email, $managerID)
 	{
 		$this->ORM = ORM::for_table('users')->create();
 		$this->ORM->username = $username;
 		$this->ORM->password = md5($password);
 		$this->ORM->email = $email;
-		$this->ORM->rank = 3;
+		$this->ORM->managerID = $managerID;
 		$this->ORM->save();
 	}
 	
@@ -35,6 +28,7 @@ class User
 		{
 			return $user;
 		}
+
 		//If credentials are not correct
 		return null;
 	}
@@ -54,13 +48,14 @@ class User
  
 		return $ORMResult == 1;
 	}
-	
+
 	//Login the user
 	public static function login($ORM)
 	{
 		$_SESSION['logID'] = $ORM->id;
 		$_SESSION['username'] = $ORM->username;
 		$_SESSION['email'] = $ORM->email;
+		$_SESSION['managerID'] = $ORM->managerID;
 	}
 	
 	//Logout the user 

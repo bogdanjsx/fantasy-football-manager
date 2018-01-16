@@ -1,7 +1,9 @@
 <?php
-require 'vendor/autoload.php';
-require 'HelperFunctions.php';
-require 'Singleton.php';
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+$root .= "/fantasy-football-manager";
+require $root . '/vendor/autoload.php';
+require $root . '/mongo/HelperFunctions.php';
+require $root . '/mongo/Singleton.php';
 
 //MongoDB class
 class Database extends Singleton
@@ -833,6 +835,28 @@ class Database extends Singleton
 
 		return $clubsInfo;
 	}
+
+	//Finds the highest manager ID and adds 1
+	public function getNewManagerID($managersCollection)
+	{
+		$managersCursor = $managersCollection->find();
+
+		$highestManagerID = 0;
+
+		foreach($managersCursor as $managerInformation)
+		{
+			$managerInfo = bsonUnserialize($managerInformation);
+			$managerID = $managerInfo['_id'];
+
+			if($managerID > $highestManagerID)
+			{
+				$highestManagerID = $managerID;
+			}
+		}
+
+		return $highestManagerID + 1;
+	}
+
 	//Returns a GK, defender, midfielder and attacker
 	public function getFavouredPlayers($favouriteTeam, $playersCollection)
 	{

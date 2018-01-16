@@ -11,6 +11,6 @@ ORM::get_db()->exec(
         'username VARCHAR(50), ' .
         'password VARCHAR(50), ' .
 		'email VARCHAR(100), ' .
-        'rank TINYINT(2)' .
+        'managerID INTEGER' .
         ')'
     );

@@ -1,6 +1,6 @@
 <?php
 require_once 'idiorm.php';
-ORM::configure('mysql:host=localhost;dbname=cormorant');
+ORM::configure('mysql:host=localhost;dbname=manager');
 ORM::configure('username', 'root');
 ORM::configure('password', '');
 
